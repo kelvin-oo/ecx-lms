@@ -3,7 +3,7 @@ import FormBox from "@/components/profile/FormBox";
 import FormBoxHeader from "@/components/profile/FormBoxHeader";
 import FormImageInput from "@/components/profile/FormImageInput";
 import React, { useState } from "react";
-import styles from "../../styles/adminProfilePage.module.scss";
+import styles from "../adminProfilePage.module.scss";
 import Image from "next/image";
 import FormInput from "@/components/profile/FormInput";
 
