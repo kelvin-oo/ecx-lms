@@ -10,7 +10,7 @@
 <h4 align="center">ECX 21 DAYS OF CODE Learning Management System (LMS)</h4>
 
 # ECX 21 Days of Code LMS
-==========================
+
 
 ## Overview
 -----------
