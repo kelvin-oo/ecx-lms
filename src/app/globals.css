@@ -1,0 +1,12 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  color: theme("colors.ecx-colors-black");
+  font-family: theme("fontFamily.inter");
+  @apply bg-ecx-colors-secondary-blue/5;
+}
+
+@layer utilities {
+}

@@ -1,0 +1,114 @@
+.main {
+    // background-color: red;
+
+
+    .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 40px;
+
+        a {
+            width: 182pxpx;
+            height: 58pxpx;
+            padding: 10px 16px 10px 16px;
+            // gap: 10px;
+            background-color: #272E4B;
+            color: #FFFFFF;
+            font-size: 16px;
+            font-weight: 600;
+            line-height: 24px;
+            letter-spacing: 0.09em;
+            text-align: left
+        }
+    }
+
+    .information {}
+
+    .details {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+
+        .detailsBox {
+            width: 100%;
+            height: 65px;
+            border: 1px solid #000000;
+            padding-top: 0.5rem;
+            padding-bottom: 0.5rem;
+            padding-left: 0.75rem;
+            padding-right: 0.75rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            @media only screen and (max-width: 500px) {
+                padding-left: 0.6rem;
+                padding-right: 0.6rem;
+                // background-color: rebeccapurple;
+                gap: 10px;
+            }
+
+
+            p {
+                font-size: 16px;
+                font-weight: 500;
+                line-height: 35px;
+                text-align: left;
+
+                @media only screen and (min-width: 752px) {
+                    padding-right: 11rem;
+                }
+            }
+        }
+    }
+
+    .performance {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+
+        .performanceBox {
+            width: 100%;
+            height: 127px;
+            border: 1px solid #000000;
+            padding-top: 0.5rem;
+            padding-bottom: 0.5rem;
+            padding-left: 0.75rem;
+            padding-right: 0.75rem;
+            display: flex;
+            justify-content: space-between;
+            // align-items: center;
+            gap: 200px;
+            @media only screen and (max-width: 500px) {
+                gap: 10px;
+            }
+
+            h3 {
+                font-size: 16px;
+                font-weight: 600;
+                line-height: 24px;
+                letter-spacing: 0.04em;
+                text-align: left;
+
+                @media only screen and (min-width: 752px) {
+                    padding-right: 11rem;
+                }
+            }
+
+            .left {
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                // background-color: green;
+            }
+
+            .right {
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                // background-color: blue;
+            }
+        }
+    }
+}

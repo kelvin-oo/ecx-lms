@@ -1,0 +1,26 @@
+[
+  {
+    "id": "01",
+    "title": "Daily Assignment",
+    "deadline": "15/02/2024",
+    "noOfTasks": 20
+  },
+  {
+    "id": "02",
+    "title": "Group Project",
+    "deadline": "15/02/2024",
+    "noOfTasks": 6
+  },
+  {
+    "id": "03",
+    "title": "Weekly Assignment",
+    "deadline": "15/02/2024",
+    "noOfTasks": 2
+  },
+  {
+    "id": "04",
+    "title": "Weekly Project",
+    "deadline": "15/02/2024",
+    "noOfTasks": 5
+  }
+]

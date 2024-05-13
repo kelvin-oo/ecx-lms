@@ -1,0 +1,27 @@
+.sidebar {
+  @apply w-48 h-[calc(100vh-4rem)] md:h-[calc(100vh-5rem)] lg:h-[calc(100vh-6rem)] py-12 px-4 fixed top-16 md:top-20 lg:top-auto border left-0 bg-white text-ecx-colors-secondary-blue shadow-xl flex flex-col justify-between text-xs lg:text-sm;
+}
+
+.sidebarLink {
+  @apply flex items-center gap-2 lg:gap-4 px-2.5 py-3 border-b border-b-black lg:gap-4;
+}
+
+.sidebarLinkActive {
+  @apply text-white bg-ecx-colors-secondary-blue;
+}
+
+.sidebarLinkImg {
+  @apply w-5 h-5 lg:w-6 lg:h-6;
+}
+
+.logoutModal {
+  @apply absolute bottom-0 left-0 w-80 lg:w-96 max-w-[80vw] bg-white shadow-xl grid grid-cols-2 gap-x-5 lg:gap-x-10 gap-y-3 lg:gap-y-5 px-5 py-7;
+}
+
+.modalBtn {
+  @apply border-[1.5px] border-ecx-colors-secondary-blue py-2 lg:py-2.5 text-ecx-colors-secondary-blue;
+}
+
+.modalBtnDark {
+  @apply bg-ecx-colors-secondary-blue py-2 lg:py-2.5 text-white;
+}

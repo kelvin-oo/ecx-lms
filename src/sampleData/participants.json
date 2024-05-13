@@ -1,0 +1,106 @@
+[
+[
+  {
+    "id": "01",
+    "name": "Olaolu Taiwo",
+    "email": "olaolutaiwo@gmail.com",
+    "taskScore": "250",
+    "tasksCompleted": "18/20"
+  },
+  {
+    "id": "02",
+    "name": "Aisha Buhari",
+    "email": "aisahbusari@gmail.com",
+    "taskScore": "300",
+    "tasksCompleted": "20/20"
+  },
+  {
+    "id": "03",
+    "name": "Chimamanda Ngozi Adichie",
+    "email": "chimamanda@gmail.com",
+    "taskScore": "280",
+    "tasksCompleted": "19/20"
+  },
+  {
+    "id": "04",
+    "name": "John Obi Mikel",
+    "email": "johnobi@gmail.com",
+    "taskScore": "220",
+    "tasksCompleted": "15/20"
+  }
+  ],
+  [
+    {
+      "id": "01",
+      "name": "Olaolu Taiwo",
+      "email": "olaolutaiwo@gmail.com",
+      "score": "250",
+      "task": "Design a new landing page using the neo-brutalism concept",
+      "completed": "18/20"
+    },
+    {
+        "id": "02",
+        "name": "akorede dubem",
+        "email": "akorededubem@gmail.com",
+        "score": "300",
+        "task": "Design a new landing page using the ne0-brutalism concept",
+        "completed": "15/20"
+      },
+      {
+        "id": "03",
+        "name": "rufus badmus",
+        "email": "rufusbadmus@gmail.com",
+        "score": "200",
+        "task": "Design a new landing page using the ne0-brutalism concept",
+        "completed": "13/20"
+      },
+      {
+        "id": "04",
+        "name": "samson bello",
+        "email": "samsonbello@gmail.com",
+        "score": "450",
+        "task": "Design a new landing page using the ne0-brutalism concept",
+        "completed": "10/20"
+      },
+      {
+        "id": "05",
+        "name": "Olaolu Taiwo",
+        "email": "olaolutaiwo@gmail.com",
+        "score": "250",
+        "task": "Design a new landing page using the ne0-brutalism concept",
+        "completed": "16/20"
+      },
+      {
+        "id": "06",
+        "name": "Olaolu Taiwo",
+        "email": "olaolutaiwo@gmail.com",
+        "score": "250",
+        "task": "Design a new landing page using the ne0-brutalism concept",
+        "completed": "18/20"
+      },
+      {
+        "id": "07",
+        "name": "Olaolu Taiwo",
+        "email": "olaolutaiwo@gmail.com",
+        "score": "250",
+        "task": "Design a new landing page using the ne0-brutalism concept",
+        "completed": "18/20"
+      },
+      {
+        "id": "08",
+        "name": "Olaolu Taiwo",
+        "email": "olaolutaiwo@gmail.com",
+        "score": "250",
+        "task": "Design a new landing page using the ne0-brutalism concept",
+        "completed": "18/20"
+      },
+      {
+        "id": "09",
+        "name": "Olaolu Taiwo",
+        "email": "olaolutaiwo@gmail.com",
+        "score": "250",
+        "task": "Design a new landing page using the ne0-brutalism concept",
+        "completed": "18/20"
+      }
+]
+]

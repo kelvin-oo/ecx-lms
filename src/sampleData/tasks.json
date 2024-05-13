@@ -1,0 +1,38 @@
+[
+  {
+    "id": "XqZt2",
+    "title": "Integrate third-party social media login using OAuth",
+    "description": "Implement login using social media (Facebook, Google etc.). Users can sign in with existing accounts for a streamlined experience",
+    "submissionDetails": "Implement social login using OAuth (Facebook, Google etc.). Submit code and documentation for integration",
+    "status": "Pending",
+    "deadline": "02:00:30",
+    "grade": "12/20"
+  },
+  {
+    "id": "w3bkA",
+    "title": "Develop interactive data visualization for user dashboard",
+    "description": "Create engaging charts and graphs to display user data on their dashboard. Allow users to interact and explore the data",
+    "submissionDetails": "Design and develop an interactive data visualization for the user dashboard. Clearly show data trends and allow user interaction",
+    "status": "Submitted",
+    "deadline": "17:24:00",
+    "grade": "20/20"
+  },
+  {
+    "id": "o1ANB",
+    "title": "Develop interactive data visualization for user dashboard",
+    "description": "Build another interactive data visualization for the user dashboard, focusing on a different data set.",
+    "submissionDetails": "Focus on a different data set for the user dashboard visualization. Maintain consistent design and interaction style",
+    "status": "Expired",
+    "deadline": "00:00:00",
+    "grade": "15/20"
+  },
+  {
+    "id": "YQPd1",
+    "title": "Develop interactive data visualization for user dashboard",
+    "description": "Develop a separate interactive data visualization for the user dashboard to represent a distinct data set. Ensure clear communication with designers",
+    "submissionDetails": "Represent a distinct data set with a new interactive visualization. Collaborate with designers to ensure visual consistency",
+    "status": "Graded",
+    "deadline": "00:00:00",
+    "grade": "18/20"
+  }
+]

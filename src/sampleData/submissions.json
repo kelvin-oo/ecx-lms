@@ -1,0 +1,26 @@
+[
+  {
+    "id": "01",
+    "name": "Olaolu Taiwo",
+    "submissionStatus": "Submitted",
+    "submissionDate": "15/02/2024"
+  },
+  {
+    "id": "02",
+    "name": "Aisha Buhari",
+    "submissionStatus": "Pending",
+    "submissionDate": "15/02/2024"
+  },
+  {
+    "id": "03",
+    "name": "Chimamanda Ngozi Adichie",
+    "submissionStatus": "Graded",
+    "submissionDate": "15/02/2024"
+  },
+  {
+    "id": "04",
+    "name": "John Obi Mikel",
+    "submissionStatus": "Canceled",
+    "submissionDate": "15/02/2024"
+  }
+]

@@ -1,0 +1,17 @@
+.table::-webkit-scrollbar {
+  width: 0.5rem;
+}
+.table::-webkit-scrollbar-track {
+  background: #AAAAAA;
+  border-radius: 0.25rem;
+}
+.table::-webkit-scrollbar-thumb {
+  background: theme("colors.ecx-colors-secondary-blue"); 
+  border-radius: 0.25rem;
+}
+
+@media (max-width: 1024px) {
+  .table::-webkit-scrollbar {
+    width: 0.25rem;
+  }
+}

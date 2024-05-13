@@ -1,0 +1,39 @@
+.auth__title {
+  @apply
+  max-w-[24ch] lg:max-w-[32ch]
+  text-lg lg:text-2xl xl:text-3xl
+  text-center font-varela-round;
+}
+
+.auth__title::after {
+  content: url(/icons/auth-vector.svg);
+  position: absolute;
+  transform: translateX(-1px) translateY(-6px) scale(1.2);
+
+  @apply
+  lg:scale-150
+  lg:translate-x-[1px] lg:-translate-y-[9px]
+}
+
+.auth__btn {
+  @apply w-full py-3 bg-ecx-colors-secondary-blue text-white text-sm lg:text-base tracking-widest flex items-center justify-center cursor-pointer hover:opacity-90 transition-opacity
+}
+
+.auth__link {
+  @apply text-sm text-ecx-colors-dart
+}
+
+.auth__info_text {
+  @apply text-center text-sm tracking-wider
+}
+
+.auth__select {
+  -webkit-appearance: none;
+  appearance: none; 
+  -moz-appearance: none; 
+  position: relative;
+  flex-grow: 1;
+  outline: none;
+  background: transparent;
+  z-index: 10;
+}
