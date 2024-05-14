@@ -9,7 +9,7 @@ import BeatLoader from "react-spinners";
 import { newVerification } from "@/actions/newVerification";
 import ComponentLevelLoader from "@/components/Loader";
 
-function page() {
+export default function NewVerification() {
 
     const [error, setError] = useState();
   const [success, setSuccess] = useState();
@@ -96,5 +96,3 @@ function page() {
     </>
   )
 }
-
-export default page
