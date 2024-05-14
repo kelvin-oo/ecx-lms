@@ -70,14 +70,14 @@ export default function Register() {
     }
 
     if (!email) {
-      setError('Please fill in your email');
+      setError('Please fill in your email!');
       setLoading(false)
       console.log(error)
       return;
     }
 
     if (!password) {
-      setError('Please choose a password');
+      setError('Please choose a password!');
       setLoading(false)
       console.log(error)
       return;
