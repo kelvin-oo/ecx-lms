@@ -95,7 +95,7 @@ export default function Register() {
       };
 
 
-      await register(body)
+      register(body)
       .then((user) => {
         if (user.success) {
             console.log(user.success)
