@@ -5,7 +5,6 @@ import { useSearchParams } from "next/navigation";
 import Image from "next/image";
 import authStyles from "@/components/css/authLayout.module.css"
 import Link from "next/link";
-import BeatLoader from "react-spinners";
 import { newVerification } from "@/actions/newVerification";
 import ComponentLevelLoader from "@/components/Loader";
 
@@ -78,11 +77,11 @@ export default function NewVerification() {
           {!success && !error && (
           <ComponentLevelLoader />
         )}
-          <a href="/auth/login" className='border-[3px] border-ecx-colors-secondary-blue text-ecx-colors-secondary-blue p-2'>
+          <Link href="/auth/login" className='border-[3px] border-ecx-colors-secondary-blue text-ecx-colors-secondary-blue p-2'>
           <h6>
             Go to Login
           </h6>
-          </a>
+          </Link>
         </div>
 
         <Image
