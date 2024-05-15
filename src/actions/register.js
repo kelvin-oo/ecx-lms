@@ -1,13 +1,9 @@
 "use server";
-// import { sendMail } from "@/lib/nMailer";
-// import * as z from "zod";
 import bcrypt from "bcryptjs";
 import db from "@/lib/db";
 import SignupSchema from "@/schemas/register";
 import { getUserByEmail } from "@/data/user";
-import { getUserByUsername } from "@/data/user";
 import { sendVerificationMail } from "@/lib/mails";
-// import { generateVerificationToken } from "@/lib/tokens";
 import { generateVerificationToken } from "@/lib/token";
 
 export const register = async (values) => {
@@ -26,10 +22,6 @@ export const register = async (values) => {
     return { error: "Email already in use!" };
   }
 
-  const existingUserName = await getUserByUsername(userName);
-  if (existingUserName) {
-    return { error: "Username already in use!" };
-  }
 
   await db.user.create({
     data: {
@@ -42,8 +34,14 @@ export const register = async (values) => {
     },
   });
 
-  const verificationToken = await generateVerificationToken(email);
-  await sendVerificationMail(verificationToken.email, verificationToken.token);
+  try {
+    const verificationToken = await generateVerificationToken(email);
+    await sendVerificationMail(verificationToken.email, verificationToken.token);
+  } catch (error) {
+    console.log(error);
+    return { error: error || "An error occurred during registration." }; // Return user-friendly error message
+  }
+
 
   return { success: "Confirmation email sent!" };
 };

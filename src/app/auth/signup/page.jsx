@@ -3,12 +3,10 @@ import Link from "next/link";
 import FormBox from "@/components/auth/AuthFormbox";
 import FormInput from "@/components/auth/AuthFormInput";
 import AuthLayout from "@/components/auth/AuthLayout";
-import AuthSelect from "@/components/auth/AuthSelect";
 import authStyles from "@/components/css/authLayout.module.css";
 import ComponentLevelLoader from "@/components/Loader";
 import { useState } from "react";
 import Image from "next/image";
-import SignupSchema from "@/schemas/register";
 import { register } from "@/actions/register";
 
 export default function Register() {
@@ -56,7 +54,7 @@ export default function Register() {
       return;
     }
     if (!userName) {
-      setError('Please choose a User Name Name');
+      setError('Please choose a User Name');
       setLoading(false)
       console.log(error)
       return;
@@ -99,7 +97,7 @@ export default function Register() {
       .then((user) => {
         if (user.success) {
             console.log(user.success)
-        //   router.push('/email-confirmation')
+            setSuccess(user.success);
         }
         setError(user.error);
       })

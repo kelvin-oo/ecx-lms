@@ -1,10 +1,8 @@
 import nodemailer from "nodemailer";
 
-const domain = process.env.NEXT_PUBLIC_APP_URL;
-
 export async function sendVerificationMail(email, token) {
   const { SMTP_EMAIL, SMTP_PASSWORD } = process.env;
-  const confirmLink = `${domain}/auth/new-verification?token=${token}`;
+  const confirmLink = `http://localhost:3000/auth/new-verification?token=${token}`;
   console.log(email, token);
   const transport = nodemailer.createTransport({
     service: "gmail",
