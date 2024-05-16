@@ -76,7 +76,7 @@ export default function Login() {
           setError(error);
         }).finally(() => {
           setLoading(false)
-          console.log('finally activated')
+          console.log('hit finally')
         })
       };
   return (
