@@ -1,5 +1,8 @@
 import { Varela_Round, Inter, Poppins } from "next/font/google";
 import "./globals.css";
+import { auth } from "@/auth";
+import { SessionProvider } from "next-auth/react";
+
 
 
 const varela_round = Varela_Round({
@@ -24,12 +27,15 @@ export const viewport = {
   maximumScale: 1,
 };
 
-export default function RootLayout({ children }) {
+export default async function RootLayout({ children }) {
+  const session = await auth()
   return (
+    <SessionProvider session={session}>
     <html lang="en">
       <body className={`${inter.variable} ${varela_round.variable}`}>
        {children}
       </body>
     </html>
+    </SessionProvider>
   );
 }
