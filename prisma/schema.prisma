@@ -60,3 +60,12 @@ model VerificationToken {
 
   @@unique([email, token])
 }
+
+model adminTasks {
+  id          String    @id @default(cuid())
+  title       String
+  description String
+  deadline    DateTime?
+  noOfTasks   Int
+  track       String
+}

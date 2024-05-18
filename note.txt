@@ -1,0 +1,18 @@
+This note contains development details, it'll hold thoghts and current task at hand.
+
+
+
+18/5/24
+current task is admin tasks, tutors shold be able to upload tasks
+sample data...
+
+  {
+    "id": "01",
+    "title": "Daily Assignment",
+    "Description": "Daily Assignment",
+    "deadline": "15/02/2024",
+    "noOfTasks": 20
+    "track": 'data analysis' (This field will not be added to the frontend but will be added to the database from session: track)
+  },
+
+Note, deadline field should have a calendar component where tutors can select date.

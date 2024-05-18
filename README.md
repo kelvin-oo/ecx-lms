@@ -51,7 +51,7 @@ Engineering Career Expo(ECX) is a student-led platform that owns and maintains t
 ## Contributing
 ----------
 
-We welcome all contributions!
+We welcome all contributions! Kindly check the note.txt to see progress report.
 
 ## License
 -------
