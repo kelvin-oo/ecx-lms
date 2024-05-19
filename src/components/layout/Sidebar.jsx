@@ -24,7 +24,7 @@ const Sidebar = ({ handleShowSidebar }) => {
     { name: 'tasks management', href: '/admin/tasks', icon: 'tasks' },
     {
       name: 'participants management',
-      href: '/admin/participants',
+      href: '/admin/participant-management',
       icon: 'classroom',
     },
   ];

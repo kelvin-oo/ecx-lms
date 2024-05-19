@@ -62,7 +62,7 @@ const Header = () => {
       </button>
 
       <Link
-        href='/participant'
+        href={`/${currentUserRole}`}
         className='col-span-4 flex justify-center lg:hidden'
       >
         <Image
@@ -75,7 +75,10 @@ const Header = () => {
         />
       </Link>
 
-      <Link href='/participant' className='hidden lg:block w-auto h-auto'>
+      <Link
+        href={`/${currentUserRole}`}
+        className='hidden lg:block w-auto h-auto'
+      >
         <Image
           src='/ecx-logo-text-white.svg'
           alt='logo'
