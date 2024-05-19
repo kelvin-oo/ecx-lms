@@ -21,7 +21,7 @@ const Header = () => {
       if (scrollY > 60) {
         setShowDropdown(false)
       }
-    }
+    } 
     handleScroll()
 
     window.addEventListener("scroll", handleScroll);
@@ -53,7 +53,7 @@ const Header = () => {
         />
       </button>
 
-      <Link href="/user" className="col-span-4 flex justify-center lg:hidden">
+      <Link href="/participant" className="col-span-4 flex justify-center lg:hidden">
         <Image
           src="/ecx-logo-no-text.svg"
           className="w-auto h-auto"
@@ -65,7 +65,7 @@ const Header = () => {
       </Link>
 
 
-      <Link href="/user" className="hidden lg:block w-auto h-auto">
+      <Link href="/participant" className="hidden lg:block w-auto h-auto">
         <Image
           src="/ecx-logo-text-white.svg"
           alt="logo"
@@ -105,7 +105,7 @@ const Header = () => {
       {
         isShowDropdown && (
           <div className="bg-white z-10 shadow-md text-xs lg:text-sm flex py-1.5 lg:py-4 px-2.5 lg:px-6 absolute right-4 lg:right-8 top-full flex-col divide-y divide-ecx-colors-black [&>*]:py-2.5 [&>*]:flex [&>*]:items-center [&>*]:gap-2 text-black">
-            <Link onClick={handleShowDropdown} href="/user/profile">
+            <Link onClick={handleShowDropdown} href="/participant/profile">
               <Image
                 src="/icons/menu-profile.svg"
                 className="w-5 h-5 lg:w-6 lg:h-6"
@@ -115,7 +115,7 @@ const Header = () => {
               />
               <span>View profile</span>
             </Link>
-            <Link onClick={handleShowDropdown} href="/user/profile">
+            <Link onClick={handleShowDropdown} href="/participant/profile">
               <Image
                 src="/icons/menu-edit.svg"
                 className="w-5 h-5 lg:w-6 lg:h-6"
@@ -125,7 +125,7 @@ const Header = () => {
               />
               <span>Edit profile</span>
             </Link>
-            <Link onClick={handleShowDropdown} href="/user/profile">
+            <Link onClick={handleShowDropdown} href="/participant/profile">
               <Image
                 src="/icons/menu-password.svg"
                 className="w-5 h-5 lg:w-6 lg:h-6"

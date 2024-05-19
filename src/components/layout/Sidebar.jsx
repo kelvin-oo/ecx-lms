@@ -1,9 +1,9 @@
-"use client";
-import Image from "next/image";
-import Link from "next/link";
-import { useRouter, usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
-import styles from "@/components/css/sidebar.module.css";
+'use client';
+import Image from 'next/image';
+import Link from 'next/link';
+import { useRouter, usePathname } from 'next/navigation';
+import { useEffect, useState } from 'react';
+import styles from '@/components/css/sidebar.module.css';
 
 const Sidebar = ({ handleShowSidebar }) => {
   const [isShowLogoutModal, setShowLogoutModal] = useState(false);
@@ -11,28 +11,28 @@ const Sidebar = ({ handleShowSidebar }) => {
   const router = useRouter();
   const pathname = usePathname();
 
-  const isAdmin = pathname.split("/")[1] === "admin";
+  const isAdmin = pathname.split('/')[1] === 'admin';
 
   const sidebarLinks__user = [
-    { name: "dashboard", href: "/user", icon: "dashboard" },
-    { name: "tasks", href: "/user/tasks", icon: "tasks" },
-    { name: "classroom", href: "/user/classroom", icon: "classroom" },
+    { name: 'dashboard', href: '/participant', icon: 'dashboard' },
+    { name: 'tasks', href: '/participant/tasks', icon: 'tasks' },
+    { name: 'classroom', href: '/participant/classroom', icon: 'classroom' },
   ];
 
   const sidebarLinks__admin = [
-    { name: "dashboard", href: "/admin", icon: "dashboard" },
-    { name: "tasks management", href: "/admin/tasks", icon: "tasks" },
+    { name: 'dashboard', href: '/admin', icon: 'dashboard' },
+    { name: 'tasks management', href: '/admin/tasks', icon: 'tasks' },
     {
-      name: "participants management",
-      href: "/admin/participants",
-      icon: "classroom",
+      name: 'participants management',
+      href: '/admin/participants',
+      icon: 'classroom',
     },
   ];
 
   const handleShowLogoutModal = () => setShowLogoutModal(!isShowLogoutModal);
 
   const handleLogout = () => {
-    console.log('trying to logout')
+    console.log('trying to logout');
   };
   useEffect(() => {
     const handleScroll = () => {
@@ -44,13 +44,13 @@ const Sidebar = ({ handleShowSidebar }) => {
     };
     handleScroll();
 
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
   }, [scrollY]);
 
   return (
     <nav className={styles.sidebar}>
-      <div className="flex flex-col gap-5 lg:gap-8">
+      <div className='flex flex-col gap-5 lg:gap-8'>
         {isAdmin
           ? sidebarLinks__admin.map(({ name, href, icon }, index) => {
               const isActiveLink = pathname == href;
@@ -65,7 +65,7 @@ const Sidebar = ({ handleShowSidebar }) => {
                   }`}
                 >
                   <Image
-                    alt="dashboard"
+                    alt='dashboard'
                     src={
                       isActiveLink
                         ? `/icons/${icon}-light.svg`
@@ -92,7 +92,7 @@ const Sidebar = ({ handleShowSidebar }) => {
                   }`}
                 >
                   <Image
-                    alt="dashboard"
+                    alt='dashboard'
                     src={
                       isActiveLink
                         ? `/icons/${icon}-light.svg`
@@ -108,15 +108,15 @@ const Sidebar = ({ handleShowSidebar }) => {
             })}
       </div>
 
-      <div className="flex flex-col gap-3.5 relative">
-        <hr className="border-black" />
+      <div className='flex flex-col gap-3.5 relative'>
+        <hr className='border-black' />
         <button
           onClick={handleShowLogoutModal}
-          className="bg-ecx-colors-ruby text-white font-semibold py-2.5 flex justify-center gap-3"
+          className='bg-ecx-colors-ruby text-white font-semibold py-2.5 flex justify-center gap-3'
         >
           <Image
-            alt="dashboard"
-            src="/icons/logout.svg"
+            alt='dashboard'
+            src='/icons/logout.svg'
             width={14}
             height={14}
           />
@@ -124,7 +124,7 @@ const Sidebar = ({ handleShowSidebar }) => {
         </button>
         {isShowLogoutModal && (
           <div className={styles.logoutModal}>
-            <div className="text-center col-span-2">ARE YOU SURE?</div>
+            <div className='text-center col-span-2'>ARE YOU SURE?</div>
             <button
               onClick={handleLogout}
               className={`${styles.modalBtn} ${styles.modalBtnDark}`}
