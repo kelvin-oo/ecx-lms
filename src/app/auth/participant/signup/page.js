@@ -45,7 +45,7 @@ export default function Register() {
               placeholder="Email Address"
               required
             />
-            <AuthSelect
+            <AuthSelect 
               className="col-span-2"
               title="Track"
               options={[

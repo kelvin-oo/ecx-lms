@@ -2,7 +2,7 @@ import Image from "next/image"
 import { useEffect, useState } from "react";
 
 
-export default function FormInput ({
+export default function FormInput ({   
   variant = "text", // text || email || password || number
   disabled = false,
   placeholder = "",
