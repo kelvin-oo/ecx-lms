@@ -63,7 +63,7 @@ const Header = () => {
 
       <Link
         href={`/${currentUserRole}`}
-        className='col-span-4 flex justify-center lg:hidden'
+        className='col-span-3 sm:col-span-4 flex justify-center lg:hidden'
       >
         <Image
           src='/ecx-logo-no-text.svg'
@@ -88,7 +88,7 @@ const Header = () => {
         />
       </Link>
 
-      <div className='flex items-center gap-3 lg:gap-4 col-span-1 justify-end'>
+      <div className='flex items-center gap-3 lg:gap-4 col-span-2 sm:col-span-1 justify-end'>
         <span className='hidden lg:block'>
           <b>Track: </b>Front end Web development
         </span>
@@ -100,7 +100,7 @@ const Header = () => {
           height={20}
         />
         <button
-          className='flex items-center gap-2 transition-colors hover:bg-ecx-colors-dart/10 rounded-3xl'
+          className='flex items-center gap-2 transition-colors hover:bg-ecx-colors-dart/10 rounded-3xl mr-'
           onClick={handleShowDropdown}
         >
           <Image
