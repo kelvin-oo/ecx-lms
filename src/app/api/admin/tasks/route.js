@@ -31,7 +31,7 @@ export async function POST(req) {
         result.data;
     const user = await currentServerUser()
     try {
-        await db.adminTasks.create({
+        await db.adminTask.create({
             data: {
                 title,
                 description,
@@ -62,8 +62,8 @@ export async function GET(req) {
 
 
     try {
-        const allTasks = await db.adminTasks.findMany();
-        return new NextResponse(JSON.stringify(allTasks), { status: 200 })
+        const adminTasks = await db.adminTask.findMany();
+        return new NextResponse(JSON.stringify(adminTasks), { status: 200 })
     } catch (error) {
         console.error(error);
         return new NextResponse(JSON.stringify({

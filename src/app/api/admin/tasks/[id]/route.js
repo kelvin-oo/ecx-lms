@@ -17,8 +17,8 @@ export async function GET(req, ctx) {
     const id = ctx.params.id
 
     try {
-        const task = db.findUnique({ where: { id } });
-        return new NextResponse(JSON.stringify(task), { status: 200 })
+        const adminTask = db.adminTask.findUnique({ where: { id } });
+        return new NextResponse(JSON.stringify(adminTask), { status: 200 })
     } catch (error) {
         console.error(error);
         return new NextResponse(JSON.stringify({
@@ -49,7 +49,7 @@ export async function PATCH(req, ctx) {
     const id = ctx.params.id
 
     try {
-        const updatedTask = await db.adminTasks.update({
+        const updatedTask = await db.adminTask.update({
             where: { id: id },
             data: {
                 body,
@@ -77,7 +77,7 @@ export async function DELETE(req, ctx) {
 
     const id = ctx.params.id
     try {
-        await db.adminTasks.delete({
+        await db.adminTask.delete({
             where: {
               id: id,
             },
@@ -90,6 +90,6 @@ export async function DELETE(req, ctx) {
         return new NextResponse(JSON.stringify({
             message: "An error occurred while deleting this task.",
             error,
-        }), { status: 500 })
+        }), { status: 400 })
     }
 }
