@@ -6,7 +6,7 @@ export default function AuthSelect({
   title = "",
   options = [],
   className = "",
-}) {
+}) {    
   const [isSelected, setIsSelected] = useState(false);
   const handleSelect = () => !isSelected && setIsSelected(true);
 
