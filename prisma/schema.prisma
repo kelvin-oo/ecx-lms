@@ -19,18 +19,26 @@ enum UserRole {
   TUTOR
 }
 
+enum TaskStatus {
+  PENDING
+  SUBMITTED
+  GRADED
+}
+
 model User {
-  id            String    @id @default(cuid())
-  email         String?   @unique
+  id            String        @id @default(cuid())
+  email         String?       @unique
   firstName     String?
   lastName      String?
-  userName      String?   @unique
+  userName      String?       @unique
   track         String?
   emailVerified DateTime?
   image         String?
   password      String?
-  role          UserRole  @default(PARTICIPANT)
+  role          UserRole      @default(PARTICIPANT)
   accounts      Account[]
+  submissions   Submission[]
+  studentTasks  StudentTask[]
 }
 
 model Account {
@@ -61,11 +69,29 @@ model VerificationToken {
   @@unique([email, token])
 }
 
-model adminTasks {
-  id          String    @id @default(cuid())
-  title       String
-  description String
-  deadline    DateTime?
-  noOfTasks   Int
-  track       String
+model AdminTask {
+  id           String        @id @default(cuid())
+  title        String
+  description  String
+  deadline     DateTime?
+  noOfTasks    Int
+  track        String
+  studentTasks StudentTask[]
+}
+
+model StudentTask {
+  id          String       @id @default(cuid())
+  student     User         @relation(fields: [id], references: [id], map: "studentConstraint")
+  task        AdminTask    @relation(fields: [id], references: [id], map: "taskConstraint")
+  status      TaskStatus   @default(PENDING)
+  submittedAt DateTime?
+  submission  Submission[]
+}
+
+model Submission {
+  id          String      @id @default(cuid())
+  user        User        @relation(fields: [id], references: [id], map: "userConstraint")
+  studentTask StudentTask @relation(fields: [id], references: [id])
+  score       Int
+  submittedAt DateTime?
 }
