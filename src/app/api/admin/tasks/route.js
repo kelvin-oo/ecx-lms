@@ -11,7 +11,7 @@ export async function POST(req) {
     if (role !== UserRole.ADMIN) {
         return new NextResponse(
             JSON.stringify({ error: "Not authorised!" }),
-            { status: 403 } 
+            { status: 403 }
         );
     }
 
@@ -31,7 +31,7 @@ export async function POST(req) {
         result.data;
     const user = await currentServerUser()
     try {
-        await db.adminTasks.create({
+        await db.adminTask.create({
             data: {
                 title,
                 description,
@@ -51,3 +51,24 @@ export async function POST(req) {
     );
 }
 
+export async function GET(req) {
+    const role = await currentServerRole()
+    if (role !== UserRole.ADMIN) {
+        return new NextResponse(
+            JSON.stringify({ error: "Not authorised!" }),
+            { status: 403 }
+        );
+    }
+
+
+    try {
+        const adminTasks = await db.adminTask.findMany();
+        return new NextResponse(JSON.stringify(adminTasks), { status: 200 })
+    } catch (error) {
+        console.error(error);
+        return new NextResponse(JSON.stringify({
+            message: "An error occurred while fetching tasks.",
+            error,
+        }), { status: 401 })
+    }
+}
