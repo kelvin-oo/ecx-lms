@@ -1,8 +1,11 @@
 import Sidebar from '@/components/layout/Sidebar';
 import Header from '@/components/layout/Header';
+import { RoleGate } from '@/components/role-gate-server';
+import { UserRole } from "@prisma/client";
 
 export default function AdminLayout({ children }) {
   return (
+    <RoleGate allowedRole={UserRole.TUTOR}>
     <main className='relative'>
       <Header />
       <span className='hidden lg:block'>
@@ -13,5 +16,6 @@ export default function AdminLayout({ children }) {
         {children}
       </main>
     </main>
+    </RoleGate>
   );
 }
