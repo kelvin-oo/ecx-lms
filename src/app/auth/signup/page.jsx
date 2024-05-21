@@ -1,17 +1,17 @@
-"use client";
-import Link from "next/link";
-import FormBox from "@/components/auth/AuthFormbox";
-import FormInput from "@/components/auth/AuthFormInput";
-import AuthLayout from "@/components/auth/AuthLayout";
-import authStyles from "@/components/css/authLayout.module.css";
-import ComponentLevelLoader from "@/components/Loader";
-import { useState } from "react";
-import Image from "next/image";
-import { register } from "@/actions/register";
+'use client';
+import Link from 'next/link';
+import FormBox from '@/components/auth/AuthFormbox';
+import FormInput from '@/components/auth/AuthFormInput';
+import AuthLayout from '@/components/auth/AuthLayout';
+import authStyles from '@/components/css/authLayout.module.css';
+import ComponentLevelLoader from '@/components/Loader';
+import { useState } from 'react';
+import Image from 'next/image';
+import { register } from '@/actions/register';
 
 export default function Register() {
-  const [error, setError] = useState("");
-  const [success, setSuccess] = useState("");
+  const [error, setError] = useState('');
+  const [success, setSuccess] = useState('');
   const [checked, setChecked] = useState(false);
   const [formData, setFormData] = useState();
   const [loading, setLoading] = useState(false);
@@ -32,114 +32,114 @@ export default function Register() {
     return emailRegex.test(email);
   };
 
-
   const handleFormSubmit = async (e) => {
-    e.preventDefault()
+    e.preventDefault();
     setError('');
-    setLoading(true)
+    setLoading(true);
 
-    const { firstName, lastName, email, password, track, userName} = formData || {};
+    const { firstName, lastName, email, password, track, userName } =
+      formData || {};
 
     if (!firstName) {
       setError('Please fill in your First Name');
-      setLoading(false)
-      console.log(error)
+      setLoading(false);
+      console.log(error);
       return;
     }
 
     if (!lastName) {
       setError('Please fill in your last Name');
-      setLoading(false)
-      console.log(error)
+      setLoading(false);
+      console.log(error);
       return;
     }
     if (!userName) {
       setError('Please choose a User Name');
-      setLoading(false)
-      console.log(error)
+      setLoading(false);
+      console.log(error);
       return;
     }
 
     if (!track) {
       setError('Please fill choose a track');
-      setLoading(false)
-      console.log(error)
+      setLoading(false);
+      console.log(error);
       return;
     }
 
     if (!email) {
       setError('Please fill in your email!');
-      setLoading(false)
-      console.log(error)
+      setLoading(false);
+      console.log(error);
       return;
     }
 
     if (!password) {
       setError('Please choose a password!');
-      setLoading(false)
-      console.log(error)
+      setLoading(false);
+      console.log(error);
       return;
     }
 
     if (!isValidEmail(email || '')) {
-        setError('Email is invalid');
-        setLoading(false)
-        console.log(error)
-        return;
-      }
+      setError('Email is invalid');
+      setLoading(false);
+      console.log(error);
+      return;
+    }
 
-      const body = {
-        ...formData,
-      };
+    const body = {
+      ...formData,
+    };
 
-
-      register(body)
+    register(body)
       .then((user) => {
         if (user.success) {
-            console.log(user.success)
-            setSuccess(user.success);
+          console.log(user.success);
+          setSuccess(user.success);
         }
         setError(user.error);
       })
       .catch((error) => {
         console.log(error);
         setError(error);
-      }).finally(() => {
-        setLoading(false)
-        console.log('finally activated')
       })
-    };
+      .finally(() => {
+        setLoading(false);
+        console.log('finally activated');
+      });
+  };
 
   return (
     <AuthLayout>
-      <div className="flex justify-center">
-        <form className="w-full flex justify-center">
+      <div className='flex justify-center'>
+        <form className='w-full flex justify-center'>
           <FormBox>
             <FormInput
-              variant="text"
-              name="firstName"
-              placeholder="Firstname"
+              variant='text'
+              name='firstName'
+              placeholder='Firstname'
               required
               onChange={handleChange}
             />
             <FormInput
-              variant="text"
-              name="lastName"
-              placeholder="Lastname"
+              variant='text'
+              name='lastName'
+              placeholder='Lastname'
               required
               onChange={handleChange}
             />
             <FormInput
-              variant="text"
-              name="userName"
-              placeholder="Username"
+              variant='text'
+              name='userName'
+              placeholder='Username'
               required
               onChange={handleChange}
             />
             <FormInput
-              variant="email"
-              name="email"
-              placeholder="Email Address"
+              variant='email'
+              name='email'
+              placeholder='Email Address'
               required
               onChange={handleChange}
             />
@@ -149,58 +149,61 @@ export default function Register() {
               <select
                 onChange={handleChange}
                 onClick={handleSelect}
-                id="track"
-                name="track"
+                id='track'
+                name='track'
                 className={authStyles.auth__select}
               >
-                <option value="Frontend development">
+                <option value='Frontend development'>
                   Frontend development
                 </option>
-                <option value="Backend development">Backend development</option>
-                <option value="Python">Python</option>
-                <option value="Data Analytics">Data Analytics</option>
-                <option value="Data Science">Data Science</option>
-                <option value="Data Structures and Algorithms">
+                <option value='Backend development'>Backend development</option>
+                <option value='Python'>Python</option>
+                <option value='Data Analytics'>Data Analytics</option>
+                <option value='Data Science'>Data Science</option>
+                <option value='Data Structures and Algorithms'>
                   Data Structures and Algorithms
                 </option>
               </select>
 
               <Image
-                className="absolute top-1/2 right-2 -translate-y-1/2"
-                src="/icons/chevron-down-black.svg"
-                alt="arrow"
+                className='absolute top-1/2 right-2 -translate-y-1/2'
+                src='/icons/chevron-down-black.svg'
+                alt='arrow'
                 width={20}
                 height={20}
               />
             </div>
             <FormInput
-              variant="password"
-              name="password"
-              placeholder="Password"
+              variant='password'
+              name='password'
+              placeholder='Password'
               required
               onChange={handleChange}
             />
             <button
               onClick={handleFormSubmit}
               className={authStyles.auth__btn}
-              type="submit"
+              type='submit'
             >
-              {loading ? <ComponentLevelLoader color={"#ffffff"} /> : "Sign up"}
+              {loading ? <ComponentLevelLoader color={'#ffffff'} /> : 'Sign up'}
             </button>
           </FormBox>
         </form>
       </div>
-      {error && <p className={authStyles.auth__info_text}>
-        <span>{error}</span>
-      </p>}
-      {success && <p className={authStyles.auth__info_text}>
-        <span>{success}</span>
-      </p>}
+      {error && (
+        <p className={authStyles.auth__info_text}>
+          <span>{error}</span>
+        </p>
+      )}
+      {success && (
+        <p className={authStyles.auth__info_text}>
+          <span>{success}</span>
+        </p>
+      )}
       <p className={authStyles.auth__info_text}>
         <span>Already have an account? </span>
-        <Link href="/auth/login">Login</Link>
+        <Link href='/auth/login'>Login</Link>
       </p>
-     
     </AuthLayout>
   );
 }
