@@ -4,24 +4,15 @@
  */
 export const publicRoutes = [
     "/",
-    "/auth/new-verification",
   ];
   
   // * An array of routes that are used for authentication
-  // * These routes will redirect logged in users to /settings
-  // * @type {string[]}
+  // * These routes will redirect logged in users to either /participant or /admin
   
   export const authRoutes = [
     "/auth/login",
-    "/auth/register",
-    "/auth/error",
-    "/auth/reset",
-    "/auth/new-password",
-    '/signup',
-    '/signin',
-    '/email-confirmation',
-    '/forgot-password',
-    '/new-password',
+    "/auth/signup",
+    "/auth/new-verification",
   ];
   
   /**
@@ -31,7 +22,7 @@ export const publicRoutes = [
   export const apiAuthPrefix = "/api/auth";
   
   /**
-   * The default redirect path after logging in
+   * The default redirect paths after logging in
    */
   
   export const DEFAULT_LOGIN_REDIRECT = "/dashboard";

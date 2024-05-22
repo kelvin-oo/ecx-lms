@@ -8,12 +8,15 @@ import { login } from '@/actions/login';
 import { useState } from 'react';
 import ComponentLevelLoader from '@/components/Loader';
 import { useRouter } from 'next/navigation';
+import { useSearchParams } from "next/navigation";
 
 export default function Login() {
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
   const [formData, setFormData] = useState();
   const [loading, setLoading] = useState(false);
+  const searchParams = useSearchParams();
+  const callbackUrl = searchParams.get("callbackUrl");
 
   const router = useRouter();
 
@@ -63,12 +66,12 @@ export default function Login() {
       ...formData,
     };
 
-    login(body)
+    login(body, callbackUrl)
       .then((user) => {
         if (user.success) {
           console.log(user.success);
-          router.push('/participant');
           setSuccess(user.success);
+          router.push(callbackUrl || '/dashboard')
         }
         setError(user.error);
       })
