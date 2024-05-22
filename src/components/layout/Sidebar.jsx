@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { useRouter, usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import styles from '@/components/css/sidebar.module.css';
+import { LogoutButton } from '../auth/logout-button';
 
 const Sidebar = ({ handleShowSidebar }) => {
   const [isShowLogoutModal, setShowLogoutModal] = useState(false);
@@ -11,7 +12,10 @@ const Sidebar = ({ handleShowSidebar }) => {
   const router = useRouter();
   const pathname = usePathname();
 
-  const isAdmin = pathname.split('/')[1] === 'admin';
+  const currentUserRole = pathname.split('/')[1];
+
+  const isAdmin =
+    (pathname.split('/')[1] === 'tutor') | (pathname.split('/')[1] === 'admin');
 
   const sidebarLinks__user = [
     { name: 'dashboard', href: '/participant', icon: 'dashboard' },
@@ -20,11 +24,15 @@ const Sidebar = ({ handleShowSidebar }) => {
   ];
 
   const sidebarLinks__admin = [
-    { name: 'dashboard', href: '/admin', icon: 'dashboard' },
-    { name: 'tasks management', href: '/admin/tasks', icon: 'tasks' },
+    { name: 'dashboard', href: `/${currentUserRole}`, icon: 'dashboard' },
+    {
+      name: 'tasks management',
+      href: `/${currentUserRole}/tasks`,
+      icon: 'tasks',
+    },
     {
       name: 'participants management',
-      href: '/admin/participant-management',
+      href: `/${currentUserRole}/participant-management`,
       icon: 'classroom',
     },
   ];
@@ -125,12 +133,15 @@ const Sidebar = ({ handleShowSidebar }) => {
         {isShowLogoutModal && (
           <div className={styles.logoutModal}>
             <div className='text-center col-span-2'>ARE YOU SURE?</div>
-            <button
-              onClick={handleLogout}
-              className={`${styles.modalBtn} ${styles.modalBtnDark}`}
-            >
-              LOGOUT
-            </button>
+            <LogoutButton>
+              <button
+                onClick={handleLogout}
+                className={`${styles.modalBtn} ${styles.modalBtnDark}`}
+              >
+                LOGOUT
+              </button>
+            </LogoutButton>
+
             <button onClick={handleShowLogoutModal} className={styles.modalBtn}>
               CANCEL
             </button>
