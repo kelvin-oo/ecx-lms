@@ -12,7 +12,6 @@ import { register } from '@/actions/register';
 export default function Register() {
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
-  const [checked, setChecked] = useState(false);
   const [formData, setFormData] = useState();
   const [loading, setLoading] = useState(false);
   const [isSelected, setIsSelected] = useState(false);

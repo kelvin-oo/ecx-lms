@@ -8,9 +8,7 @@ const TaskSchema = z.object({
   description: z.string().min(1, {
     message: "description is required",
   }),
-  deadline: z.string().min(1, {
-    message: "deadline is required",
-  }),
+  deadline: z.date(),
   noOfTasks: z.number().min(1, {
     message: "Number of tasks is required",
   }),

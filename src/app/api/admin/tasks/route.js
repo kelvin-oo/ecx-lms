@@ -6,9 +6,10 @@ import TaskSchema from "@/schemas/task";
 import db from "@/lib/db";
 import { currentServerUser } from "@/lib/serverAuthState";
 
+
 export async function POST(req) {
     const role = await currentServerRole()
-    if (role !== UserRole.ADMIN) {
+    if (role === UserRole.PARTICIPANT) {
         return new NextResponse(
             JSON.stringify({ error: "Not authorised!" }),
             { status: 403 }
@@ -17,36 +18,48 @@ export async function POST(req) {
 
     const body = await req.json()
 
-    // console.log(body);
+    const convertedBody = {
+        ...body,
+        deadline: new Date(body.deadline),
+        noOfTasks: parseInt(body.noOfTasks, 10),
+    };
 
-    const result = TaskSchema.safeParse(body);
 
-    console.log(result);
+    const result = TaskSchema.safeParse(convertedBody);
+
 
     if (!result.success) {
-        return { error: "Invalid fields!" };
+        return new NextResponse(
+            JSON.stringify({ error: 'invalid fields' }),
+            { status: 402 }
+        );
     }
 
     const { title, description, deadline, noOfTasks } =
         result.data;
     const user = await currentServerUser()
     try {
-        await db.adminTask.create({
+        const newAdminTask = await db.adminTask.create({
             data: {
-                title,
-                description,
-                deadline,
-                noOfTasks,
-                track: user.track
+              title,
+              description,
+              deadline,
+              noOfTasks,
+              track: user.track,
+              author: { connect: { id: user.id, } }, 
             },
-        });
+          })
 
     } catch (error) {
-        return { error: error || "Error creating task." };
-    }
+        console.error(error);
+        return new NextResponse(
+          JSON.stringify({ error: 'Error creating task' }),
+          { status: 500 } 
+        );
+      }
 
     return new NextResponse(
-        JSON.stringify({ success: "Task Api demo!" }),
+        JSON.stringify({ success: 'task created' }),
         { status: 200 }
     );
 }
