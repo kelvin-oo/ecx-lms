@@ -4,7 +4,7 @@ import FormBox from '@/components/auth/AuthFormbox';
 import FormInput from '@/components/auth/AuthFormInput';
 import AuthLayout from '@/components/auth/AuthLayout';
 import authStyles from '@/components/css/authLayout.module.css';
-import { login } from '@/actions/login';
+import { login } from '@/actions/auth actions/login';
 import { useState } from 'react';
 import ComponentLevelLoader from '@/components/Loader';
 import { useRouter } from 'next/navigation';

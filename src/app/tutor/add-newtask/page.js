@@ -78,7 +78,7 @@ export default function AddNewTask() {
       if (res.status === 200) {
         setError("");
         setSuccess('success uploading task')
-        router.push('/tutor')
+        // router.push('/tutor')
       }
       if (res.status === 500) {
         setError("something went wrong");

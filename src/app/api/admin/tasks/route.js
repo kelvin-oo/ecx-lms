@@ -46,7 +46,7 @@ export async function POST(req) {
               deadline,
               noOfTasks,
               track: user.track,
-              author: { connect: { id: user.id, } }, 
+              authorId: user.id 
             },
           })
 

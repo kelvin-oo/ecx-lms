@@ -1,10 +1,12 @@
-"use client";
+
 import AdminTasksTable from "@/components/admin/AdminTasksTable";
-import ParticipantsTable from "@/components/admin/ParticipantsTable";
+// import ParticipantsTable from "@/components/admin/ParticipantsTable";
 import LeaderboardTable from "@/components/dashboard/LeaderboardTable";
 import tasks from "@/sampleData/adminTasks.json";
+import { getPartialAdminTasks } from "@/actions/task actions/admin tasks";
 
-export default function AdminPage() {
+export default async function AdminPage() {
+  const tasks = await getPartialAdminTasks(4)
   return (
     <div>
       <div className="flex justify-between items-center">
@@ -22,8 +24,8 @@ export default function AdminPage() {
 
       <div className="mt-5 flex flex-col gap-10 xl:grid xl:grid-cols-2 xl:gap-x-8 xl:gap-y-7 [&>*]:bg-white [&>*]:border-[1.5px] [&>*]:border-ecx-colors-secondary-blue [&>*]:shadow-[7px_7px_rgba(39,46,75,1)] [&>*]:py-6 [&>*]:px-5">
         <LeaderboardTable className="col-span-1" />
-        <AdminTasksTable minimized tasksArr={tasks.slice(0, 3)} />
-        <ParticipantsTable />
+        <AdminTasksTable minimized tasksArr={tasks} />
+        {/* <ParticipantsTable /> */}
       </div>
     </div>
   );

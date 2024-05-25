@@ -2,7 +2,7 @@ import nodemailer from "nodemailer";
 
 export async function sendVerificationMail(email, token) {
   const { SMTP_EMAIL, SMTP_PASSWORD } = process.env;
-  const confirmLink = `http://localhost:3000/auth/new-verification?token=${token}`;
+  const confirmLink = `https://ecx-lms.vercel.app/auth/new-verification?token=${token}`;
   console.log(email, token);
   const transport = nodemailer.createTransport({
     service: "gmail",

@@ -5,7 +5,7 @@ import { UserRole } from "@prisma/client";
 
 export default function AdminLayout({ children }) {
   return (
-    <RoleGate allowedRole={UserRole.ADMIN}>
+    // <RoleGate allowedRole={UserRole.ADMIN}>
       <main className='relative'>
         <Header />
         <span className='hidden lg:block'>

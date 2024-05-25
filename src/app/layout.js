@@ -2,6 +2,7 @@ import { Varela_Round, Inter, Poppins } from "next/font/google";
 import "./globals.css";
 import { auth } from "@/auth";
 import { SessionProvider } from "next-auth/react";
+import Provider from "@/components/Provider";
 
 
 
@@ -33,7 +34,9 @@ export default async function RootLayout({ children }) {
     <SessionProvider session={session}>
     <html lang="en">
       <body className={`${inter.variable} ${varela_round.variable}`}>
-       {children}
+       <Provider>
+        {children}
+       </Provider>
       </body>
     </html>
     </SessionProvider>

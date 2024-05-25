@@ -26,19 +26,22 @@ enum TaskStatus {
 }
 
 model User {
-  id            String      @id @default(cuid())
-  email         String?     @unique
+  id            String       @id @default(cuid())
+  email         String?      @unique
   firstName     String?
   lastName      String?
-  userName      String?     @unique
+  userName      String?      @unique
   track         String?
   emailVerified DateTime?
   image         String?
   password      String?
-  role          UserRole    @default(PARTICIPANT)
+  points        Int?         @default(0)
+  taskScore     Int?         @default(0)
+  taskCompleted Int?         @default(0)
+  role          UserRole     @default(PARTICIPANT)
   accounts      Account[]
-  adminTasks AdminTask[]
-  // submissions   Submission[]
+  adminTasks    AdminTask[]
+  submissions   Submission[]
   // studentTasks  StudentTask[]
 }
 
@@ -71,29 +74,27 @@ model VerificationToken {
 }
 
 model AdminTask {
-  id          String    @id @default(cuid())
-  author      User      @relation(fields: [authorId], references: [id])
+  id          String       @id @default(cuid())
+  author      User         @relation(fields: [authorId], references: [id])
   authorId    String
   title       String?
   description String?
   deadline    DateTime?
   noOfTasks   Int?
+  taskGrade   Int?
   track       String?
+  submissions Submission[]
 }
 
-// model StudentTask {
-//   id          String       @id @default(cuid())
-//   student     User         @relation(fields: [id], references: [id], map: "studentConstraint")
-//   task        AdminTask    @relation(fields: [id], references: [id], map: "taskConstraint")
-//   status      TaskStatus   @default(PENDING)
-//   submittedAt DateTime?
-//   submission  Submission[]
-// }
-
-// model Submission {
-//   id          String      @id @default(cuid())
-//   user        User        @relation(fields: [id], references: [id], map: "userConstraint")
-//   studentTask StudentTask @relation(fields: [id], references: [id])
-//   score       Int
-//   submittedAt DateTime?
-// }
+model Submission {
+  id              String     @id @default(cuid())
+  participant     User       @relation(fields: [participantId], references: [id])
+  participantId   String
+  task            AdminTask  @relation(fields: [taskId], references: [id])
+  taskId          String
+  comment         String?
+  submissionLink  String?
+  submissionGrade Int?
+  status          TaskStatus @default(PENDING)
+  submittedAt     DateTime   @default(now())
+}

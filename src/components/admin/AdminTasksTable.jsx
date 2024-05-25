@@ -1,4 +1,5 @@
 import Image from "next/image"
+import moment from "moment";
 
 export default function AdminTasksTable({ tasksArr=[], minimized=false }) {
   return (
@@ -32,16 +33,16 @@ export default function AdminTasksTable({ tasksArr=[], minimized=false }) {
           </div>
         </div>
       
-        {tasksArr.map(({ id, title, deadline, noOfTasks }, index) => (
+        {tasksArr.map(({ title, deadline, noOfTasks }, index) => (
           <div key={index} className={`grid grid-cols-11 gap-x-10 py-1.5 text-sm lg:text-base font-light`}>
             <div className={`${minimized ? "col-span-2" : "col-span-1"} text-center`}>
-              {id}
+              {index+1}
             </div>
             <div className="col-span-3 truncate">
               {title}
             </div>
             <div className="col-span-3 text-center">
-              {deadline}
+            {moment(deadline).format('YYYY/MM/DD')}
             </div>
             <div className="col-span-3 text-center">
               {noOfTasks}

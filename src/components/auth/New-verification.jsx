@@ -5,7 +5,7 @@ import { useSearchParams } from "next/navigation";
 import Image from "next/image";
 import authStyles from "@/components/css/authLayout.module.css";
 import Link from "next/link";
-import { newVerification } from "@/actions/newVerification";
+import { newVerification } from "@/actions/auth actions/newVerification";
 import ComponentLevelLoader from "@/components/Loader";
 
 export default function NewVerification() {
