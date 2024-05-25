@@ -3,6 +3,7 @@
 import ComponentLevelLoader from '@/components/Loader';
 import { useState } from 'react';
 import authStyles from '@/components/css/authLayout.module.css';
+import { useRouter } from 'next/navigation';
 
 
 
@@ -13,6 +14,7 @@ export default function AddNewTask() {
   const [success, setSuccess] = useState('');
   const [formData, setFormData] = useState();
   const [loading, setLoading] = useState(false);
+  const router = useRouter();
 
 
   const handleFormSubmit = async (e) => {
@@ -75,7 +77,8 @@ export default function AddNewTask() {
       }
       if (res.status === 200) {
         setError("");
-        setSuccess('success uploadin task')
+        setSuccess('success uploading task')
+        router.push('/tutor')
       }
       if (res.status === 500) {
         setError("something went wrong");
