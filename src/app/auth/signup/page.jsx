@@ -153,6 +153,9 @@ export default function Register() {
                 className={authStyles.auth__select}
               >
                 <option value='Frontend development'>
+                  choose track
+                </option>
+                <option value='Frontend development'>
                   Frontend development
                 </option>
                 <option value='Backend development'>Backend development</option>
