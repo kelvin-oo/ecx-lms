@@ -1,11 +1,19 @@
 "use client"
 import tableData from '@/sampleData/leaderboard.json'
+import { getAllAdminTasks } from '@/actions/task actions/admin tasks';
+import { useQuery } from '@tanstack/react-query';
 import Image from "next/image";
 import { useState } from 'react'
 import LeaderboardTableRow from './LeaderboardTableRow';
 import LeaderboardTableExpanded from './LeaderboardTableExpanded';
+import { getAllParticipants } from '@/actions/participants/participant';
 
 export default function LeaderboardTable({ className = "" }) {
+  const { data, error, isLoading, isFetched } = useQuery({
+    queryKey: ['leaders'],
+    queryFn: getAllParticipants
+  })
+  // console.log(data)
   const [isTableCollapsed, setTableCollapsed] = useState(true)
   const [leaderboardData, setLeaderboardData] = useState(tableData.filter(
     data => data.track === "Frontend Web Development"
