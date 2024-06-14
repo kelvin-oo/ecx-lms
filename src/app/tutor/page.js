@@ -4,19 +4,24 @@ import AdminTasksTable from "@/components/admin/AdminTasksTable";
 import LeaderboardTable from "@/components/dashboard/LeaderboardTable";
 import { getPartialAdminTasks } from "@/actions/task actions/admin tasks";
 import { currentServerUser } from "@/lib/serverAuthState";
-import { getAllAdminTasks } from "@/actions/task actions/admin tasks";
+import { getLeaderBoard } from "@/actions/leaderboard/leaderboard";
 import { dehydrate, HydrationBoundary, QueryClient } from '@tanstack/react-query'
 import { getAllParticipants } from "@/actions/participants/participant";
 
-
 export default async function AdminPage() {
-  const tasks = await getPartialAdminTasks(4)
   const user = await currentServerUser()
+  const tasks = await getPartialAdminTasks(4)
   const queryClient = new QueryClient()
   await queryClient.prefetchQuery({
     queryKey: ['leaders'],
-    queryFn: getAllParticipants
-  })
+    queryFn: async () => {
+      const result = await getLeaderBoard();
+      if (result.error) {
+        throw new Error(result.error);
+      }
+      return result.success;
+    },
+  });
   return (
     <div>
       <div className="flex justify-between items-center">
@@ -33,9 +38,10 @@ export default async function AdminPage() {
       </p>
 
       <div className="mt-5 flex flex-col gap-10 xl:grid xl:grid-cols-2 xl:gap-x-8 xl:gap-y-7 [&>*]:bg-white [&>*]:border-[1.5px] [&>*]:border-ecx-colors-secondary-blue [&>*]:shadow-[7px_7px_rgba(39,46,75,1)] [&>*]:py-6 [&>*]:px-5">
-        <HydrationBoundary state={dehydrate(queryClient)}>
+      <HydrationBoundary state={dehydrate(queryClient)}>
           <LeaderboardTable className="col-span-1" />
         </HydrationBoundary>
+
 
         <AdminTasksTable minimized tasksArr={tasks} />
         {/* <ParticipantsTable /> */}

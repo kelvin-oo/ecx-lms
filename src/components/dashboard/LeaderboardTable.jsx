@@ -7,16 +7,23 @@ import { useState } from 'react'
 import LeaderboardTableRow from './LeaderboardTableRow';
 import LeaderboardTableExpanded from './LeaderboardTableExpanded';
 import { getAllParticipants } from '@/actions/participants/participant';
+import { getLeaderBoard } from "@/actions/leaderboard/leaderboard";
 
 export default function LeaderboardTable({ className = "" }) {
   const { data, error, isLoading, isFetched } = useQuery({
     queryKey: ['leaders'],
-    queryFn: getAllParticipants
+    queryFn: async () => {
+      const result = await getLeaderBoard();
+      if (result.error) {
+        throw new Error(result.error);
+      }
+      return result.success;
+    },
   })
-  // console.log(data)
+  console.log(data, error)
   const [isTableCollapsed, setTableCollapsed] = useState(true)
-  const [leaderboardData, setLeaderboardData] = useState(tableData.filter(
-    data => data.track === "Frontend Web Development"
+  const [leaderboardData, setLeaderboardData] = useState(data.filter(
+    dat => dat.track === "Python"
   ))
   const [isShowTracksMenu, setShowTracksMenu] = useState(false)
   const [activeTrack, setActiveTrack] = useState("Track")
@@ -26,10 +33,10 @@ export default function LeaderboardTable({ className = "" }) {
   const handleTracks = () => {
     if (activeTrack === "Track") {
       setActiveTrack("All Tracks")
-      setLeaderboardData(tableData)
+      setLeaderboardData(data)
     } else {
       setActiveTrack("Track")
-      setLeaderboardData(tableData.filter(data => data.track === "Frontend Web Development"))
+      setLeaderboardData(data.filter(data => data.track === "python"))
     }
   }
 
@@ -63,7 +70,7 @@ export default function LeaderboardTable({ className = "" }) {
               onClick={() => { handleTracks(); toggleShowTracksMenu() }}
               className='absolute w-[calc(100%+2px)] bg-white border border-1.5 border-ecx-colors-secondary-blue top-full -right-[1px] py-1 lg:py-1.5 px-2 lg:px-5 text-start'
             >
-              {activeTrack === "Track" ? "All Tracks" : "Track"}
+              {activeTrack === "Track" ? "All Tracks" : "My Track"}
             </button>
           )}
         </div>

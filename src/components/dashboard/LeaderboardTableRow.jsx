@@ -1,6 +1,7 @@
 export default function LeaderboardTableRow({
   position,
-  name,
+  firstName,
+  lastName,
   track,
   points,
   isLastPosition = false
@@ -13,7 +14,7 @@ export default function LeaderboardTableRow({
         </div>
       </div>
       <div className="col-span-5 lg:col-span-3 font-semibold truncate">
-        {name}
+        {firstName} {lastName}
       </div>
       <div className="col-span-5 lg:col-span-3 font-light truncate">
         {track}
