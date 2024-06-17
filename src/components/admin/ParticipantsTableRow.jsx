@@ -2,7 +2,7 @@ import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 
-const ParticipantsTableRow = ({ id, name, email, score, completed }) => {
+const ParticipantsTableRow = ({ id, firstName, lastName, email, taskScore, taskCompleted, index, noOfTasks }) => {
   const [showActions, setShowActions] = useState(false);
 
   const onActionClick = () => setShowActions(!showActions);
@@ -10,11 +10,11 @@ const ParticipantsTableRow = ({ id, name, email, score, completed }) => {
   return (
     <div className="divide-y text-[#424242] divide-black font-varela-round">
       <div className="grid grid-cols-12 gap-x-10 px-3 py-3 text-base lg:text-lg ">
-        <div className="">{id}</div>
-        <div className="col-span-2">{name}</div>
+        <div className="">{index + 1}</div>
+        <div className="col-span-2">{firstName} {lastName}</div>
         <div className="w-[8.25rem] col-span-3">{email}</div>
-        <div className="text-center col-span-2">{score}</div>
-        <div className="text-center col-span-2 ">{completed}</div>
+        <div className="text-center col-span-2">{taskScore}</div>
+        <div className="text-center col-span-2 ">{taskCompleted} / {noOfTasks}</div>
         <div className="grid place-content-center col-span-2">
           <Image
             onClick={onActionClick}
