@@ -1,7 +1,4 @@
-'use client'
 import participants from "@/sampleData/participants.json"
-import participantData from "@/sampleData/participants.json"
-import ParticipantsTableRow from "./ParticipantsTableRow";
 
 export default function ParticipantsLandingTable() {
   return (
