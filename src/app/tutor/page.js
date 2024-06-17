@@ -7,6 +7,8 @@ import { currentServerUser } from "@/lib/serverAuthState";
 import { getLeaderBoard } from "@/actions/leaderboard/leaderboard";
 import { dehydrate, HydrationBoundary, QueryClient } from '@tanstack/react-query'
 import { getAllParticipants } from "@/actions/participants/participant";
+import ParticipantsTable from "@/components/admin/ParticipantsTable";
+import ParticipantsLandingTable from "@/components/admin/ParticipantLandingTable";
 
 export default async function AdminPage() {
   const user = await currentServerUser()
@@ -44,7 +46,7 @@ export default async function AdminPage() {
 
 
         <AdminTasksTable minimized tasksArr={tasks} />
-        {/* <ParticipantsTable /> */}
+        <ParticipantsLandingTable />
       </div>
     </div>
   );
