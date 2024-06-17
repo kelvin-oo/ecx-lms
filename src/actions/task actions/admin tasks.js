@@ -12,9 +12,10 @@ export const getAllAdminTasks = async () => {
     }
 }
 
-export const getPartialAdminTasks = async (number) => {
+export const getPartialAdminTasks = async (number, track) => {
     try {
         const allTasks = db.adminTask.findMany({
+            where: {track: track},
             take: number
         })
         return allTasks
@@ -24,3 +25,4 @@ export const getPartialAdminTasks = async (number) => {
         return { error: error || "An error occurred during registration." };
     }
 }
+

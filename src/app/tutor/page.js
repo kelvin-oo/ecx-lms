@@ -1,18 +1,20 @@
 
 import AdminTasksTable from "@/components/admin/AdminTasksTable";
-// import ParticipantsTable from "@/components/admin/ParticipantsTable";
 import LeaderboardTable from "@/components/dashboard/LeaderboardTable";
 import { getPartialAdminTasks } from "@/actions/task actions/admin tasks";
 import { currentServerUser } from "@/lib/serverAuthState";
 import { getLeaderBoard } from "@/actions/leaderboard/leaderboard";
 import { dehydrate, HydrationBoundary, QueryClient } from '@tanstack/react-query'
-import { getAllParticipants } from "@/actions/participants/participant";
-import ParticipantsTable from "@/components/admin/ParticipantsTable";
 import ParticipantsLandingTable from "@/components/admin/ParticipantLandingTable";
+import { getPartialParticipants } from "@/actions/participants/participant";
+import { countTrackTasks } from "@/actions/track/trackTaskCount";
 
 export default async function AdminPage() {
   const user = await currentServerUser()
-  const tasks = await getPartialAdminTasks(4)
+  const tasks = await getPartialAdminTasks(4, user.track)
+  const noOfTasks = await countTrackTasks(user.track)
+  console.log(noOfTasks)
+  const participants = await getPartialParticipants(4, user.track)
   const queryClient = new QueryClient()
   await queryClient.prefetchQuery({
     queryKey: ['leaders'],
@@ -46,7 +48,7 @@ export default async function AdminPage() {
 
 
         <AdminTasksTable minimized tasksArr={tasks} />
-        <ParticipantsLandingTable />
+        <ParticipantsLandingTable participants={participants} noOfTasks={noOfTasks} />
       </div>
     </div>
   );

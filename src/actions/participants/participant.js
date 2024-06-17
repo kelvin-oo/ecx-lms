@@ -13,4 +13,15 @@ export const getAllParticipants = async () => {
     }
   };
 
-
+  export const getPartialParticipants = async (number, track) => {
+    try {
+        const participants = db.user.findMany({
+          where: {track: track},
+            take: number
+        })
+        return participants
+    } catch (error) {
+        console.log(error)
+        return { error: error || "An error occurred during registration." };
+    }
+}
