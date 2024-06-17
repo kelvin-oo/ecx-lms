@@ -5,7 +5,7 @@ export default function AdminTasksTable({ tasksArr=[], minimized=false }) {
   return (
     <div className="col-span-1 flex flex-col gap-6 lg:gap-8 xl:gap-10 bg-white border-[1.5px] border-[#B0AFAF] py-6 px-5 lg:px-8">
       <div className="flex justify-between">
-        <h1 className="lg:text-xl font-varela-round tracking-wide truncate">CURRENT TASKS</h1>
+        <h1 className="lg:text-xl font-varela-round tracking-wide truncate">RECENT TASKS</h1>
         {minimized && (
           <Image
             alt="schedule"
