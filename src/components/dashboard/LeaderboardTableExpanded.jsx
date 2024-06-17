@@ -65,7 +65,7 @@ export default function LeaderboardTableExpanded({
                 onClick={() => { handleTracks(); toggleShowTracksMenu() }}
                 className='absolute w-[calc(100%+2px)] bg-white border border-1.5 border-ecx-colors-secondary-blue top-full -right-[1px] py-1 lg:py-1.5 px-2 lg:px-5 text-start'
               >
-                {activeTrack === "Track" ? "All Tracks" : "Track"}
+               {activeTrack === "My Track" ? "All Tracks" : "My Track"}
               </button>
             )}
           </div>

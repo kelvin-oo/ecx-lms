@@ -8,8 +8,10 @@ import LeaderboardTableRow from './LeaderboardTableRow';
 import LeaderboardTableExpanded from './LeaderboardTableExpanded';
 import { getAllParticipants } from '@/actions/participants/participant';
 import { getLeaderBoard } from "@/actions/leaderboard/leaderboard";
+import { useCurrentClientUser } from '@/hooks/use-current-client-user';
 
 export default function LeaderboardTable({ className = "" }) {
+  const user = useCurrentClientUser()
   const { data, error, isLoading, isFetched } = useQuery({
     queryKey: ['leaders'],
     queryFn: async () => {
@@ -23,20 +25,20 @@ export default function LeaderboardTable({ className = "" }) {
   console.log(data, error)
   const [isTableCollapsed, setTableCollapsed] = useState(true)
   const [leaderboardData, setLeaderboardData] = useState(data.filter(
-    dat => dat.track === "Python"
+    dat => dat.track === user.track
   ))
   const [isShowTracksMenu, setShowTracksMenu] = useState(false)
-  const [activeTrack, setActiveTrack] = useState("Track")
+  const [activeTrack, setActiveTrack] = useState("My Track")
 
   const toggleShowTracksMenu = () => setShowTracksMenu(!isShowTracksMenu)
 
   const handleTracks = () => {
-    if (activeTrack === "Track") {
+    if (activeTrack === "My Track") {
       setActiveTrack("All Tracks")
       setLeaderboardData(data)
     } else {
-      setActiveTrack("Track")
-      setLeaderboardData(data.filter(data => data.track === "python"))
+      setActiveTrack("My Track")
+      setLeaderboardData(data.filter(data => data.track === user.track))
     }
   }
 
@@ -70,7 +72,7 @@ export default function LeaderboardTable({ className = "" }) {
               onClick={() => { handleTracks(); toggleShowTracksMenu() }}
               className='absolute w-[calc(100%+2px)] bg-white border border-1.5 border-ecx-colors-secondary-blue top-full -right-[1px] py-1 lg:py-1.5 px-2 lg:px-5 text-start'
             >
-              {activeTrack === "Track" ? "All Tracks" : "My Track"}
+              {activeTrack === "My Track" ? "All Tracks" : "My Track"}
             </button>
           )}
         </div>
