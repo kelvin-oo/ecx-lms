@@ -20,9 +20,24 @@ export default function ParticipantsTableOptional({ noOfTasks }) {
   });
   const searchParams = useSearchParams();
   const searchValue = searchParams.get("search");
+  const sort = searchParams.get("sort");
   const [participantsData, setParticipantsData] = useState(data);
   useEffect(() => {
-    if (searchValue && searchValue != 'undefined') {
+   if (sort === "score" || sort === "task") {
+     const sortedData = participantsData.sort((a, b) => {
+       if (sort === "score") {
+         return b.taskScore - a.taskScore; // descending order by score
+       } else {
+         return b.taskCompleted - a.taskCompleted; // descending order by task
+       }
+     });
+     setParticipantsData(sortedData);
+   } else {
+     setParticipantsData(participantsData); // reset to original data if sort is not valid
+   }
+ }, [sort, participantsData]);
+  useEffect(() => {
+    if (searchValue && searchValue != "undefined") {
       const filteredData = data.filter(
         (participant) =>
           participant.firstName

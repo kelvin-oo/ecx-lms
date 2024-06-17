@@ -52,9 +52,9 @@ const SearchFrame = () => {
           onClick={onFilterClick}
           className="flex flex-col gap-3 absolute z-[1000] bg-white shadow-lg top-[12rem] right-3 w-40 lg:w-50 max-w-[40vw] p-5 text-center text-xs lg:text-sm"
         >
-          <button className="outline-none">Score Range</button>
+          <button className="outline-none" onClick={()=>{router.push(`/tutor/participant-management?sort=score`);}}>Score Range</button>
           <hr className="border-grey" />
-          <button>Task Completed</button>
+          <button onClick={()=>{router.push(`/tutor/participant-management?sort=task`);}}>Task Completed</button>
           <hr className="border-grey" />
         </div>
       )}
