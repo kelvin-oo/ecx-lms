@@ -70,8 +70,8 @@ export default function Login() {
       .then((user) => {
         if (user.success) {
           console.log(user.success);
+          router.push('/dashboard')
           setSuccess(user.success);
-          router.push(callbackUrl || '/dashboard')
         }
         setError(user.error);
       })
