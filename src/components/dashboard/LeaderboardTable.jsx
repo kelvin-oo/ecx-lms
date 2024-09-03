@@ -3,7 +3,7 @@ import tableData from '@/sampleData/leaderboard.json'
 import { getAllAdminTasks } from '@/actions/task actions/admin tasks';
 import { useQuery } from '@tanstack/react-query';
 import Image from "next/image";
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import LeaderboardTableRow from './LeaderboardTableRow';
 import LeaderboardTableExpanded from './LeaderboardTableExpanded';
 import { getAllParticipants } from '@/actions/participants/participant';
@@ -13,7 +13,7 @@ import { useCurrentClientUser } from '@/hooks/use-current-client-user';
 export default function LeaderboardTable({ className = "" }) {
   const user = useCurrentClientUser()
   const { data, error, isLoading, isFetched } = useQuery({
-    queryKey: ['leaders'],
+    queryKey: ["leaderboard"],
     queryFn: async () => {
       const result = await getLeaderBoard();
       if (result.error) {
@@ -21,12 +21,15 @@ export default function LeaderboardTable({ className = "" }) {
       }
       return result.success;
     },
-  })
-  console.log(data, error)
+  });   
+  if(isLoading) {
+    return (
+      <h2>Loading</h2>
+    )
+  }
+   console.log("🚀 ~ LeaderboardTable ~ data:", data)
   const [isTableCollapsed, setTableCollapsed] = useState(true)
-  const [leaderboardData, setLeaderboardData] = useState(data.filter(
-    dat => dat.track === user.track
-  ))
+  const [leaderboardData, setLeaderboardData] = useState(data)
   const [isShowTracksMenu, setShowTracksMenu] = useState(false)
   const [activeTrack, setActiveTrack] = useState("My Track")
 
@@ -44,11 +47,23 @@ export default function LeaderboardTable({ className = "" }) {
 
   const toggleTableCollapse = () => setTableCollapsed(!isTableCollapsed)
 
+  useEffect(() => {
+    const filteredData = leaderboardData.filter(
+      dat => dat.track === user.track
+    );
+    
+    
+    // Update the state with the filtered data
+    setLeaderboardData(filteredData);
+  }, [user.track]);
+
+  // console.log("🚀 ~ useEffect ~ filteredData:", filteredData)
   const sortedTableData = leaderboardData.sort((a, b) => b.points - a.points)
 
   const lastPlace = [sortedTableData[sortedTableData.length - 1]]
 
   return (
+   
     <div className={`flex flex-col gap-4 relative ${className}`}>
       <div className="flex justify-between items-center">
         <h2 className="lg:text-xl font-varela-round tracking-wide">LEADERBOARD</h2>

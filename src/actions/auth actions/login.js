@@ -8,7 +8,7 @@ import { generateVerificationToken } from "@/lib/token";
 import LoginSchema from "@/schemas/login";
 
 
-export const login = async (body, callbackUrl) => {
+export const login = async (body) => {
   const validatedFields = LoginSchema.safeParse(body);
   console.log(validatedFields);
   if (!validatedFields.success) {
@@ -38,8 +38,8 @@ export const login = async (body, callbackUrl) => {
     await signIn("credentials", {
       email,
       password,
-      redirectTo: callbackUrl || DEFAULT_LOGIN_REDIRECT,
-    });
+      // redirectTo: callbackUrl || DEFAULT_LOGIN_REDIRECT,
+    })
   } catch (error) {
     console.log(error);
   }

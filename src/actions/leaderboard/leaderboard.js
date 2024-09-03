@@ -13,9 +13,9 @@ export const getLeaderBoard = async (track) => {
         },
       };
   
-      if (track) {
-        userQuery.where = { track };
-      }
+      // if (track) {
+      //   userQuery.where = { track };
+      // }
   
       const users = await db.user.findMany(userQuery);
       return { success: users };

@@ -8,10 +8,9 @@ import ComponentLevelLoader from '@/components/Loader';
 import { useState } from 'react';
 import Image from 'next/image';
 import { register } from '@/actions/auth actions/register';
+import { ToastContainer, toast } from "react-toastify";
 
 export default function Register() {
-  const [error, setError] = useState('');
-  const [success, setSuccess] = useState('');
   const [formData, setFormData] = useState();
   const [loading, setLoading] = useState(false);
   const [isSelected, setIsSelected] = useState(false);
@@ -33,57 +32,106 @@ export default function Register() {
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
-    setError('');
+    
     setLoading(true);
 
     const { firstName, lastName, email, password, track, userName } =
       formData || {};
 
     if (!firstName) {
-      setError('Please fill in your First Name');
+      toast.error("Please fill in your First Name", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+      });
       setLoading(false);
-      console.log(error);
+      
       return;
     }
 
     if (!lastName) {
-      setError('Please fill in your last Name');
+      toast.error("Please fill in your Last Name", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+      });
       setLoading(false);
-      console.log(error);
+      
       return;
     }
     if (!userName) {
-      setError('Please choose a User Name');
+      toast.error("Please choose a username", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+      });
       setLoading(false);
-      console.log(error);
+      
       return;
     }
 
     if (!track) {
-      setError('Please fill choose a track');
+      toast.error("Please fill choose a track", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+      });
       setLoading(false);
-      console.log(error);
+      
       return;
     }
 
     if (!email) {
-      setError('Please fill in your email!');
+      toast.error("Please enter email", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+      });
       setLoading(false);
-      console.log(error);
+      
       return;
     }
 
     if (!password) {
-      setError('Please choose a password!');
+      toast.error("Please choose a password!", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+      });
       setLoading(false);
-      console.log(error);
+      
       return;
     }
 
     if (!isValidEmail(email || '')) {
-      setError('Email is invalid');
+      toast.error("Email is invalid", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+      });
       setLoading(false);
-      console.log(error);
+      
       return;
     }
 
@@ -95,13 +143,34 @@ export default function Register() {
       .then((user) => {
         if (user.success) {
           console.log(user.success);
-          setSuccess(user.success);
+          toast.success(user.success, {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+          });
         }
-        setError(user.error);
+        toast.error(user.error, {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+        });
       })
       .catch((error) => {
-        console.log(error);
-        setError(error);
+        
+        toast.error(error, {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+        });
       })
       .finally(() => {
         setLoading(false);
@@ -192,16 +261,6 @@ export default function Register() {
           </FormBox>
         </form>
       </div>
-      {error && (
-        <p className={authStyles.auth__info_text}>
-          <span>{error}</span>
-        </p>
-      )}
-      {success && (
-        <p className={authStyles.auth__info_text}>
-          <span>{success}</span>
-        </p>
-      )}
       <p className={authStyles.auth__info_text}>
         <span>Already have an account? </span>
         <Link href='/auth/login'>Login</Link>

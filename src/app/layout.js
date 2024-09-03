@@ -3,6 +3,8 @@ import "./globals.css";
 import { auth } from "@/auth";
 import { SessionProvider } from "next-auth/react";
 import Provider from "@/components/Provider";
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 
@@ -35,6 +37,7 @@ export default async function RootLayout({ children }) {
     <html lang="en">
       <body className={`${inter.variable} ${varela_round.variable}`}>
        <Provider>
+       {/* <ToastContainer /> */}
         {children}
        </Provider>
       </body>

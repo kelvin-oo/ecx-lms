@@ -23,7 +23,7 @@ const AuthLayout = ({ children }) => {
           height={64}
         />
 
-        <div className='flex flex-col items-center gap-8 mt-24 lg:mt-32'>
+        <div className='flex flex-col items-center gap-8 mt-24 lg:mt-[2.5rem]'>
           <h1 className={authStyles.auth__title}>
             Welcome to the ECX 21 days of code and design
           </h1>

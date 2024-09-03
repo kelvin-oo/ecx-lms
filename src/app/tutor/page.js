@@ -15,17 +15,17 @@ export default async function AdminPage() {
   const noOfTasks = await countTrackTasks(user.track)
   console.log(noOfTasks)
   const participants = await getPartialParticipants(4, user.track)
-  const queryClient = new QueryClient()
-  await queryClient.prefetchQuery({
-    queryKey: ['leaders'],
-    queryFn: async () => {
-      const result = await getLeaderBoard();
-      if (result.error) {
-        throw new Error(result.error);
-      }
-      return result.success;
-    },
-  });
+  // const queryClient = new QueryClient()
+  // await queryClient.prefetchQuery({
+  //   queryKey: ['leaders'],
+  //   queryFn: async () => {
+  //     const result = await getLeaderBoard();
+  //     if (result.error) {
+  //       throw new Error(result.error);
+  //     }
+  //     return result.success;
+  //   },
+  // });
   return (
     <div>
       <div className="flex justify-between items-center">
@@ -42,9 +42,9 @@ export default async function AdminPage() {
       </p>
 
       <div className="mt-5 flex flex-col gap-10 xl:grid xl:grid-cols-2 xl:gap-x-8 xl:gap-y-7 [&>*]:bg-white [&>*]:border-[1.5px] [&>*]:border-ecx-colors-secondary-blue [&>*]:shadow-[7px_7px_rgba(39,46,75,1)] [&>*]:py-6 [&>*]:px-5">
-      <HydrationBoundary state={dehydrate(queryClient)}>
+      {/* <HydrationBoundary state={dehydrate(queryClient)}>
           <LeaderboardTable className="col-span-1" />
-        </HydrationBoundary>
+        </HydrationBoundary> */}
 
 
         <AdminTasksTable minimized tasksArr={tasks} />
