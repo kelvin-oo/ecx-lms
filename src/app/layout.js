@@ -37,7 +37,7 @@ export default async function RootLayout({ children }) {
     <html lang="en">
       <body className={`${inter.variable} ${varela_round.variable}`}>
        <Provider>
-       {/* <ToastContainer /> */}
+       <ToastContainer />
         {children}
        </Provider>
       </body>

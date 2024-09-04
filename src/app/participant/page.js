@@ -7,14 +7,27 @@ import {
   dehydrate,
 } from "@tanstack/react-query"
 import { getLeaderBoard } from '@/actions/leaderboard/leaderboard';
-import { getAllParticipants } from '@/actions/participants/participant';
+import { getTrackAdminTasks } from '@/actions/task actions/admin tasks';
+import { currentServerUser } from '@/lib/serverAuthState';
 
 export default async function UserPage() {
+  const user = currentServerUser()
   const queryClient = new QueryClient()
   await queryClient.prefetchQuery({
     queryKey: ['leaderboard'],
     queryFn: async () => {
       const result = await getLeaderBoard();
+      if (result.error) {
+        throw new Error(result.error);
+      }
+      return result.success;
+    },
+  });
+
+  await queryClient.prefetchQuery({
+    queryKey: ['tasks'],
+    queryFn: async () => {
+      const result = await getTrackAdminTasks(user.track);
       if (result.error) {
         throw new Error(result.error);
       }
@@ -35,9 +48,10 @@ export default async function UserPage() {
 
         <HydrationBoundary state={dehydrate(queryClient)}>
         <LeaderboardTable className='col-span-2'  />
+        <TasksTable />
       </HydrationBoundary>
 
-        <TasksTable />
+        
       </div>
     </div>
   );

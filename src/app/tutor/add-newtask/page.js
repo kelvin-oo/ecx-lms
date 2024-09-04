@@ -4,6 +4,7 @@ import ComponentLevelLoader from '@/components/Loader';
 import { useState } from 'react';
 import authStyles from '@/components/css/authLayout.module.css';
 import { useRouter } from 'next/navigation';
+import { toast } from 'react-toastify';
 
 
 
@@ -22,31 +23,72 @@ export default function AddNewTask() {
     setError('');
     setLoading(true);
 
-    const { title, description, deadline, noOfTasks } =
+    const { title, description, deadline, noOfTasks, taskGrade } =
       formData || {};
 
     if (!title) {
-      setError('Please fill in title');
+      toast.error("Please fill in title of task", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+      });
       setLoading(false);
       console.log(error);
       return;
     }
 
     if (!description) {
-      setError('Please fill in description');
+      toast.error("Please fill in description", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+      });
       setLoading(false);
       console.log(error);
       return;
     }
     if (!deadline) {
-      setError('Please choose a deadline');
+      toast.error("Please choose a deadline", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+      });
       setLoading(false);
       console.log(error);
       return;
     }
 
     if (!noOfTasks) {
-      setError('Please fill choose number of tasks');
+      toast.error("Please choose number of tasks", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+      });
+      setLoading(false);
+      console.log(error);
+      return;
+    }
+    if (!taskGrade) {
+      toast.error("Please set task grade", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+      });
       setLoading(false);
       console.log(error);
       return;
@@ -68,23 +110,57 @@ export default function AddNewTask() {
         body: JSON.stringify(body),
       });
       if (res.status === 401) {
-        setError("Error uploading tasks");
+        toast.error("Error uploading tasks", {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+        });
         setLoading(false);
       }
       if (res.status === 403) {
-        setError("You are not authourized to upload tasks");
+        toast.error("You are not authourized to upload tasks", {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+        });
         setLoading(false);
       }
       if (res.status === 200) {
-        setError("");
-        setSuccess('success uploading task')
-        // router.push('/tutor')
+        toast.success('success uploading task', {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+        });
+        router.push('/tutor')
       }
       if (res.status === 500) {
-        setError("something went wrong");
+        toast.error("Something went wrong", {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+        });
       }
     } catch (err) {
-      setError("Error, try again.");
+      toast.error("Error, try again", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+      });
       console.log(err);
     } finally {
       setLoading(false)
@@ -147,16 +223,16 @@ export default function AddNewTask() {
             name='noOfTasks'
           />
         </div>
-        {error && (
-        <p className={authStyles.auth__info_text}>
-          <span>{error}</span>
-        </p>
-      )}
-      {success && (
-        <p className={authStyles.auth__info_text}>
-          <span>{success}</span>
-        </p>
-      )}
+        <div className='grid gap-y-3'>
+          <input
+            type='number'
+            className='w-full outline-none bg-transparent border-2 border-[#424242] px-3 py-2 lg:py-3'
+            placeholder='Task Grade'
+            onChange={handleChange}
+            name='taskGrade'
+          />
+        </div>
+        
         <button onClick={handleFormSubmit} className='w-full bg-ecx-colors-secondary-blue  py-2 lg:py-3 text-white grid gap-y-3 hover justify-center'>
         {loading ? <ComponentLevelLoader color={'#ffffff'} /> : 'Add Task'}
         </button>

@@ -1,7 +1,24 @@
+'use client'
 import TableRow from "./TasksTableRow";
 import tasks from "@/sampleData/tasks.json"
+import { getTrackAdminTasks } from "@/actions/task actions/admin tasks";
+import { useCurrentClientUser } from "@/hooks/use-current-client-user";
+import { useQuery } from "@tanstack/react-query";
 
 export default function TasksTable({ title, tasksData }) {
+  const user = useCurrentClientUser()
+  const { data, error, isLoading, isFetched } = useQuery({
+    queryKey: ["tasks"],
+    queryFn: async () => {
+      const result = await getTrackAdminTasks(user.track);
+      if (result.error) {
+        throw new Error(result.error);
+      }
+      return result.success;
+    },
+  }); 
+
+
   const recentTasks = tasks.sort((a, b) => {
     const [aHour, aMinute, aSecond] = a.deadline.split(':').map(Number);
     const [bHour, bMinute, bSecond] = b.deadline.split(':').map(Number);
@@ -11,8 +28,11 @@ export default function TasksTable({ title, tasksData }) {
 
     return aTotalSeconds - bTotalSeconds;
   }).slice(0,3)
+  
+  console.log("🚀 ~ TasksTable ~ data:", data)
 
   return (
+    
     <div className="col-span-3 text-[#424242] divide-y divide-black font-varela-round">
       <div className="grid grid-cols-7 gap-x-10 px-3 py-3 text-base lg:text-lg">
         <div className="col-span-5 lg:col-span-4 text-base lg:text-xl text-black">

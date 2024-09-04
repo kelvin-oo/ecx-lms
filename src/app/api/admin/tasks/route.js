@@ -22,6 +22,7 @@ export async function POST(req) {
         ...body,
         deadline: new Date(body.deadline),
         noOfTasks: parseInt(body.noOfTasks, 10),
+        taskGrade: parseInt(body.taskGrade, 10),
     };
 
 
@@ -35,7 +36,7 @@ export async function POST(req) {
         );
     }
 
-    const { title, description, deadline, noOfTasks } =
+    const { title, description, deadline, noOfTasks, taskGrade } =
         result.data;
     const user = await currentServerUser()
     try {
@@ -45,6 +46,7 @@ export async function POST(req) {
               description,
               deadline,
               noOfTasks,
+              taskGrade,
               track: user.track,
               authorId: user.id 
             },
