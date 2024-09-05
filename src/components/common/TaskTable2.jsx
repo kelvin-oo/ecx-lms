@@ -1,23 +1,14 @@
 'use client'
 import TableRow from "./TasksTableRow";
-import tasks from "@/sampleData/tasks.json"
-import { getTrackAdminTasks } from "@/actions/task actions/admin tasks";
+// import tasks from "@/sampleData/tasks.json"
+// import { getTrackAdminTasks } from "@/actions/task actions/admin tasks";
 import { useCurrentClientUser } from "@/hooks/use-current-client-user";
-import { useQuery } from "@tanstack/react-query";
-import { getUserTasksAndStatuses } from "@/actions/task actions/admin tasks";
+// import { useQuery } from "@tanstack/react-query";
+// import { getUserTasksAndStatuses } from "@/actions/task actions/admin tasks";
 
-export default function TasksTable({ title, tasksData }) {
-  const user = useCurrentClientUser()
-  const { data, error, isLoading, isFetched } = useQuery({
-    queryKey: ["tasks"],
-    queryFn: async () => {
-      const result = await getUserTasksAndStatuses(user.id,user.track);
-      if (result.error) {
-        throw new Error(result.error);
-      }
-      return result.success.slice(0,3);
-    },
-  }); 
+export default function TasksTable2({ title, tasksData }) {
+//   const user = useCurrentClientUser()
+
 
 
   // const recentTasks = data.sort((a, b) => {
@@ -30,7 +21,7 @@ export default function TasksTable({ title, tasksData }) {
   //   return aTotalSeconds - bTotalSeconds;
   // }).slice(0,3)
   
-  // console.log("🚀 ~ TasksTable ~ data:", data)
+  console.log("🚀 ~ TasksTable ~ data:", tasksData)
 
   return (
     
@@ -50,7 +41,7 @@ export default function TasksTable({ title, tasksData }) {
         </div>
       </div>
 
-      {data.map(({...props}, index) => (
+      {tasksData.map(({...props}, index) => (
         <TableRow key={index} {...props} />
       )) }
     </div>

@@ -27,7 +27,7 @@ export default function LeaderboardTable({ className = "" }) {
       <h2>Loading</h2>
     )
   }
-   console.log("🚀 ~ LeaderboardTable ~ data:", data)
+  //  console.log("🚀 ~ LeaderboardTable ~ data:", data)
   const [isTableCollapsed, setTableCollapsed] = useState(true)
   const [leaderboardData, setLeaderboardData] = useState(data)
   const [isShowTracksMenu, setShowTracksMenu] = useState(false)

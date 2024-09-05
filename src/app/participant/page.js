@@ -9,9 +9,11 @@ import {
 import { getLeaderBoard } from '@/actions/leaderboard/leaderboard';
 import { getTrackAdminTasks } from '@/actions/task actions/admin tasks';
 import { currentServerUser } from '@/lib/serverAuthState';
+import { getUserTasksAndStatuses } from '@/actions/task actions/admin tasks';
+import { getUserGradeSummary } from '@/actions/participants/participant';
 
 export default async function UserPage() {
-  const user = currentServerUser()
+  const user = await currentServerUser()
   const queryClient = new QueryClient()
   await queryClient.prefetchQuery({
     queryKey: ['leaderboard'],
@@ -27,7 +29,18 @@ export default async function UserPage() {
   await queryClient.prefetchQuery({
     queryKey: ['tasks'],
     queryFn: async () => {
-      const result = await getTrackAdminTasks(user.track);
+      const result = await getUserTasksAndStatuses(user.id,user.track);
+      if (result.error) {
+        throw new Error(result.error);
+      }
+      return result.success;
+    },
+  });
+
+  await queryClient.prefetchQuery({
+    queryKey: ['userGrade'],
+    queryFn: async () => {
+      const result = await getUserGradeSummary(user.id, user.track);
       if (result.error) {
         throw new Error(result.error);
       }
@@ -44,9 +57,10 @@ export default async function UserPage() {
       </p>
 
       <div className='mt-5 flex flex-col gap-10 lg:grid lg:grid-cols-3 lg:gap-x-8 lg:gap-y-7 [&>*]:bg-white [&>*]:border-[1.5px] [&>*]:border-ecx-colors-secondary-blue [&>*]:shadow-[7px_7px_rgba(39,46,75,1)] [&>*]:py-6 [&>*]:px-5'>
-        <AssignedTasks />
+        
 
         <HydrationBoundary state={dehydrate(queryClient)}>
+        <AssignedTasks />
         <LeaderboardTable className='col-span-2'  />
         <TasksTable />
       </HydrationBoundary>

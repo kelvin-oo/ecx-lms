@@ -23,6 +23,7 @@ enum TaskStatus {
   PENDING
   SUBMITTED
   GRADED
+  EXPIRED
 }
 
 model User {
@@ -79,6 +80,7 @@ model AdminTask {
   authorId    String
   title       String?
   description String?
+  submissionDetails String?
   deadline    DateTime?
   noOfTasks   Int?
   taskGrade   Int?
