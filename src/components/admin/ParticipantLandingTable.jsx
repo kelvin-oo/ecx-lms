@@ -1,7 +1,7 @@
 
 export default function ParticipantsLandingTable({ participants, noOfTasks }) {
   return (
-    <div className="col-span-2">
+    <div className="col-span-2 mt-5 flex flex-col gap-10 xl:grid xl:grid-cols-2 xl:gap-x-8 xl:gap-y-7 bg-white border-[1.5px] border-ecx-colors-secondary-blue shadow-[7px_7px_rgba(39,46,75,1)] py-6 px-5">
       <h2 className="col-span-5 lg:col-span-4 py-3 lg:text-xl font-varela-round">
         List of Participants
       </h2>

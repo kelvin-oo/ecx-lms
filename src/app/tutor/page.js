@@ -41,15 +41,17 @@ export default async function AdminPage() {
         <b>Track: </b>Front end Web Development
       </p>
 
-      <div className="mt-5 flex flex-col gap-10 xl:grid xl:grid-cols-2 xl:gap-x-8 xl:gap-y-7 [&>*]:bg-white [&>*]:border-[1.5px] [&>*]:border-ecx-colors-secondary-blue [&>*]:shadow-[7px_7px_rgba(39,46,75,1)] [&>*]:py-6 [&>*]:px-5">
+      <div className="mt-5 flex gap-10 xl:grid xl:grid-cols-2 xl:gap-x-8 xl:gap-y-7 [&>*]:bg-white [&>*]:border-[1.5px] [&>*]:border-ecx-colors-secondary-blue [&>*]:shadow-[7px_7px_rgba(39,46,75,1)] [&>*]:py-6 [&>*]:px-5">
       <HydrationBoundary state={dehydrate(queryClient)}>
           <LeaderboardTable className="col-span-1" />
+          <AdminTasksTable minimized tasksArr={tasks} />
         </HydrationBoundary>
 
 
-        <AdminTasksTable minimized tasksArr={tasks} />
-        <ParticipantsLandingTable participants={participants} noOfTasks={noOfTasks} />
+        
+        
       </div>
+      <ParticipantsLandingTable participants={participants} noOfTasks={noOfTasks} />
     </div>
   );
 }

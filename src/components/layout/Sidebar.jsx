@@ -26,7 +26,7 @@ const Sidebar = ({ handleShowSidebar }) => {
   const sidebarLinks__admin = [
     { name: 'dashboard', href: `/${currentUserRole}`, icon: 'dashboard' },
     {
-      name: 'tasks management',
+      name: 'tasks & submissions',
       href: `/${currentUserRole}/tasks`,
       icon: 'tasks',
     },
