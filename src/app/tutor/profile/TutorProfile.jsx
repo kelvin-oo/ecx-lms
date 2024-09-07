@@ -4,11 +4,12 @@ import FormBoxHeader from "@/components/profile/FormBoxHeader";
 import FormImageInput from "@/components/profile/FormImageInput";
 import React, { useState } from "react";
 import styles from "../../../styles/adminProfilePage.module.scss";
-
+import { useCurrentClientUser } from "@/hooks/use-current-client-user";
 import Image from "next/image";
 import FormInput from "@/components/profile/FormInput";
 
-const TutorProfile = () => {
+const TutorProfile = ({ participantCount, highestScoreParticipant, highestTaskParticipant, ungradedTaskCount }) => {
+  const user = useCurrentClientUser()
   return (
     <main className={styles.main}>
       <div className={styles.header}>
@@ -24,9 +25,9 @@ const TutorProfile = () => {
           <FormBox>
             <FormBoxHeader header={`Personal Information`} />
             <div className="grid grid-cols-1 gap-y-4">
-              <FormInput placeholder="Name" type="name" />
-              <FormInput placeholder="Email" type="email" />
-              <FormInput placeholder="Role" type="text" />
+              <FormInput placeholder={`Name -- ${user.firstName} ${user.lastName}`} type="name" disabled={true}/>
+              <FormInput placeholder={`Email -- ${user.email}`}type="email" disabled={true}/>
+              <FormInput placeholder={`Role -- ${user.role}`} type="text" disabled={true}/>
             </div>
           </FormBox>
         </div>
@@ -36,19 +37,19 @@ const TutorProfile = () => {
           <FormBoxHeader header={`Tutor-Specific Details`} />
           <div className={styles.detailsBox}>
             <h3>Your Assigned Track</h3>
-            <h3> Front end Web dev</h3>
+            <h3> {user.track}</h3>
           </div>
           <div className={styles.detailsBox}>
             <p>Number of Participants in Your Track</p>
-            <p> 140</p>
+            <p> {participantCount.success}</p>
           </div>
           <div className={styles.detailsBox}>
             <p>Tasks Graded Today</p>
-            <p> 140</p>
+            <p> 0</p>
           </div>
           <div className={styles.detailsBox}>
             <p>Pending Tasks to Grade</p>
-            <p> 140</p>
+            <p> {ungradedTaskCount.success}</p>
           </div>
         </div>
 
@@ -62,8 +63,8 @@ const TutorProfile = () => {
               <h3>Score</h3>
             </div>
             <div className={styles.right}>
-              <h3>Azeem</h3>
-              <h3>140</h3>
+              <h3>{highestScoreParticipant.success.firstName}</h3>
+              <h3>{highestScoreParticipant.success.points}</h3>
             </div>
           </div>
           <div className={styles.performanceBox}>
@@ -72,8 +73,8 @@ const TutorProfile = () => {
               <h3>Tasks Completed</h3>
             </div>
             <div className={styles.right}>
-              <h3>Azeem</h3>
-              <h3>140</h3>
+              <h3>{highestTaskParticipant.success.firstName}</h3>
+              <h3>{highestTaskParticipant.success.taskCompleted}</h3>
             </div>
           </div>
         </div>
