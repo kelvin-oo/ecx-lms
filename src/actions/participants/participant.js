@@ -1,6 +1,10 @@
+'use server'
 import db from "@/lib/db"
 import { UserRole } from "@prisma/client";
 import { currentServerUser } from "@/lib/serverAuthState";
+import { revalidatePath } from "next/cache";
+import { unstable_update } from "@/auth";
+import bcrypt from "bcryptjs";
 
 export const getAllParticipants = async () => {
     try {
@@ -73,3 +77,64 @@ export const getUserGradeSummary = async (userId, track) => {
     throw new Error('Failed to fetch grade summary');
   }
 }
+
+export const getParticipantProfile = async (userId) => {
+  try {
+    const user = await db.user.findUnique({
+      where: { id: userId },
+    });
+    revalidatePath('/participant/profile')
+    return { success: user };
+  } catch (error) {
+    console.log(error);
+    return { error: error.message || 'An error occurred while fetching participants.' };
+  }
+};
+export const editParticipantProfile = async (userId, updatedData) => {
+  console.log(updatedData)
+  try {
+    const user = await db.user.update({
+      where: { id: userId },
+      data: updatedData,
+    });
+    return { success: 'Profile updated successfully'};
+  } catch (error) {
+    console.error('Error updating user profile:', error);
+    return {error: error.message || 'An error occurred while updating the participant profile.' };
+  }
+};
+
+export const updatePassword = async (body) => {
+  try {
+    const user = await currentServerUser()
+    const dbUser = await db.user.findUnique({
+      where: { id: user.id },
+      select: { password: true },
+    });
+
+    if (!dbUser) {
+      return { error: 'User not found' };
+    }
+
+    // Check if the old password matches
+    const isOldPasswordValid = await bcrypt.compare(body.previousPassword, dbUser.password);
+
+    if (!isOldPasswordValid) {
+      return { error: 'Old password is incorrect' };
+    }
+
+    // Hash the new password
+    const hashedNewPassword = await bcrypt.hash(body.password, 10);
+
+    // Update the user's password
+    const updatedUser = await db.user.update({
+      where: { id: user.id },
+      data: { password: hashedNewPassword },
+    });
+
+    return { success: 'password updated successfully' };
+  } catch (error) {
+    console.log(error);
+    return { error: error.message || 'An error occurred while updating the password.' };
+  }
+};

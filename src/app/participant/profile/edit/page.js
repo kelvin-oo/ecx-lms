@@ -1,4 +1,4 @@
-import ParticipantProfile from "./ParticipantProfile"
+import EditProfile from "./EditProfile"
 import { currentServerUser } from "@/lib/serverAuthState"
 import { getParticipantProfile } from "@/actions/participants/participant"
 
@@ -9,7 +9,7 @@ export default async function page() {
   
   return (
     <div>
-      <ParticipantProfile user={user.success} />
+      <EditProfile user={user.success} />
     </div>
   )
 }
