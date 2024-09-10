@@ -97,3 +97,41 @@ export const getTrackParticipantCount = async () => {
     }
   };
  
+
+  export const getTrackSubmissions = async () => {
+    const user = await currentServerUser()
+    try {
+      const submissions = await db.submission.findMany({
+        where: {
+          task: {
+            track: user.track
+          }
+        },
+        include: {
+          participant: {
+            select: {
+              id: true,
+              firstName: true,
+              lastName: true
+              // Add any other user fields you want to include
+            }
+          },
+          task: {
+            select: {
+              id: true,
+              deadline: true
+              // Add any other task fields you want to include
+            }
+          }
+        },
+        orderBy: {
+          submittedAt: 'desc'
+        }
+      });
+  
+      return { success: submissions };
+    } catch (error) {
+      console.error('Error in getTrackSubmissions:', error);
+      return { error: error.message || 'An error occurred while fetching the track submissions.' };
+    }
+  };

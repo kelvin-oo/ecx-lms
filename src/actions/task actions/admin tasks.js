@@ -1,5 +1,6 @@
 'use server'
 import db from "@/lib/db"
+import { currentServerUser } from "@/lib/serverAuthState"
 
 export const getAllAdminTasks = async () => {
   try {
@@ -27,10 +28,11 @@ export const getPartialAdminTasks = async (number, track) => {
 }
 
 
-export const getTrackAdminTasks = async (track) => {
+export const getTrackAdminTasks = async () => {
+  const user = await currentServerUser()
   try {
     const allTasks = db.adminTask.findMany({
-      where: { track: track },
+      where: { track: user.track },
       orderBy: {
         deadline: 'desc',
       },
@@ -142,3 +144,20 @@ export async function getUserSingleTaskAndStatuses(userId, taskId) {
   //     };
   //   });
 }
+
+// export const getTrackSubmissions = async () => {
+//   const user = await currentServerUser()
+//   try {
+//     const allSubmissions = db.submission.findMany({
+//       where: { track: user.track },
+//       orderBy: {
+//         deadline: 'desc',
+//       },
+//     })
+
+//     return { success: allTasks };
+//   } catch (error) {
+//     console.log(error)
+//     return { error: error || "An error occurred during registration." };
+//   }
+// }

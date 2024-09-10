@@ -2,16 +2,30 @@
 import AdminTasksTable from '@/components/admin/AdminTasksTable';
 import SubmissionsTable from '@/components/admin/SubmissionsTable';
 import tasks from '@/sampleData/adminTasks.json';
+import { useQuery } from '@tanstack/react-query';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
+import { getTrackSubmissions } from "@/actions/tutor/tutor";
 
 export default function AllSubmissions() {
+  const { data, error, isLoading, isFetched } = useQuery({
+    queryKey: ["track-submissions"],
+    queryFn: async () => {
+      const result = await getTrackSubmissions();
+      if (result.error) {
+        throw new Error(result.error);
+      }
+      return result.success;
+    },
+  });   
   const [isShowSubmissions, setShowSubmissions] = useState(true);
 
   const toggleShowSubmissions = () => setShowSubmissions(!isShowSubmissions);
+  console.log("🚀 ~ AllSubmissions ~ data:", data)
 
   return (
+   
     <div>
       <div className='flex items-center justify-between lg:justify-end'>
         <p className='lg:hidden mt-2'>
@@ -40,7 +54,7 @@ export default function AllSubmissions() {
           />
         </div> */}
 
-        <SubmissionsTable display={isShowSubmissions} />
+        <SubmissionsTable display={isShowSubmissions} data={data} />
       </div>
     </div>
   );
