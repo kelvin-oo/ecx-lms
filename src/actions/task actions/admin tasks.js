@@ -12,6 +12,17 @@ export const getAllAdminTasks = async () => {
     return { error: error || "An error occurred during registration." };
   }
 }
+export const getSingleAdminTask = async (id) => {
+  try {
+    const task = db.adminTask.findUnique({
+      where: {id : id}
+    })
+    return task
+  } catch (error) {
+    console.log(error)
+    return { error: error || "An error occurred during registration." };
+  }
+}
 
 export const getPartialAdminTasks = async (number, track) => {
   try {

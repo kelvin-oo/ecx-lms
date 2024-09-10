@@ -53,7 +53,9 @@ export default function AdminTasksPage({ tasks }) {
 
       <div className='mt-5 flex flex-col gap-10 xl:gap-x-8 xl:gap-y-7'>
         <AdminTasksTable tasksArr={taskData.slice(0,4)} />
-
+        <button className="border border-1.5 border-ecx-colors-secondary-blue flex items-center py-0.5 lg:py-1 px-2 lg:px-4 gap-1.5 lg:gap-4 font-medium self-end text-sm lg:text-base">
+        <Link href="/tutor/all-tasks">View All</Link>
+      </button>
         <div
           onClick={toggleShowSubmissions}
           className='flex items-center justify-between py-3 border-b border-black select-none cursor-pointer'
@@ -70,7 +72,11 @@ export default function AdminTasksPage({ tasks }) {
           />
         </div>
 
-        <SubmissionsTable display={isShowSubmissions} data={data} />
+        <SubmissionsTable display={true} data={data} />
+        <button className="border border-1.5 border-ecx-colors-secondary-blue flex items-center py-0.5 lg:py-1 px-2 lg:px-4 gap-1.5 lg:gap-4 font-medium self-end text-sm lg:text-base">
+        <Link href="/tutor/all-submissions">View All</Link>
+      </button>
+       
       </div>
     </div>
   );

@@ -92,7 +92,7 @@ model Submission {
   id              String     @id @default(cuid())
   participant     User       @relation(fields: [participantId], references: [id])
   participantId   String
-  task            AdminTask  @relation(fields: [taskId], references: [id])
+  task            AdminTask  @relation(fields: [taskId], references: [id], onDelete: Cascade)
   taskId          String
   comment         String?
   submissionLink  String?

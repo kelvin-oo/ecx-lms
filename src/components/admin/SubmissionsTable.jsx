@@ -60,6 +60,7 @@ export default function SubmissionsTable({ display, data }) {
             </div>
           )
         )}
+        
       </div>
     </div>
   );

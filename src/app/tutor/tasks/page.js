@@ -6,6 +6,7 @@ import { getTrackAdminTasks } from "@/actions/task actions/admin tasks";
 
 
 async function page() {
+  
   const tasks = await getTrackAdminTasks() 
   
   const queryClient = new QueryClient()
