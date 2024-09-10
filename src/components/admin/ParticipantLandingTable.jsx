@@ -1,7 +1,10 @@
+import participants from "@/sampleData/participants.json"
+import participantData from "@/sampleData/participants.json"
+import ParticipantsTableRow from "./ParticipantsTableRow";
 
 export default function ParticipantsLandingTable({ participants, noOfTasks }) {
   return (
-    <div className="col-span-2 mt-5 flex flex-col gap-10 xl:grid xl:grid-cols-2 xl:gap-x-8 xl:gap-y-7 bg-white border-[1.5px] border-ecx-colors-secondary-blue shadow-[7px_7px_rgba(39,46,75,1)] py-6 px-5">
+    <div className="col-span-2">
       <h2 className="col-span-5 lg:col-span-4 py-3 lg:text-xl font-varela-round">
         List of Participants
       </h2>
@@ -25,7 +28,7 @@ export default function ParticipantsLandingTable({ participants, noOfTasks }) {
           </div>
         </div>
 
-        {participants?.map(({ firstName, lastName, email, taskScore, taskCompleted }, index) => (
+        {participants.map(({ firstName, lastName, email, taskScore, taskCompleted }, index) => (
           <div key={index} className="grid grid-cols-5 lg:grid-cols-12 gap-x-10 py-3 text-sm lg:text-base font-light">
             <div className="col-span-1 text-center">
             {index+1}
@@ -34,13 +37,13 @@ export default function ParticipantsLandingTable({ participants, noOfTasks }) {
             {firstName} {lastName}
             </div>
             <div className="col-span-1 lg:col-span-3 truncate">
-              {email}
+            {email}
             </div>
             <div className="col-span-1 lg:col-span-2 text-center">
               {taskScore}
             </div>
             <div className="col-span-1 lg:col-span-3 text-center">
-              {taskCompleted} / {noOfTasks}
+            {taskCompleted} / {noOfTasks}
             </div>
           </div>
         ))}
@@ -48,3 +51,25 @@ export default function ParticipantsLandingTable({ participants, noOfTasks }) {
     </div>
   );
 }
+
+const ParticipantsTableOptional = () => {
+   return(
+    <div className="divide-y text-[#424242] divide-black font-varela-round">
+        <div className="grid grid-cols-12 gap-x-10 px-3 py-3 text-base lg:text-lg whitespace-nowrap">
+           <div className="text-black">ID</div>
+           <div className="text-black col-span-2">Name</div>
+           <div className="col-span-3 text-black">Email</div>
+           <div className="text-center col-span-2 text-black">Total Score</div>
+           <div className="text-center col-span-2 text-black">Task Completed</div>
+           <div className="text-center col-span-2 text-black">Action</div>
+        </div>
+        
+        {participantData[1].map(({...props}, index) => (
+          <ParticipantsTableRow key={index} {...props}/>
+        ))          
+        }
+    </div>
+   )
+}
+
+//export default ParticipantsTable;

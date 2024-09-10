@@ -12,7 +12,7 @@ export default function AdminLayout({ children }) {
         <Sidebar />
       </span>
 
-      <main className='lg:ms-48 pt-6 lg:pt-12 px-4 lg:px-20 pb-10'>
+      <main className='lg:ms-48 pt-6 lg:pt-12 px-4 lg:px-20'>
         {children}
       </main>
     </main>
