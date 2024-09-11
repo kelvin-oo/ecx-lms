@@ -1,5 +1,6 @@
+'use server'
 import db from "@/lib/db"
-import { UserRole } from "@prisma/client";
+import { UserRole, TaskStatus } from "@prisma/client";
 import { currentServerUser } from "@/lib/serverAuthState";
 // import { startOfDay, endOfDay } from 'date-fns';
 
@@ -133,5 +134,75 @@ export const getTrackParticipantCount = async () => {
     } catch (error) {
       console.error('Error in getTrackSubmissions:', error);
       return { error: error.message || 'An error occurred while fetching the track submissions.' };
+    }
+  };
+
+
+  export const getSingleSubmission = async (id) => {
+    try {
+      const submission = await db.submission.findUnique({
+        where: { id },
+        include: {
+          participant: {
+            select: {
+              lastName: true, 
+              firstName: true
+            },
+          },
+          task: {
+            select: {
+              title: true,
+              taskGrade: true,
+              noOfTasks: true
+            },
+          },
+        },
+      });
+      return submission;
+    } catch (error) {
+      console.log(error);
+      return { error: error || "An error occurred while fetching the submission." };
+    }
+  };
+
+  export const gradeSubmission = async (body, id, taskGrade) => {
+    // console.log("🚀 ~ gradeSubmission ~ taskGrade:", taskGrade)
+    // console.log("🚀 ~ gradeSubmission ~ id:", id)
+    // console.log("🚀 ~ gradeSubmission ~ body:", body)
+    // console.log(comment, submissionId, taskGrade, submissionGrade)
+    const grade = parseInt(body.submissionGrade, 10);
+    if(grade > taskGrade) {
+      return {gradeError: 'submission grade cannt be above task grade'};
+    }
+    try {
+      // Update submission
+      
+      const updatedSubmission = await db.submission.update({
+        where: { id: id },
+        data: {
+          comment: body.comment,
+          submissionGrade: grade,
+          status: TaskStatus.GRADED, // Assuming the TaskStatus enum has a 'GRADED' value
+        },
+      });
+  
+      // Update user
+      const user = await db.user.findUnique({
+        where: { id: updatedSubmission.participantId },
+      });
+      if (user) {
+        await db.user.update({
+          where: { id: user.id },
+          data: {
+            points: { increment: grade },
+            taskCompleted: { increment: 1 },
+          },
+        });
+      }
+  
+      return {success: updatedSubmission};
+    } catch (error) {
+      console.log(error);
+      return { error: error || "An error occurred while grading the submission." };
     }
   };
