@@ -3,7 +3,7 @@ import Link from "next/link"
 import Image from "next/image"
 import Timer from "@/components/common/Timer"
 import ComponentLevelLoader from '@/components/Loader';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { toast } from 'react-toastify';
 import { useCurrentClientUser } from "@/hooks/use-current-client-user";
@@ -14,10 +14,18 @@ export default function Submission({ data }) {
     const [error, setError] = useState('');
     const [success, setSuccess] = useState('');
     const [formData, setFormData] = useState();
+    const [initialData, setInitialData] = useState({});
     const [loading, setLoading] = useState(false);
     const router = useRouter();
 
-
+    useEffect(() => {
+      // Fetch or set your initial data here
+      const loadedInitialData = {
+        submissionLink: data?.submissions.length > 0 ? data.submissions[0].submissionLink : undefined,
+      };
+      setInitialData(loadedInitialData);
+      setFormData(loadedInitialData);
+    }, []);
   
   
     const handleFormSubmit = async (e) => {
@@ -114,8 +122,19 @@ export default function Submission({ data }) {
           });
           setLoading(false);
         }
-        if (res.status === 200) {
+        if (res.status === 201) {
           toast.success('Submission Successful', {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+          });
+          router.push('/participant')
+        }
+        if (res.status === 200) {
+          toast.success('Submission updated', {
             position: "top-right",
             autoClose: 5000,
             hideProgressBar: false,
@@ -208,6 +227,7 @@ console.log(deadline);
             name="submissionLink"
             className="border-2 border-ecx-colors-secondary-blue px-4 lg:px-5 xl:px-6 py-3.5 lg:py-4 xl:py-5 placeholder-black text-sm font-varela-round outline-none"
             placeholder="Paste URL link"
+            defaultValue={data?.submissions.length > 0 ? data.submissions[0].submissionLink : '' }
           />
           <div className="grid grid-cols-2 w-11/12 xl:w-4/5 h-10 lg:h-14 mx-auto gap-6 xl:gap-16 justify-center text-sm lg:text-lg">
             <button onClick={handleFormSubmit} className="bg-ecx-colors-secondary-blue text-white">{loading ? <ComponentLevelLoader color={'#ffffff'} /> : 'Submit'}</button>
