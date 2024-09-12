@@ -48,7 +48,7 @@ export default function SubmissionsTable({ display, data }) {
                 <p className="rotate-90 absolute right-1/2">...</p>
                 {activeItemId === id && (
                   <div className="flex flex-col gap-3 absolute bg-white shadow-lg right-10 w-40 lg:w-50 max-w-[40vw] p-5 text-center text-xs lg:text-sm">
-                    <Link href={`/admin/grading/${id}`}>
+                    <Link href={`/tutor/grading/${id}`}>
                       <button className="outline-none">Grade Task</button>
                     </Link>
                     <hr className="border-grey" />

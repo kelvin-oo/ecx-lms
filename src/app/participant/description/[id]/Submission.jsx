@@ -59,6 +59,17 @@ export default function Submission({ data }) {
           },
           body: JSON.stringify(body),
         });
+        if (res.status === 400) {
+          toast.error("Submission deadline has passed", {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+          });
+          setLoading(false);
+        }
         if (res.status === 401) {
           toast.error("Error uploading submission", {
             position: "top-right",
@@ -70,8 +81,30 @@ export default function Submission({ data }) {
           });
           setLoading(false);
         }
+        if (res.status === 402) {
+          toast.error("This task has already been graded. No further submissions allowed.", {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+          });
+          setLoading(false);
+        }
         if (res.status === 403) {
           toast.error("Submission not allowed", {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+          });
+          setLoading(false);
+        }
+        if (res.status === 404) {
+          toast.error("Task not found", {
             position: "top-right",
             autoClose: 5000,
             hideProgressBar: false,

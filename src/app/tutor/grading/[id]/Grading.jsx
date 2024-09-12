@@ -6,9 +6,10 @@ import { useRouter } from "next/navigation"
 import { getSingleSubmission } from "@/actions/tutor/tutor";
 import Link from "next/link";
 import ComponentLevelLoader from '@/components/Loader';
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { gradeSubmission } from "@/actions/tutor/tutor";
 import { toast } from "react-toastify";
+import { comment } from "postcss";
 export default function Grading({id}){
     const { data, error, isLoading, isFetched } = useQuery({
         queryKey: ["submission"],
@@ -23,9 +24,20 @@ export default function Grading({id}){
       console.log("🚀 ~ Grading ~ data:", data)
 
       const [formData, setFormData] = useState();
+      const [initialData, setInitialData] = useState({});
       const [loading, setLoading] = useState(false);
       const [isSelected, setIsSelected] = useState(false);
       const handleSelect = () => !isSelected && setIsSelected(true);
+
+      useEffect(() => {
+        // Fetch or set your initial data here
+        const loadedInitialData = {
+          comment: data?.comment,
+          submissionGrade: data?.submissionGrade,
+        };
+        setInitialData(loadedInitialData);
+        setFormData(loadedInitialData);
+      }, []);
     
       const handleChange = (e) => {
         setFormData((prev) => {
@@ -76,7 +88,7 @@ export default function Grading({id}){
           ...formData
         }
         // console.log(comment, id, data.task.taskGrade, submissionGrade)
-        gradeSubmission(body, id, data.task.taskGrade)
+        gradeSubmission(body, id, data.task.taskGrade, data.status)
           .then((submission) => {
             if (submission.success) {
               // console.log(user.success);
@@ -88,10 +100,23 @@ export default function Grading({id}){
                 pauseOnHover: true,
                 draggable: true,
               });
-              router.push('/tutur/all-submissions')
+              router.back()
               return
             }
             if (submission.gradeError) {
+              // console.log(user.success);
+              toast.error('submission already graded', {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+              });
+              router.back()
+              return
+            }
+            if (submission.mathError) {
               // console.log(user.success);
               toast.error('submission grade cannt be above task grade', {
                 position: "top-right",
@@ -152,11 +177,11 @@ export default function Grading({id}){
                 </div>
                 <div className="grid gap-y-3">
                 <label className="text-ecx-colors-secondary-blue font-bold">Remark</label>
-                <input type="text" name="comment" onChange={handleChange} className="w-full outline-none bg-transparent border-2 border-[#424242] p-4"/>
+                <input defaultValue={data?.comment} type="text" name="comment" onChange={handleChange} className="w-full outline-none bg-transparent border-2 border-[#424242] p-4"/>
                 </div>
                 <div className="grid gap-y-3">
                 <label className="text-ecx-colors-secondary-blue font-bold">Grade:</label>
-                <input type="number" name="submissionGrade" onChange={handleChange} className="w-full outline-none bg-transparent border-2 border-[#424242] p-4"/>
+                <input defaultValue={data?.submissionGrade} type="number" name="submissionGrade" onChange={handleChange} className="w-full outline-none bg-transparent border-2 border-[#424242] p-4"/>
                 </div>
                 <button onClick={handleFormSubmit} className="w-full justify-center align-middle bg-ecx-colors-secondary-blue p-4 text-white grid gap-y-3 hover"> {loading ? <ComponentLevelLoader color={'#ffffff'} /> : 'Submit'}</button>
             </div>

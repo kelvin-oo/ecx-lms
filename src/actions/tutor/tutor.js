@@ -165,14 +165,17 @@ export const getTrackParticipantCount = async () => {
     }
   };
 
-  export const gradeSubmission = async (body, id, taskGrade) => {
+  export const gradeSubmission = async (body, id, taskGrade, status) => {
     // console.log("🚀 ~ gradeSubmission ~ taskGrade:", taskGrade)
     // console.log("🚀 ~ gradeSubmission ~ id:", id)
     // console.log("🚀 ~ gradeSubmission ~ body:", body)
     // console.log(comment, submissionId, taskGrade, submissionGrade)
     const grade = parseInt(body.submissionGrade, 10);
     if(grade > taskGrade) {
-      return {gradeError: 'submission grade cannt be above task grade'};
+      return {mathError: 'submission grade cannt be above task grade'};
+    }
+    if(status === TaskStatus.GRADED) {
+      return {gradeError: 'submission already graded'};
     }
     try {
       // Update submission
@@ -204,5 +207,63 @@ export const getTrackParticipantCount = async () => {
     } catch (error) {
       console.log(error);
       return { error: error || "An error occurred while grading the submission." };
+    }
+  };
+
+  export const getUserSubmissions = async (userId) => {
+    try {
+      const submissions = await db.submission.findMany({
+        where: {
+          participantId: userId
+        },
+        include: {
+          task: {
+            select: {
+              id: true,
+              title: true,
+              description: true,
+              deadline: true,
+              noOfTasks: true,
+              taskGrade: true,
+              track: true
+            }
+          }
+        },
+        orderBy: {
+          submittedAt: 'desc'
+        }
+      });
+  
+      return { success: submissions };
+    } catch (error) {
+      console.error('Error in getUserSubmissions:', error);
+      return { error: error.message || 'An error occurred while fetching the user submissions.' };
+    }
+  };
+
+  export const getSingleSubmission2 = async (id) => {
+    try {
+      const submission = await db.submission.findMany({
+        where: { participantId: id },
+        include: {
+          participant: {
+            select: {
+              lastName: true, 
+              firstName: true
+            },
+          },
+          task: {
+            select: {
+              title: true,
+              taskGrade: true,
+              noOfTasks: true
+            },
+          },
+        },
+      });
+      return submission;
+    } catch (error) {
+      console.log(error);
+      return { error: error || "An error occurred while fetching the submission." };
     }
   };
