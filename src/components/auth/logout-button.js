@@ -1,5 +1,5 @@
 "use client";
-import { logout } from "@/actions/auth actions/logout";
+import { logout } from "@/actions/auth/logout";
 
 export const LogoutButton = ({ children }) => {
   const onClick = () => {

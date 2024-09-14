@@ -6,7 +6,7 @@ import { sendVerificationMail } from "@/lib/mails";
 import { DEFAULT_LOGIN_REDIRECT } from "@/routes";
 import { generateVerificationToken } from "@/lib/token";
 import LoginSchema from "@/schemas/login";
-
+import bcrypt from "bcryptjs";
 
 export const login = async (body) => {
   const validatedFields = LoginSchema.safeParse(body);
@@ -30,6 +30,15 @@ export const login = async (body) => {
 
     await sendVerificationMail(verificationToken.email, verificationToken.token);
     return { success: "Confirmation email sent!" };
+  }
+
+  const passwordsMatch = await bcrypt.compare(
+    password,
+    existingUser.password,
+  );
+
+  if (!passwordsMatch) {
+    return { error: "Wrong email or password" };
   }
 
 

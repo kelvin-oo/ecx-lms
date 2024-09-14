@@ -24,13 +24,17 @@ export default {
           const { email, password } = validatedFields.data;
           console.log('after schema')
           const user = await getUserByEmail(email);
-          if (!user || !user.password) return null;
+          
+          console.log(user)
+          if (!user) return null;
           console.log('before password match')
           const passwordsMatch = await bcrypt.compare(
             password,
             user.password,
           );
+          console.log("🚀 ~ authorize ~ passwordsMatch:", passwordsMatch)
           console.log('after password match')
+          console.log("🚀 ~ authorize ~ user:", user)
           if (passwordsMatch) return user;
         }
 

@@ -55,7 +55,7 @@ export default function LeaderboardTable({ className = "" }) {
     
     // Update the state with the filtered data
     setLeaderboardData(filteredData);
-  }, [user.track]);
+  }, []);
 
   // console.log("🚀 ~ useEffect ~ filteredData:", filteredData)
   const sortedTableData = leaderboardData.sort((a, b) => b.points - a.points)

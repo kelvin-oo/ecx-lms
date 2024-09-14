@@ -7,7 +7,7 @@ import authStyles from '@/components/css/authLayout.module.css';
 import ComponentLevelLoader from '@/components/Loader';
 import { useState } from 'react';
 import Image from 'next/image';
-import { register } from '@/actions/auth actions/register';
+import { register } from '@/actions/auth/register';
 import { ToastContainer, toast } from "react-toastify";
 
 export default function Register() {
