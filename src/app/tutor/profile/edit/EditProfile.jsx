@@ -13,6 +13,7 @@ import { useCurrentClientUser } from "@/hooks/use-current-client-user";
 
 const EditProfile = ({ user }) => {
   const [imgFile, setImgFile] = useState();
+  const [photo, setPhoto] = useState(null);
   const router = useRouter()
   const session = useCurrentClientUser()
 
@@ -20,10 +21,22 @@ const EditProfile = ({ user }) => {
     setImgFile(file);
   }
 
+  const handleImageChange = (e) => {
+    setPhoto(e.target.files[0]);
+  };
+
   const [formData, setFormData] = useState();
   const [loading, setLoading] = useState(false);
   const [isSelected, setIsSelected] = useState(false);
   const handleSelect = () => !isSelected && setIsSelected(true);
+
+  const CLOUD_NAME = "du6g27tfh";
+  const UPLOAD_PRESET = "brickwire";
+  const responseType = {
+    error: "error",
+    success: "success",
+  };
+
 
   const handleChange = (e) => {
     setFormData((prev) => {
@@ -43,6 +56,7 @@ const EditProfile = ({ user }) => {
     e.preventDefault();
 
     setLoading(true);
+    
 
     // const { firstName, lastName, email, password, track, userName } =
     //   formData || {};
@@ -143,10 +157,39 @@ const EditProfile = ({ user }) => {
 
     //   return;
     // }
+    const uploadImage = async () => {
+      if (!photo) return;
+  
+      const formData = new FormData();
+  
+      formData.append("file", photo);
+      formData.append("upload_preset", UPLOAD_PRESET);
+  
+      try {
+        const res = await fetch(
+          `https://api.cloudinary.com/v1_1/${CLOUD_NAME}/image/upload`,
+          {
+            method: "POST",
+            body: formData,
+          }
+        );
+  
+        const data = await res.json();
+  
+        const imageUrl = data["secure_url"];
+  
+        return imageUrl;
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    const imageUrl = await uploadImage();
 
     const body = {
       
       ...formData,
+      image: imageUrl
     };
     
     console.log("🚀 ~ handleFormSubmit ~ body:", body)
@@ -191,7 +234,10 @@ const EditProfile = ({ user }) => {
   };
   return (
     <form className="grid grid-cols-1 gap-y-10 pb-8">
-      <FormImageInput setFile={setFile} />
+     <FormImageInput 
+      setFile={setFile} 
+      onImageChange={handleImageChange}
+    />
       <FormBox>
         <FormBoxHeader header={`Personal Information`} />
         <div className="grid grid-cols-1 gap-y-4">

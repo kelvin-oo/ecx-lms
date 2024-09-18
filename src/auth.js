@@ -58,6 +58,7 @@ export const {
         session.user.userName = token.userName;
         session.user.email = token.email;
         session.user.track = token.track;
+        session.user.image = token.image;
         session.user.isOAuth = token.isOAuth;
       }
 
@@ -80,6 +81,7 @@ export const {
       token.userName = existingUser.userName;
       token.email = existingUser.email;
       token.track = existingUser.track;
+      token.image = existingUser.image;
       token.role = existingUser.role;
       return token;
     }

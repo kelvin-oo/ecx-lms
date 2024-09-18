@@ -38,3 +38,23 @@ sample data...
 
 
 Note, deadline field should have a calendar component where tutors can select date.
+
+
+import { useQuery } from 'react-query';
+
+const useTrackSubmissions = () => {
+  return useQuery({
+    queryKey: ["track-submissions"],
+    queryFn: async () => {
+      const result = await getTrackSubmissions();
+      if (result.error) {
+        throw new Error(result.error);
+      }
+      return result.success;
+    },
+    refetchOnMount: true,
+    refetchOnWindowFocus: true,
+    refetchOnReconnect: true,
+    staleTime: 0,
+  });
+};

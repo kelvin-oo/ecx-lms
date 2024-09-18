@@ -4,9 +4,11 @@ import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import Sidebar from './Sidebar';
 import { usePathname } from 'next/navigation';
-
+import { useCurrentClientUser } from '@/hooks/use-current-client-user';
+import profileImage from '../../../public/icons/user.svg'
 const Header = () => {
   const pathname = usePathname();
+  const user = useCurrentClientUser()
 
   const currentUserRole = pathname.split('/')[1];
 
@@ -90,7 +92,7 @@ const Header = () => {
 
       <div className='flex items-center gap-3 lg:gap-4 col-span-2 sm:col-span-1 justify-end'>
         <span className='hidden lg:block'>
-          <b>Track: </b>Front end Web development
+          <b>Track: </b>{user?.track}
         </span>
         <Image
           src='/icons/bell-white.svg'
@@ -104,7 +106,7 @@ const Header = () => {
           onClick={handleShowDropdown}
         >
           <Image
-            src='/icons/user-light.svg'
+            src={user?.image ? user.image : profileImage}
             alt='user'
             className='w-8 h-w-8 lg:w-[44px] lg:h-[44px] rounded-full'
             width={44}

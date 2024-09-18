@@ -1,49 +1,99 @@
-'use client'
-import FormBox from '@/components/profile/FormBox'
-import FormBoxHeader from '@/components/profile/FormBoxHeader'
-import FormImageInput from '@/components/profile/FormImageInput'
-import FormInput from '@/components/profile/FormInput'
-import React, { useState } from 'react'
+"use client";
+import FormBox from "@/components/profile/FormBox";
+import FormBoxHeader from "@/components/profile/FormBoxHeader";
+import FormImageInput from "@/components/profile/FormImageInput";
+import React, { useState } from "react";
+import styles from "../../../styles/adminProfilePage.module.scss";
+import { useCurrentClientUser } from "@/hooks/use-current-client-user";
+import Image from "next/image";
+import FormInput from "@/components/profile/FormInput";
+import Link from "next/link";
 
 const ParticipantProfile = ({ user }) => {
-  const [imgFile, setImgFile] = useState()
-
-  function setFile(file){
-    setImgFile(file)
-  }
+  // const user = useCurrentClientUser()
   return (
-    <form className='grid grid-cols-1 gap-y-10 pb-8'>
-      <FormImageInput 
-        setFile={setFile}
-      />
-      <FormBox>
-        <FormBoxHeader
-          header={`Personal Information`}
-        />
-        <div className='grid grid-cols-1 gap-y-4'> 
-          <div className='grid gap-y-4 lg:grid-cols-2 lg:gap-x-8'>
-            <FormInput placeholder={user?.firstName} type='text' disabled={true} />
-            <FormInput placeholder={user?.lastName} type='text' disabled={true} />
-          </div>
-          <FormInput placeholder={user?.email} type='email' disabled={true} />
-          <FormInput placeholder={user?.userName} type='text' disabled={true} />
+    <main className={styles.main}>
+      <div className={styles.header}>
+        <div className="relative w-20 h-20 lg:w-[8.3125rem] lg:h-[8.3125rem] bg-ecx-colors-black rounded-full">
+          <Image src={user?.image} alt="" className="w-[100%] h-[100%] rounded-full object-fill bg-cover"  width={200} height={200}/>
         </div>
-      </FormBox>
-      <FormBox>
-        <FormBoxHeader 
-          header={`Educational`}
-        />
-        <div className='grid grid-cols-1 gap-y-4'>
-          <FormInput type='text' placeholder={`Track --- ${user?.track}`} disabled={true} />
-          <div className='grid gap-y-4 lg:grid-cols-2 lg:gap-x-8'>
-            <FormInput placeholder='Department' type='text' disabled={true} />
-            <FormInput placeholder='Faculty' type='text' disabled={true} />
-          </div>
-        </div>
-      </FormBox>
-      <div className='w-full max-w-[44.575rem] h-[2.625rem] lg:h-[3.625rem] text-ecx-colors-white lg:text-base text-sm font-inter tracking-widest bg-ecx-colors-secondary-blue mx-auto flex items-center justify-center cursor-pointer'>Edit Profile</div>
-    </form>
-  )
-}
+        <Link href="/participant/profile/edit">Edit Profile</Link>
+      </div>
+      <form className="grid grid-cols-1 gap-y-10 pb-8">
+        {/* personal information */}
 
-export default ParticipantProfile
+        <div className="information">
+          <FormBox>
+            <FormBoxHeader header={`Personal Information`} />
+            <div className="grid grid-cols-1 gap-y-4">
+              <FormInput placeholder={`Name -- ${user.firstName} ${user.lastName}`} type="name" disabled={true}/>
+              <FormInput placeholder={`Email -- ${user.email}`}type="email" disabled={true}/>
+              <FormInput placeholder={`Role -- ${user.role}`} type="text" disabled={true}/>
+              <FormInput placeholder={`Your Track -- ${user.track}`} type="text" disabled={true}/>
+            </div>
+          </FormBox>
+        </div>
+
+        {/* Tutor-Specific Details */}
+        {/* <FormBox>
+        <FormBoxHeader header={`Educational`} />
+        <div className="grid grid-cols-1 gap-y-4">
+          <input
+            type="text"
+            placeholder={`Track --- ${user?.track}`}
+            name="track"
+            disabled={true}
+            className=" border border-solid outline-none border-ecx-colors-black w-full py-2 lg:py-3 px-3 font-inter placeholder:text-ecx-colors-black placeholder:font-inter text-base lg:text-xl placeholder:tracking-wider truncate"
+          />
+          <div className="grid gap-y-4 lg:grid-cols-2 lg:gap-x-8">
+            <input
+              type="text"
+              placeholder="Department"
+              name="Department"
+              disabled={true}
+             
+              className=" border border-solid outline-none border-ecx-colors-black w-full py-2 lg:py-3 px-3 font-inter placeholder:text-ecx-colors-black placeholder:font-inter text-base lg:text-xl placeholder:tracking-wider truncate"
+            />
+            <input
+              type="text"
+              placeholder="Faculty"
+              name="Faculty"
+             
+              disabled={true}
+              className=" border border-solid outline-none border-ecx-colors-black w-full py-2 lg:py-3 px-3 font-inter placeholder:text-ecx-colors-black placeholder:font-inter text-base lg:text-xl placeholder:tracking-wider truncate"
+            />
+          </div>
+        </div>
+      </FormBox> */}
+
+        {/* Participant Performance */}
+
+        {/* <div className={styles.performance}>
+          <FormBoxHeader header={`Participant Performance`} />
+          <div className={styles.performanceBox}>
+            <div className={styles.left}>
+              <h3>Highest Scorer:</h3>
+              <h3>Score</h3>
+            </div>
+            <div className={styles.right}>
+              <h3>{highestScoreParticipant.success.firstName}</h3>
+              <h3>{highestScoreParticipant.success.points}</h3>
+            </div>
+          </div>
+          <div className={styles.performanceBox}>
+            <div className={styles.left}>
+              <h3>Most Active Participant</h3>
+              <h3>Tasks Completed</h3>
+            </div>
+            <div className={styles.right}>
+              <h3>{highestTaskParticipant.success.firstName}</h3>
+              <h3>{highestTaskParticipant.success.taskCompleted}</h3>
+            </div>
+          </div>
+        </div> */}
+      </form>
+    </main>
+  );
+};
+
+export default ParticipantProfile;

@@ -18,6 +18,7 @@ export default function AllSubmissions() {
       }
       return result.success;
     },
+    refetchInterval: 2000,
   });   
   const [isShowSubmissions, setShowSubmissions] = useState(true);
 

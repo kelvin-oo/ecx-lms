@@ -7,6 +7,7 @@ import styles from "../../../styles/adminProfilePage.module.scss";
 import { useCurrentClientUser } from "@/hooks/use-current-client-user";
 import Image from "next/image";
 import FormInput from "@/components/profile/FormInput";
+import Link from "next/link";
 
 const TutorProfile = ({ participantCount, highestScoreParticipant, highestTaskParticipant, ungradedTaskCount }) => {
   const user = useCurrentClientUser()
@@ -14,9 +15,9 @@ const TutorProfile = ({ participantCount, highestScoreParticipant, highestTaskPa
     <main className={styles.main}>
       <div className={styles.header}>
         <div className="relative w-20 h-20 lg:w-[8.3125rem] lg:h-[8.3125rem] bg-ecx-colors-black rounded-full">
-          <Image src="" alt="" className="object-cover object-center" />
+          <Image src={user?.image} alt="" className="w-[100%] h-[100%] rounded-full object-fill bg-cover"  width={200} height={200}/>
         </div>
-        <a href="">Edit Profile</a>
+        <Link href="/tutor/profile/edit">Edit Profile</Link>
       </div>
       <form className="grid grid-cols-1 gap-y-10 pb-8">
         {/* personal information */}

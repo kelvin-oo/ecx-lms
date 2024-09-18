@@ -11,6 +11,7 @@ function page() {
         <h1>username {user?.userName}</h1>
         <h1>role {user?.role}</h1>
         <h1>track {user?.track}</h1>
+        <h1>track {user?.image}</h1>
         <h1>id {user?.id}</h1>
         <LogoutButton>
         <h1>Log out</h1>
