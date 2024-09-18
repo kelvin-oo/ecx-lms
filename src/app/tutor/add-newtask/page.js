@@ -23,7 +23,7 @@ export default function AddNewTask() {
     setError('');
     setLoading(true);
 
-    const { title, description, deadline, noOfTasks, taskGrade } =
+    const { title, description, deadline, submissionDetails, taskGrade } =
       formData || {};
 
     if (!title) {
@@ -67,8 +67,8 @@ export default function AddNewTask() {
       return;
     }
 
-    if (!noOfTasks) {
-      toast.error("Please choose number of tasks", {
+    if (!submissionDetails) {
+      toast.error("Please enter submission details", {
         position: "top-right",
         autoClose: 5000,
         hideProgressBar: false,
@@ -197,6 +197,7 @@ export default function AddNewTask() {
             />
           </div>
         </div>
+       
         <div className='grid gap-y-3'>
           <textarea
             className='w-full outline-none bg-transparent border-2 border-[#424242] px-3 py-2 lg:py-3 resize-none min-h-[200px]'
@@ -218,20 +219,22 @@ export default function AddNewTask() {
           <input
             type='number'
             className='w-full outline-none bg-transparent border-2 border-[#424242] px-3 py-2 lg:py-3'
-            placeholder='Number of Tasks'
-            onChange={handleChange}
-            name='noOfTasks'
-          />
-        </div>
-        <div className='grid gap-y-3'>
-          <input
-            type='number'
-            className='w-full outline-none bg-transparent border-2 border-[#424242] px-3 py-2 lg:py-3'
             placeholder='Task Grade'
             onChange={handleChange}
             name='taskGrade'
           />
         </div>
+        <div className='grid gap-y-3'>
+          <div className='flex text-[#424242] border-2 border-[#424242] px-3  py-2 lg:py-3 '>
+            <input
+              type='text'
+              className='w-full outline-none bg-transparent '
+              placeholder='Submission Details'
+              onChange={handleChange}
+              name='submissionDetails'
+            />
+          </div>
+        </div> 
         
         <button onClick={handleFormSubmit} className='w-full bg-ecx-colors-secondary-blue  py-2 lg:py-3 text-white grid gap-y-3 hover justify-center'>
         {loading ? <ComponentLevelLoader color={'#ffffff'} /> : 'Add Task'}

@@ -170,6 +170,7 @@ export const getTrackParticipantCount = async () => {
     // console.log("🚀 ~ gradeSubmission ~ id:", id)
     // console.log("🚀 ~ gradeSubmission ~ body:", body)
     // console.log(comment, submissionId, taskGrade, submissionGrade)
+    const session = await currentServerUser()
     const grade = parseInt(body.submissionGrade, 10);
     if(grade > taskGrade) {
       return {mathError: 'submission grade cannt be above task grade'};
@@ -185,7 +186,8 @@ export const getTrackParticipantCount = async () => {
         data: {
           comment: body.comment,
           submissionGrade: grade,
-          status: TaskStatus.GRADED, // Assuming the TaskStatus enum has a 'GRADED' value
+          status: TaskStatus.GRADED,
+          gradedById: session.id // Assuming the TaskStatus enum has a 'GRADED' value
         },
       });
   

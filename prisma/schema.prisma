@@ -27,23 +27,23 @@ enum TaskStatus {
 }
 
 model User {
-  id            String       @id @default(cuid())
-  email         String?      @unique
-  firstName     String?
-  lastName      String?
-  userName      String?      @unique
-  track         String?
-  emailVerified DateTime?
-  image         String?
-  password      String?
-  points        Int?         @default(0)
-  taskScore     Int?         @default(0)
-  taskCompleted Int?         @default(0)
-  role          UserRole     @default(PARTICIPANT)
-  accounts      Account[]
-  adminTasks    AdminTask[]
-  submissions   Submission[]
-  // studentTasks  StudentTask[]
+  id                String       @id @default(cuid())
+  email             String?      @unique
+  firstName         String?
+  lastName          String?
+  userName          String?      @unique
+  track             String?
+  emailVerified     DateTime?
+  image             String?
+  password          String?
+  points            Int?         @default(0)
+  taskScore         Int?         @default(0)
+  taskCompleted     Int?         @default(0)
+  role              UserRole     @default(PARTICIPANT)
+  accounts          Account[]
+  adminTasks        AdminTask[]
+  submissions       Submission[] @relation("submissions")
+  gradedSubmissions Submission[] @relation("gradedSubmissions")
 }
 
 model Account {
@@ -90,7 +90,7 @@ model AdminTask {
 
 model Submission {
   id              String     @id @default(cuid())
-  participant     User       @relation(fields: [participantId], references: [id])
+  participant     User       @relation("submissions", fields: [participantId], references: [id])
   participantId   String
   task            AdminTask  @relation(fields: [taskId], references: [id], onDelete: Cascade)
   taskId          String
@@ -99,4 +99,6 @@ model Submission {
   submissionGrade Int?
   status          TaskStatus @default(PENDING)
   submittedAt     DateTime   @default(now())
+  gradedBy        User?      @relation("gradedSubmissions", fields: [gradedById], references: [id])
+  gradedById      String?
 }

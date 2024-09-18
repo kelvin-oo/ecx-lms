@@ -21,23 +21,22 @@ export async function POST(req) {
     const convertedBody = {
         ...body,
         deadline: new Date(body.deadline),
-        noOfTasks: parseInt(body.noOfTasks, 10),
         taskGrade: parseInt(body.taskGrade, 10),
     };
 
 
-    const result = TaskSchema.safeParse(convertedBody);
+    // const result = TaskSchema.safeParse(convertedBody);
 
 
-    if (!result.success) {
-        return new NextResponse(
-            JSON.stringify({ error: 'invalid fields' }),
-            { status: 402 }
-        );
-    }
+    // if (!result.success) {
+    //     return new NextResponse(
+    //         JSON.stringify({ error: 'invalid fields' }),
+    //         { status: 402 }
+    //     );
+    // }
 
-    const { title, description, deadline, noOfTasks, taskGrade } =
-        result.data;
+    const { title, description, deadline, submissionDetails, taskGrade } =
+       convertedBody;
     const user = await currentServerUser()
     try {
         const newAdminTask = await db.adminTask.create({
@@ -45,8 +44,8 @@ export async function POST(req) {
               title,
               description,
               deadline,
-              noOfTasks,
               taskGrade,
+              submissionDetails,
               track: user.track,
               authorId: user.id 
             },

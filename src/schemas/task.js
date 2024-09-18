@@ -5,6 +5,9 @@ const TaskSchema = z.object({
   title: z.string().min(1, {
     message: "title is required",
   }),
+  submissionDetails: z.string().min(1, {
+    message: "title is required",
+  }),
   description: z.string().min(1, {
     message: "description is required",
   }),

@@ -219,7 +219,7 @@ console.log(deadline);
           <h1 className="text-[18px] lg:text-2xl xl:text-3xl">{data?.title}</h1>
           <p className="text-sm lg:text-lg xl:text-xl">{data?.description}</p>
           <h1 className="lg:text-xl xl:text-2xl mt-5">Submission Details</h1>
-          <p className="text-sm lg:text-lg xl:text-xl">submissionDetails</p>
+          <p className="text-sm lg:text-lg xl:text-xl">{data?.submissionDetails}</p>
           <input
           onChange={handleChange}
         //   disabled={true}
