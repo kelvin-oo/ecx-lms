@@ -23,7 +23,7 @@ export default function AllSubmissions() {
   const [isShowSubmissions, setShowSubmissions] = useState(true);
 
   const toggleShowSubmissions = () => setShowSubmissions(!isShowSubmissions);
-  console.log("🚀 ~ AllSubmissions ~ data:", data)
+  // console.log("🚀 ~ AllSubmissions ~ data:", data)
 
   return (
    

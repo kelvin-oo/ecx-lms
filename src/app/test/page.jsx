@@ -89,7 +89,7 @@ async function page() {
   const user = await currentServerUser()
   const response = getUserGradeSummary(user.id, user.track)
   const data = await response.json
-  console.log("🚀 ~ page ~ data:", data)
+  // console.log("🚀 ~ page ~ data:", data)
   return (
     <div>page</div>
   )

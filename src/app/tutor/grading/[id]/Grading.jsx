@@ -21,7 +21,7 @@ export default function Grading({id}){
           return result;
         },
       });   
-      console.log("🚀 ~ Grading ~ data:", data)
+      // console.log("🚀 ~ Grading ~ data:", data)
 
       const [formData, setFormData] = useState();
       const [initialData, setInitialData] = useState({});

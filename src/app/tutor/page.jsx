@@ -13,7 +13,7 @@ export default async function AdminPage() {
   const user = await currentServerUser()
   const tasks = await getPartialAdminTasks(4, user.track)
   const noOfTasks = await countTrackTasks(user.track)
-  console.log(noOfTasks)
+  // console.log(noOfTasks)
   const participants = await getPartialParticipants(4, user.track)
   const queryClient = new QueryClient()
   await queryClient.prefetchQuery({

@@ -30,7 +30,7 @@ export default function AssignedTasks() {
     return Math.min(Math.round(progressPercentage * 100) / 100, 100);
   };
   const taskProgress = calculateTaskProgress(data.totalSubmissionGrade,data.totalTaskGrade, )
-  console.log("🚀 ~ AssignedTasks ~ data:", taskProgress)
+  // console.log("🚀 ~ AssignedTasks ~ data:", taskProgress)
 
   return (
     

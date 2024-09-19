@@ -40,7 +40,7 @@ export async function PATCH(req, ctx) {
         );
     }
     const body = await req.json()
-    console.log("🚀 ~ PATCH ~ body:", body)
+    // console.log("🚀 ~ PATCH ~ body:", body)
     if (body.deadline) {
         const deadline = new Date(body.deadline);
         if (isNaN(deadline.getTime())) {
@@ -67,7 +67,7 @@ export async function PATCH(req, ctx) {
     // }
 
     const id = ctx.params.id
-    console.log("🚀 ~ PATCH ~ id:", id)
+    // console.log("🚀 ~ PATCH ~ id:", id)
 
     try {
         const updatedTask = await db.adminTask.update({
@@ -95,7 +95,7 @@ export async function DELETE(req, ctx) {
     }
 
     const id = ctx.params.id
-    console.log("🚀 ~ DELETE ~ id:", id)
+    // console.log("🚀 ~ DELETE ~ id:", id)
     try {
         await db.adminTask.delete({
             where: {

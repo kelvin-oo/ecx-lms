@@ -8,7 +8,7 @@ export default async function SubmissionPage({ params }) {
   const user = await currentServerUser()
   const data = await getUserSingleTaskAndStatuses(user.id, params.id)
  
-  console.log("🚀 ~ SubmissionPage ~ data:", data)
+  // console.log("🚀 ~ SubmissionPage ~ data:", data)
   
   // taskid = cm0mt9ixx0001q45b6z0r7x8v
   // partiid = cm0idnmjf000052hdqwgksae8

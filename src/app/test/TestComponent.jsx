@@ -9,7 +9,7 @@ function TestComponent() {
     queryKey: ["posts"],
   });
  
-  console.log(data)
+  // console.log(data)
   
   return <div>TestComponent</div>;
 }

@@ -16,7 +16,7 @@ export default function AdminTasksTable({ tasksArr, minimized = false }) {
   };
 
   const handleDelete = async (id) => {
-    console.log("clicked delete");
+    // console.log("clicked delete");
     try {
       const res = await fetch(`/api/admin/tasks/${id}`, {
         headers: {

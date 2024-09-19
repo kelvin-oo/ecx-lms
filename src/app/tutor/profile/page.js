@@ -7,10 +7,10 @@ export default async function page() {
   const highestTaskParticipant = await getUserWithHighestTaskCompleted()
   const ungradedTaskCount = await getUngradedSubmissionsCountByTrack()
 
-  console.log("🚀 ~ page ~ ungradedTaskCount:", ungradedTaskCount)
-  console.log("🚀 ~ page ~ highestTaskParticipant:", highestTaskParticipant)
-  console.log("🚀 ~ page ~ highestScoreParticipant:", highestScoreParticipant)
-  console.log("🚀 ~ page ~ participantCount:", participantCount)
+  // console.log("🚀 ~ page ~ ungradedTaskCount:", ungradedTaskCount)
+  // console.log("🚀 ~ page ~ highestTaskParticipant:", highestTaskParticipant)
+  // console.log("🚀 ~ page ~ highestScoreParticipant:", highestScoreParticipant)
+  // console.log("🚀 ~ page ~ participantCount:", participantCount)
   return (
     <div>
       <TutorProfile participantCount={participantCount} highestScoreParticipant={highestScoreParticipant} highestTaskParticipant={highestTaskParticipant} ungradedTaskCount={ungradedTaskCount} />

@@ -3,9 +3,9 @@ import EditTask from "./EditTask"
 
 async function page({ params }) {
     const id = params.id
-    console.log("🚀 ~ page ~ id:", id)
+    // console.log("🚀 ~ page ~ id:", id)
     const oldData = await getSingleAdminTask(id)
-    console.log("🚀 ~ page ~ oldData:", oldData)
+    // console.log("🚀 ~ page ~ oldData:", oldData)
   return (
     <div>
         <EditTask id={id} oldData={oldData} />

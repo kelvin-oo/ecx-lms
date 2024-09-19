@@ -23,7 +23,7 @@ export default function AllTasks() {
 
   const toggleShowSubmissions = () => setShowSubmissions(!isShowSubmissions);
 
-  console.log("🚀 ~ AllTasks ~ data:", data)
+  // console.log("🚀 ~ AllTasks ~ data:", data)
 
   return (
     

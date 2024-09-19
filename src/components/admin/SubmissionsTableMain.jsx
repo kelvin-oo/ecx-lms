@@ -23,7 +23,7 @@ export default function SubmissionsTableMain( { id } ) {
   const toggleActions = (itemId) => {
     setActiveItemId(activeItemId === itemId ? null : itemId);
   };
-  console.log("🚀 ~ Grading ~ data:", data)
+  // console.log("🚀 ~ Grading ~ data:", data)
   const formatDate1 = (dateString) => {
     if (!dateString) return '';
     const date = new Date(dateString);

@@ -31,8 +31,8 @@ export default function AdminTasksPage({ tasks }) {
           return result.success;
         },
       });   
-      console.log("🚀 ~ page ~ submissions:", data)
-      console.log("🚀 ~ page ~ tasks:", taskData)
+      // console.log("🚀 ~ page ~ submissions:", data)
+      // console.log("🚀 ~ page ~ tasks:", taskData)
   const [isShowSubmissions, setShowSubmissions] = useState(false);
 
   const toggleShowSubmissions = () => setShowSubmissions(!isShowSubmissions);

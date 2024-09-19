@@ -1,5 +1,6 @@
 import Timer from "./Timer";
 import Link from "next/link";
+import CountdownTimer from "./Timer";
 
 export default function TableRow({
   id,
@@ -8,19 +9,16 @@ export default function TableRow({
   taskGrade,
   submissions,
 }) {
-  function convertToDeadlineFormat(dateString) {
+  function convertDateFormat(dateString) {
     const date = new Date(dateString);
-
-    // Extract hours, minutes, and seconds
-    const hours = String(date.getUTCHours()).padStart(2, "0");
-    const minutes = String(date.getUTCMinutes()).padStart(2, "0");
-    const seconds = String(date.getUTCSeconds()).padStart(2, "0");
-
-    // Format the deadline
-    return `${hours}:${minutes}:${seconds}`;
+    const day = date.getDate().toString().padStart(2, '0');
+    const month = (date.getMonth() + 1).toString().padStart(2, '0');
+    const year = date.getFullYear();
+  
+    return `${day}/${month}/${year}`;
   }
-  const actualDeadline = convertToDeadlineFormat(deadline);
-  console.log(deadline);
+  
+
 
   let actualStatus;
 
@@ -48,14 +46,16 @@ export default function TableRow({
           color:
           actualStatus === "PENDING"
               ? "#424242"
-              : actualStatus === "GRADED" || actualStatus === "EXPIRED"
-              ? "#F2443F"
+              : actualStatus === "GRADED" 
+              ? "#00B29A"
+              : actualStatus === "EXPIRED" 
+              ? '#F2443F'
               : "#00B29A",
         }}
       >
         {actualStatus}
       </div>
-      <Timer initDeadline={actualDeadline} />
+      <CountdownTimer date={convertDateFormat(deadline)} />
       <div className="text-center col-span-1 hidden lg:block">{submissions.length > 0 ? submissions[0].submissionGrade : '*'} / {taskGrade} </div>
     </Link>
   );

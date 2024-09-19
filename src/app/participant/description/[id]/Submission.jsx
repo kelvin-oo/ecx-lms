@@ -1,7 +1,7 @@
 "use client"
 import Link from "next/link"
 import Image from "next/image"
-import Timer from "@/components/common/Timer"
+import CountdownTimer from "@/components/common/Timer";
 import ComponentLevelLoader from '@/components/Loader';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
@@ -178,20 +178,16 @@ export default function Submission({ data }) {
       });
     };
 
-function convertToDeadlineFormat(dateString) {
-    const date = new Date(dateString);
+    function convertDateFormat(dateString) {
+      const date = new Date(dateString);
+      const day = date.getDate().toString().padStart(2, '0');
+      const month = (date.getMonth() + 1).toString().padStart(2, '0');
+      const year = date.getFullYear();
+    
+      return `${day}/${month}/${year}`;
+    }
 
-    // Extract hours, minutes, and seconds
-    const hours = String(date.getUTCHours()).padStart(2, '0');
-    const minutes = String(date.getUTCMinutes()).padStart(2, '0');
-    const seconds = String(date.getUTCSeconds()).padStart(2, '0');
 
-    // Format the deadline
-    return `${hours}:${minutes}:${seconds}`;
-}
-
-const deadline = convertToDeadlineFormat(data.deadline);
-console.log(deadline);
 
 
   return(
@@ -242,7 +238,7 @@ console.log(deadline);
           </div>
           <div className="flex flex-col lg:grid grid-cols-2 gap-1.5 lg:gap-4">
             <div className="font-varela-round lg:font-bold">Deadline</div>
-            <Timer className="!text-center lg:!text-start font-light text-sm lg:text-xl" initDeadline={deadline} />
+            <CountdownTimer className="!text-center lg:!text-start font-light text-sm lg:text-xl text-red-900" date={convertDateFormat(data.deadline)} />
           </div>
           <div className="flex flex-col lg:grid grid-cols-2 gap-1.5 lg:gap-4">
             <div className="font-varela-round lg:font-bold">Grade</div>

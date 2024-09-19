@@ -21,7 +21,7 @@ export default function TasksTable2({ title, tasksData }) {
   //   return aTotalSeconds - bTotalSeconds;
   // }).slice(0,3)
   
-  console.log("🚀 ~ TasksTable ~ data:", tasksData)
+  // console.log("🚀 ~ TasksTable ~ data:", tasksData)
 
   return (
     

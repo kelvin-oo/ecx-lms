@@ -6,7 +6,6 @@ export const getAllAdminTasks = async () => {
   try {
     const allTasks = db.adminTask.findMany({})
     return allTasks
-    console.log(allTasks)
   } catch (error) {
     console.log(error)
     return { error: error || "An error occurred during registration." };
@@ -31,7 +30,6 @@ export const getPartialAdminTasks = async (number, track) => {
       take: number
     })
     return allTasks
-    console.log(allTasks)
   } catch (error) {
     console.log(error)
     return { error: error || "An error occurred during registration." };
@@ -58,8 +56,8 @@ export const getTrackAdminTasks = async () => {
 
 
 export async function getUserTasksAndStatuses(userId, track) {
-  console.log("🚀 ~ getUserTasksAndStatuses ~ track:", track)
-  console.log("🚀 ~ getUserTasksAndStatuses ~ userId:", userId)
+  // console.log("🚀 ~ getUserTasksAndStatuses ~ track:", track)
+  // console.log("🚀 ~ getUserTasksAndStatuses ~ userId:", userId)
   const currentDate = new Date();
   
 
@@ -67,9 +65,9 @@ export async function getUserTasksAndStatuses(userId, track) {
     where: {
       track: track
     },
-    orderBy: {
-      deadline: 'desc',
-    },
+    // orderBy: {
+    //   deadline: 'asc',
+    // },
     include: {
       submissions: {
         select: {
