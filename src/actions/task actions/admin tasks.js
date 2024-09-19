@@ -72,10 +72,15 @@ export async function getUserTasksAndStatuses(userId, track) {
     },
     include: {
       submissions: {
+        select: {
+          submissionGrade: true,
+          id: true,
+          status: true,
+        },
         where: {
           participantId: userId,
-
-        }
+        },
+        
       }
     }
   });

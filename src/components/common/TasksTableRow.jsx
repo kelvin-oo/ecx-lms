@@ -56,7 +56,7 @@ export default function TableRow({
         {actualStatus}
       </div>
       <Timer initDeadline={actualDeadline} />
-      <div className="text-center col-span-1 hidden lg:block">{submissions.length > 0 ? submissions.submissionGrade : '*'} / {taskGrade} </div>
+      <div className="text-center col-span-1 hidden lg:block">{submissions.length > 0 ? submissions[0].submissionGrade : '*'} / {taskGrade} </div>
     </Link>
   );
 }

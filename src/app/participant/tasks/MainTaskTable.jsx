@@ -4,8 +4,10 @@ import Timer from '@/components/common/Timer'
 import Link from 'next/link'
 import { useQuery } from '@tanstack/react-query'
 import TasksTable2 from '@/components/common/TaskTable2'
+import { useCurrentClientUser } from '@/hooks/use-current-client-user'
 
 const MainTaskTable = () => {
+  const user = useCurrentClientUser()
   const { data, error, isLoading, isFetched } = useQuery({
     queryKey: ["tasks"],
     queryFn: async () => {
@@ -19,7 +21,7 @@ const MainTaskTable = () => {
   
   return (
     <div>
-      <h1 className='font-varela-round lg:text-2xl mb-5 lg:mb-8'>Welcome, Ifihan</h1>
+      <h1 className='font-varela-round lg:text-2xl mb-5 lg:mb-8'>Welcome,  {user?.firstName}</h1>
 
       <div className='hidden lg:block bg-white border-[1.5px] border-ecx-colors-secondary-blue shadow-[7px_7px_rgba(39,46,75,1)] py-6 px-5'>
         <TasksTable2 tasksData={data}  title={"Tasks"} />

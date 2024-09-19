@@ -18,21 +18,11 @@ export default function TasksTable({ title, tasksData }) {
       return result.success.slice(0,3);
     },
   }); 
-
-
-  // const recentTasks = data.sort((a, b) => {
-  //   const [aHour, aMinute, aSecond] = a.deadline.split(':').map(Number);
-  //   const [bHour, bMinute, bSecond] = b.deadline.split(':').map(Number);
-
-  //   const aTotalSeconds = aHour * 3600 + aMinute * 60 + aSecond;
-  //   const bTotalSeconds = bHour * 3600 + bMinute * 60 + bSecond;
-
-  //   return aTotalSeconds - bTotalSeconds;
-  // }).slice(0,3)
-  
   // console.log("🚀 ~ TasksTable ~ data:", data)
 
+
   return (
+    
     
     <div className="col-span-3 text-[#424242] divide-y divide-black font-varela-round">
       <div className="grid grid-cols-7 gap-x-10 px-3 py-3 text-base lg:text-lg">
