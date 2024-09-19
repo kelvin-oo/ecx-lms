@@ -142,7 +142,7 @@ export default function Register() {
     register(body)
       .then((user) => {
         if (user.success) {
-          .log(user.success);
+          console.log(user.success);
           toast.success(user.success, {
             position: "top-right",
             autoClose: 5000,
@@ -174,7 +174,7 @@ export default function Register() {
       })
       .finally(() => {
         setLoading(false);
-        .log('finally activated');
+        console.log('finally activated');
       });
   };
 
