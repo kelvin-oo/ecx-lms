@@ -41,14 +41,15 @@ export default async function AdminPage() {
         <b>Track: </b> {user?.track}
       </p>
       <HydrationBoundary state={dehydrate(queryClient)}>
-      <div className="mt-5 flex gap-10 xl:grid xl:grid-cols-2 xl:gap-x-8 xl:gap-y-7 [&>*]:bg-white [&>*]:border-[1.5px] [&>*]:border-ecx-colors-secondary-blue [&>*]:shadow-[7px_7px_rgba(39,46,75,1)] [&>*]:py-6 [&>*]:px-5">
+      <div className="mt-5 flex flex-col gap-10 lg:grid lg:grid-cols-2 xl:gap-x-8 xl:gap-y-7 [&>*]:bg-white [&>*]:border-[1.5px] [&>*]:border-ecx-colors-secondary-blue [&>*]:shadow-[7px_7px_rgba(39,46,75,1)] [&>*]:py-6 [&>*]:px-5">
        
           <LeaderboardTable className="col-span-1" />
           <AdminTasksTable minimized tasksArr={tasks} />
+          <ParticipantsLandingTable participants={participants} noOfTasks={noOfTasks} />
+    
       </div>
-      <div className="mt-5 flex gap-10 xl:grid xl:grid-cols-2 xl:gap-x-8 xl:gap-y-7 [&>*]:bg-white [&>*]:border-[1.5px] [&>*]:border-ecx-colors-secondary-blue [&>*]:shadow-[7px_7px_rgba(39,46,75,1)] [&>*]:py-6 [&>*]:px-5">
-      <ParticipantsLandingTable participants={participants} noOfTasks={noOfTasks} />
-      </div>
+      
+      
       </HydrationBoundary>
     </div>
   );

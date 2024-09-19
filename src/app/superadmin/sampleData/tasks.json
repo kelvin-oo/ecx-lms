@@ -1,0 +1,110 @@
+[
+  {
+    "id": "01",
+    "name": "Olaolu Taiwo",
+    "email": "olaolutaiwo@gmail.com",
+    "score": "250",
+    "task": "Design a new landing page using the neo-brutalism concept",
+    "completed": "18/20",
+    "track": "UI/UX Design"
+  },
+  {
+    "id": "02",
+    "name": "Akorede Dubem",
+    "email": "akorededubem@gmail.com",
+    "score": "300",
+    "task": "Design a new landing page using the neo-brutalism concept",
+    "completed": "15/20",
+    "track": "UI/UX Design"
+  },
+  {
+    "id": "03",
+    "name": "Rufus Badmus",
+    "email": "rufusbadmus@gmail.com",
+    "score": "200",
+    "task": "Design a new landing page using the neo-brutalism concept",
+    "completed": "13/20",
+    "track": "UI/UX Design"
+  },
+  {
+    "id": "04",
+    "name": "Samson Bello",
+    "email": "samsonbello@gmail.com",
+    "score": "450",
+    "task": "Design a new landing page using the neo-brutalism concept",
+    "completed": "10/20",
+    "track": "UI/UX Design"
+  },
+  {
+    "id": "01",
+    "name": "Olaolu Taiwo",
+    "email": "olaolutaiwo@gmail.com",
+    "score": "250",
+    "task": "Design a new landing page using the neo-brutalism concept",
+    "completed": "18/20",
+    "track": "UI/UX Design"
+  },
+  {
+    "id": "02",
+    "name": "Akorede Dubem",
+    "email": "akorededubem@gmail.com",
+    "score": "300",
+    "task": "Design a new landing page using the neo-brutalism concept",
+    "completed": "15/20",
+    "track": "UI/UX Design"
+  },
+  {
+    "id": "03",
+    "name": "Rufus Badmus",
+    "email": "rufusbadmus@gmail.com",
+    "score": "200",
+    "task": "Design a new landing page using the neo-brutalism concept",
+    "completed": "13/20",
+    "track": "UI/UX Design"
+  },
+  {
+    "id": "04",
+    "name": "Samson Bello",
+    "email": "samsonbello@gmail.com",
+    "score": "450",
+    "task": "Design a new landing page using the neo-brutalism concept",
+    "completed": "10/20",
+    "track": "UI/UX Design"
+  },
+  {
+    "id": "01",
+    "name": "Olaolu Taiwo",
+    "email": "olaolutaiwo@gmail.com",
+    "score": "250",
+    "task": "Design a new landing page using the neo-brutalism concept",
+    "completed": "18/20",
+    "track": "UI/UX Design"
+  },
+  {
+    "id": "02",
+    "name": "Akorede Dubem",
+    "email": "akorededubem@gmail.com",
+    "score": "300",
+    "task": "Design a new landing page using the neo-brutalism concept",
+    "completed": "15/20",
+    "track": "UI/UX Design"
+  },
+  {
+    "id": "03",
+    "name": "Rufus Badmus",
+    "email": "rufusbadmus@gmail.com",
+    "score": "200",
+    "task": "Design a new landing page using the neo-brutalism concept",
+    "completed": "13/20",
+    "track": "UI/UX Design"
+  },
+  {
+    "id": "04",
+    "name": "Samson Bello",
+    "email": "samsonbello@gmail.com",
+    "score": "450",
+    "task": "Design a new landing page using the neo-brutalism concept",
+    "completed": "10/20",
+    "track": "UI/UX Design"
+  }
+]
