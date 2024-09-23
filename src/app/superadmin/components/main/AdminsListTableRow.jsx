@@ -1,8 +1,8 @@
 export default function AdminsListTableRow({
   index,
-  name,
+  firstName,
+  lastName,
   track,
-  points,
   isLastPosition = false,
 }) {
   return (
@@ -13,17 +13,17 @@ export default function AdminsListTableRow({
           : 'border border-ecx-colors-secondary-blue'
       }`}
     >
-      <div className='col-span-2'>
+      <div className='col-span-1'>
         <div
           className={`w-6 lg:w-8 h-6 lg:h-8 rounded-full flex items-center justify-center text-[10px] lg:text-xs`}
         >
           {index}
         </div>
       </div>
-      <div className='col-span-5 lg:col-span-4 font-semibold truncate'>
-        <p>{name}</p>
+      <div className='col-span-5 lg:col-span-3 flex lg:items-end lg:justify-start font-semibold truncate'>
+        <p>{firstName} {lastName}</p>
       </div>
-      <div className='col-span-1 lg:col-span-4 flex items-end justify-end gap-x-1.5'>
+      <div className='col-span-1 lg:col-span-6 flex lg:items-end lg:justify-self-end gap-x-1.5'>
         <span className='font-semibold'>{track}</span>
       </div>
     </div>

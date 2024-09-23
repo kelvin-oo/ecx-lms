@@ -7,6 +7,7 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { toast } from 'react-toastify';
 import { useCurrentClientUser } from "@/hooks/use-current-client-user";
+import { UserRole } from "@prisma/client";
 
 
 export default function Submission({ data }) {
@@ -216,19 +217,23 @@ export default function Submission({ data }) {
           <p className="text-sm lg:text-lg xl:text-xl">{data?.description}</p>
           <h1 className="lg:text-xl xl:text-2xl mt-5">Submission Details</h1>
           <p className="text-sm lg:text-lg xl:text-xl">{data?.submissionDetails}</p>
-          <input
-          onChange={handleChange}
-        //   disabled={true}
-            type="text"
-            name="submissionLink"
-            className="border-2 border-ecx-colors-secondary-blue px-4 lg:px-5 xl:px-6 py-3.5 lg:py-4 xl:py-5 placeholder-black text-sm font-varela-round outline-none"
-            placeholder="Paste URL link"
-            defaultValue={data?.submissions.length > 0 ? data.submissions[0].submissionLink : '' }
-          />
-          <div className="grid grid-cols-2 w-11/12 xl:w-4/5 h-10 lg:h-14 mx-auto gap-6 xl:gap-16 justify-center text-sm lg:text-lg">
+          {
+            user.role === UserRole.PARTICIPANT && <input
+            onChange={handleChange}
+          //   disabled={true}
+              type="text"
+              name="submissionLink"
+              className="border-2 border-ecx-colors-secondary-blue px-4 lg:px-5 xl:px-6 py-3.5 lg:py-4 xl:py-5 placeholder-black text-sm font-varela-round outline-none"
+              placeholder="Paste URL link"
+              defaultValue={data?.submissions.length > 0 ? data.submissions[0].submissionLink : '' }
+            />
+          }
+          {
+            user.role === UserRole.PARTICIPANT && <div className="grid grid-cols-2 w-11/12 xl:w-4/5 h-10 lg:h-14 mx-auto gap-6 xl:gap-16 justify-center text-sm lg:text-lg">
             <button onClick={handleFormSubmit} className="bg-ecx-colors-secondary-blue text-white">{loading ? <ComponentLevelLoader color={'#ffffff'} /> : 'Submit'}</button>
             <button disabled={true} className="border-2 border-ecx-colors-secondary-blue text-ecx-colors-secondary-blue">Edit Link</button>
           </div>
+          }
         </div>
 
         <div className="col-span-6 lg:col-span-3 xl:col-span-2 lg:order-2 border lg:border-2 border-ecx-colors-secondary-blue h-fit px-5 lg:px-10 xl:px-12 py-4 lg:py-6 flex justify-between lg:flex-col lg:gap-6 text-lg lg:text-xl bg-white shadow-[4px_4px_rgba(39,46,75,1)] lg:shadow-[7px_7px_rgba(39,46,75,1)] text-center lg:text-start">

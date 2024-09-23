@@ -1,13 +1,8 @@
 'use server'
 import db from "@/lib/db"
 import { UserRole } from "@prisma/client";
-import { currentServerUser } from "@/lib/serverAuthState";
-import { revalidatePath } from "next/cache";
-import { unstable_update } from "@/auth";
-import bcrypt from "bcryptjs";
 
-
-// Get all users that are either tutors or admins
+// Get all users that have a role of tutor or admin
 export async function getAdminAndTutorUsers() {
     try {
         const users = await db.user.findMany({
@@ -36,7 +31,7 @@ export async function getAdminAndTutorUsers() {
 }
 
 
-// Get first three users that are either tutors or admins
+// Get the first three users who are either tutors or admins
 export async function getPartialAdminAndTutorUsers() {
     try {
         const users = await db.user.findMany({
@@ -89,6 +84,7 @@ export async function getAdminParticipants() {
         return { success: false, error: error.message || 'An error occurred while fetching users.' };
     }
 }
+
 // This will return first three users who are participants
 export async function getPartialAdminParticipants() {
     try {
@@ -127,7 +123,7 @@ export const getAllAdminTasks = async () => {
 }
 
 //   Get first three tasks 
-export const getPartialAllAdminTasks = async () => {
+export const getPartialAdminTasks = async () => {
     try {
         const allTasks = db.adminTask.findMany({
             take: 3,
@@ -166,7 +162,7 @@ export const getAdminLeaderBoard = async () => {
     }
   };
 
-  //   Get all tasks by a particular user
+  //   Get all tasks by a particular auithor
 export const getAllUserAdminTasks = async (id) => {
     try {
         const allTasks = db.adminTask.findMany({

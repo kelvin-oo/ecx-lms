@@ -4,10 +4,22 @@ import tasks from '@/sampleData/tasks.json';
 import { getTrackAdminTasks } from '@/actions/task actions/admin tasks';
 import { useCurrentClientUser } from '@/hooks/use-current-client-user';
 import { useQuery } from '@tanstack/react-query';
-import { getUserTasksAndStatuses } from '@/actions/task actions/admin tasks';
+import { getPartialAdminTasks } from '@/actions/superAdmin/super';
 
 export default function TasksTable({ title, tasksData }) {
+  const { data, error, isLoading, isFetched } = useQuery({
+    queryKey: ["tasks"],
+    queryFn: async () => {
+      const result = await getPartialAdminTasks();
+      if (result.error) {
+        throw new Error(result.error);
+      }
+      return result.success;
+    },
+  });   
+  console.log("🚀 ~ TasksTable ~ data:", data)
   return (
+    
     <div className='col-span-3 text-[#424242] divide-y divide-black font-varela-round'>
       <div className='grid grid-cols-7 gap-x-10 px-3 py-3 text-base lg:text-lg'>
         <div className='col-span-5 lg:col-span-4 text-base lg:text-xl text-black'>
@@ -20,7 +32,7 @@ export default function TasksTable({ title, tasksData }) {
         <div className='text-center col-span-1 hidden lg:block'>Grade</div>
       </div>
 
-      {tasks.map(({ ...props }, index) => (
+      {data.map(({ ...props }, index) => (
         <TableRow key={index} {...props} />
       ))}
     </div>

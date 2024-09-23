@@ -1,12 +1,48 @@
-'use client';
-import AdminTasksTable from './components/AdminTasksTable';
-import ParticipantsTable from './components/ParticipantsTable';
-import LeaderboardTable from './components/LeaderboardTable';
-import tasks from '@/sampleData/adminTasks.json';
+import {
+  QueryClient,
+  HydrationBoundary,
+  dehydrate,
+} from "@tanstack/react-query"
 import AdminsList from './components/main/AdminsList';
 import TasksTable from '@/app/superadmin/components/main/RecentTasksTable';
+import { currentServerUser } from "@/lib/serverAuthState";
+import { getPartialAdminAndTutorUsers, getPartialAdminParticipants, getPartialAdminTasks } from "@/actions/superAdmin/super";
 
-export default function AdminPage() {
+export default async function AdminPage() {
+  const user = await currentServerUser()
+  const queryClient = new QueryClient()
+  await queryClient.prefetchQuery({
+    queryKey: ['adminsxtutors'],
+    queryFn: async () => {
+      const result = await getPartialAdminAndTutorUsers();
+      if (result.error) {
+        throw new Error(result.error);
+      }
+      return result.success;
+    },
+  });
+
+  await queryClient.prefetchQuery({
+    queryKey: ['participants'],
+    queryFn: async () => {
+      const result = await getPartialAdminParticipants();
+      if (result.error) {
+        throw new Error(result.error);
+      }
+      return result.success;
+    },
+  });
+
+  await queryClient.prefetchQuery({
+    queryKey: ['tasks'],
+    queryFn: async () => {
+      const result = await getPartialAdminTasks();
+      if (result.error) {
+        throw new Error(result.error);
+      }
+      return result.success;
+    },
+  });
   return (
     <div>
       <div className='flex justify-between items-center'>
@@ -23,9 +59,11 @@ export default function AdminPage() {
       </p>
 
       <div className='mt-5 flex flex-col gap-10 lg:grid lg:grid-cols-2 xl:gap-x-8 xl:gap-y-7 [&>*]:bg-white [&>*]:border-[1.5px] [&>*]:border-ecx-colors-secondary-blue [&>*]:shadow-[7px_7px_rgba(39,46,75,1)] [&>*]:py-6 [&>*]:px-5'>
-        <AdminsList className='col-span-1' role={'ADMINS'} route={'admins'} />
-        <AdminsList className='col-span-1' role={'PARTICIPANTS'} route={'participants'}/>
+      <HydrationBoundary state={dehydrate(queryClient)}>
+        <AdminsList className='col-span-1' role={'ADMINS'} route={'admins'} fetch={`adminsxtutors`} action={getPartialAdminAndTutorUsers} />
+        <AdminsList className='col-span-1' role={'PARTICIPANTS'} route={'participants'} fetch={`participants`} action={getPartialAdminParticipants}/>
         <TasksTable />
+        </HydrationBoundary>
       </div>
     </div>
   );
