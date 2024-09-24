@@ -1,5 +1,5 @@
 .sidebar {
-  @apply w-48 h-[calc(100vh-4rem)] md:h-[calc(100vh-5rem)] lg:h-[calc(100vh-6rem)] py-12 px-4 fixed top-16 md:top-20 lg:top-auto border left-0 bg-white text-ecx-colors-secondary-blue shadow-xl flex flex-col justify-between text-xs lg:text-sm;
+  @apply w-48 h-[calc(100vh-4rem)] md:h-[calc(100vh-5rem)] lg:h-[calc(100vh-6rem)] py-12 px-4 fixed top-16 md:top-20 lg:top-auto border left-0 bg-white text-ecx-colors-secondary-blue shadow-xl flex flex-col justify-between text-xs lg:text-[.8rem];
 }
 
 .sidebarLink {

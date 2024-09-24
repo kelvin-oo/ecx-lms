@@ -230,6 +230,7 @@ export default function Register() {
                 <option value='Backend development'>Backend development</option>
                 <option value='Python'>Python</option>
                 <option value='Data Analytics'>Data Analytics</option>
+                <option value='UI/UX'>UI/UX</option>
                 <option value='Data Science'>Data Science</option>
                 <option value='Data Structures and Algorithms'>
                   Data Structures and Algorithms

@@ -189,7 +189,15 @@ export default function Submission({ data }) {
     }
 
 
+    
+  let actualStatus;
 
+  const currentDate = new Date();
+  if (data.deadline > currentDate) {
+    actualStatus = 'ONGOING';
+  } else {
+    actualStatus = 'ENDED';
+  }
 
   return(
     <div className="flex flex-col gap-6 lg:gap-10">
@@ -239,7 +247,12 @@ export default function Submission({ data }) {
         <div className="col-span-6 lg:col-span-3 xl:col-span-2 lg:order-2 border lg:border-2 border-ecx-colors-secondary-blue h-fit px-5 lg:px-10 xl:px-12 py-4 lg:py-6 flex justify-between lg:flex-col lg:gap-6 text-lg lg:text-xl bg-white shadow-[4px_4px_rgba(39,46,75,1)] lg:shadow-[7px_7px_rgba(39,46,75,1)] text-center lg:text-start">
           <div className="flex flex-col lg:grid grid-cols-2 gap-1.5 lg:gap-4">
             <div className="font-varela-round lg:font-bold">Status</div>
-            <div className="font-light text-sm lg:text-xl">{data?.submissions.length > 0 ? data.submissions[0].status : 'PENDING' }</div>
+            {
+              user.role === UserRole.PARTICIPANT && <div className="font-light text-sm lg:text-xl">{data?.submissions.length > 0 ? data.submissions[0].status : 'PENDING' }</div>
+            }
+            {
+              user.role !== UserRole.PARTICIPANT && <div className="font-light text-sm lg:text-xl">{ actualStatus }</div>
+            }
           </div>
           <div className="flex flex-col lg:grid grid-cols-2 gap-1.5 lg:gap-4">
             <div className="font-varela-round lg:font-bold">Deadline</div>
