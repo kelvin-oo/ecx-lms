@@ -9,6 +9,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { ChevronDown } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
+import { getAdminParticipants } from "@/actions/superAdmin/super";
+import { useQuery } from "@tanstack/react-query";
 
 export default function AdminParticipantList() {
   const [isOpen, setIsOpen] = useState(false);
@@ -23,19 +25,67 @@ export default function AdminParticipantList() {
     "UI/UX",
     "DSA",
   ];
+  const { data, error, isLoading, isFetched } = useQuery({
+    queryKey: [`participants`],
+    queryFn: async () => {
+      const result = await getAdminParticipants();
+      if (result.error) {
+        throw new Error(result.error);
+      }
+
+      return result.success;
+    },
+  });
+  console.log("🚀 ~ AdminAndTutorList ~ data:", data)
+  const [leaderboardData, setLeaderboardData] = useState(data);
+  const handleTracks = () => {
+    if (selectedOption === "All tracks") {
+      console.log("All tracks");
+      setLeaderboardData(data);
+    }
+    if (selectedOption === "Frontend") {
+      console.log("Frontend");
+      setLeaderboardData(
+        
+        data.filter((data) => data.track === `Frontend development`)
+      );
+    }
+    if (selectedOption === "Backend") {
+      console.log("Backend");
+      setLeaderboardData(
+        data.filter((data) => data.track === `Backend development`)
+      );
+    }
+    if (selectedOption === "Python") {
+      console.log("Backend");
+      setLeaderboardData(data.filter((data) => data.track === `Python`));
+    }
+    if (selectedOption === "Data Science") {
+      console.log("Data Science");
+      setLeaderboardData(data.filter((data) => data.track === `Data Science`));
+    }
+    if (selectedOption === "Data Analysis") {
+      console.log("Data Analysis");
+      setLeaderboardData(
+        data.filter((data) => data.track === `Data Analytics`)
+      );
+    }
+    if (selectedOption === "UI/UX") {
+      console.log("UI/UX");
+      setLeaderboardData(data.filter((data) => data.track === `UI/UX`));
+    }
+    if (selectedOption === "DSA") {
+      console.log("DSA");
+      setLeaderboardData(
+        data.filter((data) => data.track === `Data Structures and Algorithms`)
+      );
+    }
+  };
+  useEffect(() => {
+    handleTracks();
+  }, [selectedOption]);
   const DropdownButton = () => {
-    const [isOpen, setIsOpen] = useState(false);
-    const [selectedOption, setSelectedOption] = useState("All tracks");
-    const dropdownRef = useRef(null);
-    const options = [
-      "All tracks",
-      "Frontend",
-      "Backend",
-      "Data Science",
-      "Data Analysis",
-      "UI/UX",
-      "DSA",
-    ];
+  
 
     const toggleDropdown = () => setIsOpen(!isOpen);
 
@@ -102,7 +152,7 @@ export default function AdminParticipantList() {
       <div className="mt-5">
         <div className={`flex flex-col gap-4 relative`}>
           <div className="flex flex-col gap-2.5">
-            {tableData.map((data, index) => (
+            {leaderboardData?.map((data, index) => (
               <Link href="/superadmin/participants/profile" key={index}>
                 <div
                   className={`grid grid-cols-12 lg:grid-cols-10 px-1.5 lg:px-5 py-1.5 lg:py-1.5 gap-x-5 gap-y-7 items-center font-medium text-xs lg:text-sm border border-ecx-colors-secondary-blue`}
@@ -115,13 +165,13 @@ export default function AdminParticipantList() {
                     </div>
                   </div>
                   <div className="col-span-4 lg:col-span-3 font-semibold truncate">
-                    <p>{data.name}</p>
+                    <p>{data.firstName} {data.lastName}</p>
                   </div>
                   <div className="col-span-3 lg:col-span-3 flex items-end justify-start gap-x-1.5">
                     <span className="font-semibold">{data.track}</span>
                   </div>
                   <div className="col-span-2 lg:col-span-2 flex items-end justify-start gap-x-1.5 w-[100%]">
-                    <span className="font-semibold">{data.score} points</span>
+                    <span className="font-semibold">{data.points} points</span>
                   </div>
                   <div className="col-span-1 flex justify-center">
                     <Image

@@ -4,16 +4,16 @@ import {
   dehydrate,
 } from "@tanstack/react-query"
 import { currentServerUser } from "@/lib/serverAuthState";
-import { getAllAdminTasks } from "@/actions/superAdmin/super";
+import { getAdminAndTutorUsers } from "@/actions/superAdmin/super";
 import AdminAndTutorList from "./AdminAndTutorList";
 
 export default async function AdminPage() {
   const user = await currentServerUser()
   const queryClient = new QueryClient()
   await queryClient.prefetchQuery({
-    queryKey: ['tasks'],
+    queryKey: ['adminsxtutors'],
     queryFn: async () => {
-      const result = await getAllAdminTasks();
+      const result = await getAdminAndTutorUsers();
       if (result.error) {
         throw new Error(result.error);
       }

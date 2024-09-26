@@ -72,6 +72,7 @@ export async function getAdminParticipants() {
                 firstName: true,
                 lastName: true,
                 track: true,
+                points: true
             },
             orderBy: {
                 userName: 'asc',

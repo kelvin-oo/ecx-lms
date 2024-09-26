@@ -9,6 +9,8 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { ChevronDown } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
+import { getAdminAndTutorUsers } from '@/actions/superAdmin/super';
+import { useQuery } from '@tanstack/react-query';
 
 export default function AdminAndTutorList() {
     const [isOpen, setIsOpen] = useState(false);
@@ -23,19 +25,67 @@ export default function AdminAndTutorList() {
     "UI/UX",
     "DSA",
   ];
+  const { data, error, isLoading, isFetched } = useQuery({
+    queryKey: [`adminsxtutors`],
+    queryFn: async () => {
+      const result = await getAdminAndTutorUsers();
+      if (result.error) {
+        throw new Error(result.error);
+      }
+
+      return result.success;
+    },
+  });
+  console.log("🚀 ~ AdminAndTutorList ~ data:", data)
+  const [leaderboardData, setLeaderboardData] = useState(data);
+  const handleTracks = () => {
+    if (selectedOption === "All tracks") {
+      console.log("All tracks");
+      setLeaderboardData(data);
+    }
+    if (selectedOption === "Frontend") {
+      console.log("Frontend");
+      setLeaderboardData(
+        
+        data.filter((data) => data.track === `Frontend development`)
+      );
+    }
+    if (selectedOption === "Backend") {
+      console.log("Backend");
+      setLeaderboardData(
+        data.filter((data) => data.track === `Backend development`)
+      );
+    }
+    if (selectedOption === "Python") {
+      console.log("Backend");
+      setLeaderboardData(data.filter((data) => data.track === `Python`));
+    }
+    if (selectedOption === "Data Science") {
+      console.log("Data Science");
+      setLeaderboardData(data.filter((data) => data.track === `Data Science`));
+    }
+    if (selectedOption === "Data Analysis") {
+      console.log("Data Analysis");
+      setLeaderboardData(
+        data.filter((data) => data.track === `Data Analytics`)
+      );
+    }
+    if (selectedOption === "UI/UX") {
+      console.log("UI/UX");
+      setLeaderboardData(data.filter((data) => data.track === `UI/UX`));
+    }
+    if (selectedOption === "DSA") {
+      console.log("DSA");
+      setLeaderboardData(
+        data.filter((data) => data.track === `Data Structures and Algorithms`)
+      );
+    }
+  };
+
+  useEffect(() => {
+    handleTracks();
+  }, [selectedOption]);
   const DropdownButton = () => {
-    const [isOpen, setIsOpen] = useState(false);
-    const [selectedOption, setSelectedOption] = useState("All tracks");
-    const dropdownRef = useRef(null);
-    const options = [
-      "All tracks",
-      "Frontend",
-      "Backend",
-      "Data Science",
-      "Data Analysis",
-      "UI/UX",
-      "DSA",
-    ];
 
     const toggleDropdown = () => setIsOpen(!isOpen);
 
@@ -100,8 +150,8 @@ export default function AdminAndTutorList() {
       <div className='mt-5'>
         <div className={`flex flex-col gap-4 relative`}>
           <div className='flex flex-col gap-2.5'>
-            {tableData.map(({ name, track, points }, index) => (
-              <Link href='/superadmin/admins/profile' key={index}>
+            {leaderboardData.map(({id, firstName, lastName, track }, index) => (
+              <Link href={`/superadmin/admins/profile/${id}`} key={index}>
                 <div
                   className={`grid grid-cols-12 lg:grid-cols-10 px-1.5 lg:px-5 py-1.5 lg:py-1.5 gap-x-5 gap-y-7 items-center font-medium text-xs lg:text-sm border border-ecx-colors-secondary-blue`}
                 >
@@ -113,7 +163,7 @@ export default function AdminAndTutorList() {
                     </div>
                   </div>
                   <div className='col-span-5 lg:col-span-4 font-semibold truncate'>
-                    <p>{name}</p>
+                    <p>{firstName} {lastName}</p>
                   </div>
                   <div className='col-span-1 lg:col-span-4 flex items-end justify-start gap-x-1.5'>
                     <span className='font-semibold'>{track}</span>
