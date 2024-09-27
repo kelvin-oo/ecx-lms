@@ -20,10 +20,10 @@ export default function AdminsListTableRow({
           {index}
         </div>
       </div>
-      <div className='col-span-5 lg:col-span-3 flex lg:items-end lg:justify-start font-semibold truncate'>
+      <div className='col-span-5 lg:col-span-4 flex lg:items-end lg:justify-start font-semibold truncate'>
         <p>{firstName} {lastName}</p>
       </div>
-      <div className='col-span-1 lg:col-span-6 flex lg:items-end lg:justify-self-end gap-x-1.5'>
+      <div className='col-span-1 lg:col-span-5 flex lg:items-end lg:justify-self-end gap-x-1.5'>
         <span className='font-semibold'>{track}</span>
       </div>
     </div>

@@ -1,0 +1,123 @@
+.stats {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1.5rem;
+    margin-bottom: 4rem;
+    @media (max-width: 800px) {
+        display: none;
+    }
+
+    .users {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 150px;
+        height: 150px;
+        position: relative;
+        border-radius: 50%;
+        border-right: 10px solid #272E4B;
+        border-left: 1px solid #272E4B;
+        border-top: 2px solid #272E4B;
+        border-bottom: 2px solid #272E4B;
+        background-color: white;
+
+        h1 {
+            font-size: 80px;
+            font-weight: 400;
+            line-height: 35px;
+            text-align: left;
+            color: #272E4B;
+            font-family: Varela Round;
+        }
+
+        h2 {
+            position: absolute;
+            top: 9.5rem;
+        }
+    }
+    .participants {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 150px;
+        height: 150px;
+        position: relative;
+        border-radius: 50%;
+        border-right: 10px solid #272E4B;
+        border-left: 1px solid #272E4B;
+        border-top: 2px solid #272E4B;
+        border-bottom: 2px solid #272E4B;
+        background-color: white;
+
+        h1 {
+            font-size: 80px;
+            font-weight: 400;
+            line-height: 35px;
+            text-align: left;
+            color: #272E4B;
+            font-family: Varela Round;
+        }
+
+        h2 {
+            position: absolute;
+            top: 9.5rem;
+        }
+    }
+    .admins {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 150px;
+        height: 150px;
+        position: relative;
+        border-radius: 50%;
+        border-right: 10px solid #272E4B;
+        border-left: 1px solid #272E4B;
+        border-top: 2px solid #272E4B;
+        border-bottom: 2px solid #272E4B;
+        background-color: white;
+
+        h1 {
+            font-size: 80px;
+            font-weight: 400;
+            line-height: 35px;
+            text-align: left;
+            color: #272E4B;
+            font-family: Varela Round;
+        }
+
+        h2 {
+            position: absolute;
+            top: 9.5rem;
+        }
+    }
+    .blocked {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 150px;
+        height: 150px;
+        position: relative;
+        border-radius: 50%;
+        border-right: 10px solid #272E4B;
+        border-left: 1px solid #272E4B;
+        border-top: 2px solid #272E4B;
+        border-bottom: 2px solid #272E4B;
+        background-color: white;
+
+        h1 {
+            font-size: 80px;
+            font-weight: 400;
+            line-height: 35px;
+            text-align: left;
+            color: #272E4B;
+            font-family: Varela Round;
+        }
+
+        h2 {
+            position: absolute;
+            top: 9.5rem;
+        }
+    }
+   
+}
