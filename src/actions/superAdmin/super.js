@@ -255,6 +255,7 @@ export const getTutotDetailsAndStats = async (userId) => {
         taskScore: true,
         taskCompleted: true,
         role: true,
+        image: true
       },
     });
 
@@ -273,6 +274,7 @@ export const getTutotDetailsAndStats = async (userId) => {
     const submissionsGraded = await db.submission.count({
       where: { gradedById: userId },
     });
+
 
     return {
       success: {
@@ -324,3 +326,4 @@ export const getAdminStats = async () => {
     return { error: "An error occurred while fetching user details and statistics." };
   }
 };
+
