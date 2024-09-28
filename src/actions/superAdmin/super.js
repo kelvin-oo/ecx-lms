@@ -72,7 +72,8 @@ export async function getAdminParticipants() {
         firstName: true,
         lastName: true,
         track: true,
-        points: true
+        points: true,
+        
       },
       orderBy: {
         userName: 'asc',
@@ -192,6 +193,7 @@ export const getUserDetailsAndTaskInfo = async (id) => {
         taskScore: true,
         taskCompleted: true,
         role: true,
+        image: true
       },
     });
 
@@ -206,15 +208,28 @@ export const getUserDetailsAndTaskInfo = async (id) => {
         taskGrade: true,
       },
     });
-
+    const tasksDone = await db.user.findUnique({
+      where: {
+        id: user.id
+      },
+      select: {
+        _count: {
+          select: {
+            submissions: true
+          }
+        }
+      }
+    });
     const totalTasksInTrack = tasksInUserTrack.length;
     const totalTaskGrade = tasksInUserTrack.reduce((sum, task) => sum + (task.taskGrade || 0), 0);
+    const totalTasksDone = tasksDone._count.submissions
 
     return {
       success: {
         user,
         totalTasksInTrack,
         totalTaskGrade,
+        totalTasksDone
       },
     };
   } catch (error) {

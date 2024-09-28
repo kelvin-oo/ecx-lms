@@ -153,7 +153,7 @@ export default function AdminParticipantList() {
         <div className={`flex flex-col gap-4 relative`}>
           <div className="flex flex-col gap-2.5">
             {leaderboardData?.map((data, index) => (
-              <Link href="/superadmin/participants/profile" key={index}>
+              <Link href={`/superadmin/participants/profile/${data.id}`} key={index}>
                 <div
                   className={`grid grid-cols-12 lg:grid-cols-10 px-1.5 lg:px-5 py-1.5 lg:py-1.5 gap-x-5 gap-y-7 items-center font-medium text-xs lg:text-sm border border-ecx-colors-secondary-blue`}
                 >
