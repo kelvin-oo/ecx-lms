@@ -4,12 +4,24 @@ import FormBoxHeader from "@/components/profile/FormBoxHeader";
 import FormImageInput from "@/components/profile/FormImageInput";
 import React, { useState } from "react";
 import styles from "../../../styles/adminProfilePage.module.scss";
-import { useCurrentClientUser } from "@/hooks/use-current-client-user";
+import { getParticipantProfile } from "@/actions/participants/participant"
 import Image from "next/image";
 import FormInput from "@/components/profile/FormInput";
 import Link from "next/link";
+import { useQuery } from "@tanstack/react-query";
 
-const ParticipantProfile = ({ user }) => {
+const ParticipantProfile = ( { id } ) => {
+  const { data:user, error, isLoading, isFetched } = useQuery({
+    queryKey: ["profile"],
+    queryFn: async () => {
+      const result = await getParticipantProfile(id)
+      if (result.error) {
+        throw new Error(result.error);
+      }
+      return result.success
+    },
+    // refetchOnMount: true
+  }); 
   // const user = useCurrentClientUser()
   return (
     <main className={styles.main}>

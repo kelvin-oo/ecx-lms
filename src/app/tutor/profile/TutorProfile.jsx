@@ -8,9 +8,20 @@ import { useCurrentClientUser } from "@/hooks/use-current-client-user";
 import Image from "next/image";
 import FormInput from "@/components/profile/FormInput";
 import Link from "next/link";
+import { getParticipantProfile } from "@/actions/participants/participant";
 
 const TutorProfile = ({ participantCount, highestScoreParticipant, highestTaskParticipant, ungradedTaskCount }) => {
-  const user = useCurrentClientUser()
+  const { data:user, error, isLoading, isFetched } = useQuery({
+    queryKey: ["profile"],
+    queryFn: async () => {
+      const result = await getParticipantProfile(id)
+      if (result.error) {
+        throw new Error(result.error);
+      }
+      return result.success
+    },
+    refetchOnMount: true
+  }); 
   return (
     <main className={styles.main}>
       <div className={styles.header}>
