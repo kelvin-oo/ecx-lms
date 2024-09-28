@@ -193,7 +193,8 @@ export const getUserDetailsAndTaskInfo = async (id) => {
         taskScore: true,
         taskCompleted: true,
         role: true,
-        image: true
+        image: true,
+        status: true
       },
     });
 
@@ -255,7 +256,8 @@ export const getTutotDetailsAndStats = async (userId) => {
         taskScore: true,
         taskCompleted: true,
         role: true,
-        image: true
+        image: true,
+        status: true
       },
     });
 
@@ -326,4 +328,26 @@ export const getAdminStats = async () => {
     return { error: "An error occurred while fetching user details and statistics." };
   }
 };
+
+export const userStatusChange = async (id, status) => {
+  console.log(`Attempting to change user status: ID=${id}, Current Status=${status}`);
+
+  try {
+    const newStatus = status === UserStatus.ACTIVE ? UserStatus.BLOCKED : UserStatus.ACTIVE;
+
+    await db.user.update({
+      where: { id: id },
+      data: { status: newStatus }
+    });
+
+    const actionMessage = newStatus === UserStatus.BLOCKED ? 'Blocked' : 'Unblocked';
+    console.log(`User ${actionMessage}: ID=${id}`);
+    return { success: `User ${actionMessage}` };
+
+  } catch (error) {
+    console.error('Error changing user status:', error);
+    return { error: error.message || 'An unexpected error occurred while updating user status' };
+  }
+};
+
 
