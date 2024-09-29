@@ -175,3 +175,20 @@ export async function getUserSingleTaskAndStatuses(userId, taskId) {
 //     return { error: error || "An error occurred during registration." };
 //   }
 // }
+
+export const deleteUser = async (id) => {
+  // console.log(`Attempting to change user status: ID=${id}, Current Status=${status}`);
+
+  try {
+
+    await db.user.delete({
+      where: { id: id },
+    });
+
+    return { success: `User deleted successfully` };
+
+  } catch (error) {
+    console.error('Error changing user status:', error);
+    return { error: error.message || 'An unexpected error occurred while updating user status' };
+  }
+};

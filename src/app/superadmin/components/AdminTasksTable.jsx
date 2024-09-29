@@ -29,11 +29,11 @@ export default function AdminTasksTable({ tasksArr=[], minimized=false }) {
             Deadline
           </div>
           <div className="col-span-3 text-center truncate">
-            No. of Tasks
+            Task Grade
           </div>
         </div>
       
-        {tasksArr.map(({ title, deadline, noOfTasks }, index) => (
+        {tasksArr.map(({ title, deadline, taskGrade }, index) => (
           <div key={index} className={`grid grid-cols-11 gap-x-10 py-1.5 text-sm lg:text-base font-light`}>
             <div className={`${minimized ? "col-span-2" : "col-span-1"} text-center`}>
               {index+1}
@@ -45,7 +45,7 @@ export default function AdminTasksTable({ tasksArr=[], minimized=false }) {
             {moment(deadline).format('YYYY/MM/DD')}
             </div>
             <div className="col-span-3 text-center">
-              {noOfTasks}
+              {taskGrade}
             </div>
             {!minimized && (
               <div className="col-span-1 font-medium relative">
