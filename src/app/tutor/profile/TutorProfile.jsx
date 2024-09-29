@@ -9,6 +9,7 @@ import Image from "next/image";
 import FormInput from "@/components/profile/FormInput";
 import Link from "next/link";
 import { getParticipantProfile } from "@/actions/participants/participant";
+import { useQuery } from "@tanstack/react-query";
 
 const TutorProfile = ({ participantCount, highestScoreParticipant, highestTaskParticipant, ungradedTaskCount }) => {
   const { data:user, error, isLoading, isFetched } = useQuery({

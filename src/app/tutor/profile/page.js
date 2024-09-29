@@ -2,8 +2,10 @@ import { dehydrate, HydrationBoundary, QueryClient } from "@tanstack/react-query
 import TutorProfile from "./TutorProfile"
 import { getTrackParticipantCount, getUserWithHighestPoints, getUserWithHighestTaskCompleted, getUngradedSubmissionsCountByTrack } from "@/actions/tutor/tutor"
 import { getParticipantProfile } from "@/actions/participants/participant";
+import { currentServerUser } from "@/lib/serverAuthState";
 
 export default async function page() {
+  const session = await currentServerUser()
   const queryClient = new QueryClient()
   await queryClient.prefetchQuery({
     queryKey: ['profile'],
