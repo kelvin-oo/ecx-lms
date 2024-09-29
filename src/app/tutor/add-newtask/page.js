@@ -140,7 +140,7 @@ export default function AddNewTask() {
           pauseOnHover: true,
           draggable: true,
         });
-        router.push('/tutor')
+        router.push('/tutor/tasks')
       }
       if (res.status === 500) {
         toast.error("Something went wrong", {
