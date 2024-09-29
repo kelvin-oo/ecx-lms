@@ -11,6 +11,7 @@ import {
 import ParticipantsLandingTable from "@/components/admin/ParticipantLandingTable";
 import { getPartialParticipants } from "@/actions/participants/participant";
 import { countTrackTasks } from "@/actions/track/trackTaskCount";
+import Link from "next/link";
 
 export default async function AdminPage() {
   const user = await currentServerUser();
@@ -37,7 +38,7 @@ export default async function AdminPage() {
         </h1>
 
         <button className="bg-ecx-colors-secondary-blue text-white font-semibold text-xs lg:text-base py-2.5 lg:py-3 px-3.5 lg:px-5 hover:opacity-90 transition-opacity">
-          Task Management
+          <Link href="/tutor/tasks">Task Management</Link>
         </button>
       </div>
       <p className="lg:hidden mt-2">
