@@ -20,7 +20,7 @@ const MainTaskTable = () => {
   return (
     <div>
       <h1 className='font-varela-round lg:text-2xl mb-5 lg:mb-8'>
-        Welcome, Ifihan
+        Welcome, {user.firstName}
       </h1>
 
       <div className='hidden lg:block bg-white border-[1.5px] border-ecx-colors-secondary-blue shadow-[7px_7px_rgba(39,46,75,1)] py-6 px-5'>
