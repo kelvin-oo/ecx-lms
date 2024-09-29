@@ -31,7 +31,7 @@ export default function EditTask({ id, oldData }) {
       title: oldData.title,
       description: oldData.description,
       deadline: oldData.deadline,
-      noOfTasks: oldData.noOfTasks,
+      submissionDetails: oldData.submissionDetails,
       taskGrade: oldData.taskGrade
     };
     setInitialData(loadedInitialData);
@@ -44,7 +44,7 @@ export default function EditTask({ id, oldData }) {
     setError('');
     setLoading(true);
 
-    const { title, description, deadline, noOfTasks, taskGrade } =
+    const { title, description, deadline, submissionDetails, taskGrade } =
       formData || {};
 
     if (!title) {
@@ -88,7 +88,7 @@ export default function EditTask({ id, oldData }) {
       return;
     }
 
-    if (!noOfTasks) {
+    if (!submissionDetails) {
       toast.error("Please choose number of tasks", {
         position: "top-right",
         autoClose: 5000,
@@ -219,7 +219,7 @@ export default function EditTask({ id, oldData }) {
     <main className='grid font-varela-round text-[#424242] gap-y-6 '>
       <div className='text-base px-6'>
         <span className='text-ecx-colors-secondary-blue font-bold'>
-          Add New Task
+          Edit Task
         </span>
       </div>
       <div className=' grid gap-y-6 text-base lg:text-lg  px-6 py-10'>
@@ -255,17 +255,6 @@ export default function EditTask({ id, oldData }) {
           />
         </div>
         <div className='grid gap-y-3'>
-            <h1>Number of tasks</h1>
-          <input
-            type='number'
-            className='w-full outline-none bg-transparent border-2 border-[#424242] px-3 py-2 lg:py-3 text-black'
-            placeholder={`Number of Tasks`}
-            onChange={handleChange}
-            name='noOfTasks'
-            defaultValue={oldData.noOfTasks}
-          />
-        </div>
-        <div className='grid gap-y-3'>
             Task Grade
           <input
             type='number'
@@ -274,6 +263,17 @@ export default function EditTask({ id, oldData }) {
             onChange={handleChange}
             name='taskGrade'
             defaultValue={oldData.taskGrade}
+          />
+        </div>
+        <div className='grid gap-y-3'>
+            <h1>Submission Details</h1>
+          <input
+            type='text'
+            className='w-full outline-none bg-transparent border-2 border-[#424242] px-3 py-2 lg:py-3 text-black'
+            placeholder={`Submission Details`}
+            onChange={handleChange}
+            name='submissionDetails'
+            defaultValue={oldData.submissionDetails}
           />
         </div>
         

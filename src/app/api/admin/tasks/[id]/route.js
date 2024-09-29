@@ -68,11 +68,16 @@ export async function PATCH(req, ctx) {
 
     const id = ctx.params.id
     // console.log("🚀 ~ PATCH ~ id:", id)
+    const convertedBody = {
+        ...body,
+        // deadline: new Date(body.deadline),
+        taskGrade: parseInt(body.taskGrade, 10),
+    };
 
     try {
         const updatedTask = await db.adminTask.update({
             where: { id: id },
-            data: body
+            data: convertedBody
         });
         return new NextResponse(JSON.stringify(updatedTask), { status: 200 })
     } catch (error) {
