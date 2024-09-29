@@ -139,7 +139,7 @@ const Header = () => {
           </Link>
           <Link
             onClick={handleShowDropdown}
-            href={`/${currentUserRole}/profile`}
+            href={`/${currentUserRole}/profile/edit`}
           >
             <Image
               src='/icons/menu-edit.svg'
@@ -152,7 +152,7 @@ const Header = () => {
           </Link>
           <Link
             onClick={handleShowDropdown}
-            href={`/${currentUserRole}/profile`}
+            href={`/${currentUserRole}/profile/change-passsword`}
           >
             <Image
               src='/icons/menu-password.svg'
