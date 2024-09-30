@@ -10,7 +10,7 @@ import { getAllParticipants } from '@/actions/participants/participant';
 import { getLeaderBoard } from "@/actions/leaderboard/leaderboard";
 import { useCurrentClientUser } from '@/hooks/use-current-client-user';
 
-export default function LeaderboardTable({ className = "" }) {
+export default function LeaderboardTable({ className = "", track }) {
   const user = useCurrentClientUser()
   const { data, error, isLoading, isFetched } = useQuery({
     queryKey: ["leaderboard"],
@@ -41,7 +41,7 @@ export default function LeaderboardTable({ className = "" }) {
       setLeaderboardData(data)
     } else {
       setActiveTrack("My Track")
-      setLeaderboardData(data.filter(data => data.track === user.track))
+      setLeaderboardData(data.filter(data => data.track === track))
     }
   }
 
@@ -49,7 +49,7 @@ export default function LeaderboardTable({ className = "" }) {
 
   useEffect(() => {
     const filteredData = leaderboardData.filter(
-      dat => dat.track === user.track
+      dat => dat.track === track
     );
     
     

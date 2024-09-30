@@ -61,7 +61,7 @@ export default async function UserPage() {
 
         <HydrationBoundary state={dehydrate(queryClient)}>
         <AssignedTasks />
-        <LeaderboardTable className='col-span-2'  />
+        <LeaderboardTable className='col-span-2' track={user.track} />
         <TasksTable />
       </HydrationBoundary>
       </div>
