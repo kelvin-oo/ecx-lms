@@ -128,9 +128,11 @@ const Sidebar = ({ handleShowSidebar }) => {
             width={14}
             height={14}
           />
+           <LogoutButton>
           <span>LOGOUT</span>
+          </LogoutButton>
         </button>
-        {isShowLogoutModal && (
+        {/* {isShowLogoutModal && (
           <div className={styles.logoutModal}>
             <div className='text-center col-span-2'>ARE YOU SURE?</div>
             <LogoutButton>
@@ -146,7 +148,7 @@ const Sidebar = ({ handleShowSidebar }) => {
               CANCEL
             </button>
           </div>
-        )}
+        )} */}
       </div>
     </nav>
   );
